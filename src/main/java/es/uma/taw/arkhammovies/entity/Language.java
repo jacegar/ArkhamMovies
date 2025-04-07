@@ -1,0 +1,32 @@
+package es.uma.taw.arkhammovies.entity;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "language", uniqueConstraints = {
+        @UniqueConstraint(name = "name_UNIQUE", columnNames = {"name"})
+})
+public class Language {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "language_id", nullable = false)
+    private Integer id;
+
+    @Column(name = "name", nullable = false, length = 20)
+    private String name;
+
+    @ManyToMany
+    @JoinTable(name = "movielanguage",
+            joinColumns = @JoinColumn(name = "language_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id"))
+    private List<Movie> movies = new ArrayList<>();
+
+}
