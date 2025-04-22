@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.lang.Character;
+import es.uma.taw.arkhammovies.entity.Character;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -33,6 +33,9 @@ public class Person {
 
     @Column(name = "age", nullable = false)
     private Integer age;
+
+    @Column(name = "photoUrl", length = 256)
+    private String photoUrl;
 
     @OneToMany(mappedBy = "person")
     private List<Character> characters = new ArrayList<>();

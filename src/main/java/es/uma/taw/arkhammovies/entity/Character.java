@@ -26,6 +26,9 @@ public class Character {
     @Column(name = "surname2", length = 30)
     private String surname2;
 
+    @Column(name = "photoUrl", length = 256)
+    private String photoUrl;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "movie_id", nullable = false)
     private es.uma.taw.arkhammovies.entity.Movie movie;
