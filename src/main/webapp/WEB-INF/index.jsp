@@ -11,6 +11,8 @@
     <title>Title</title>
 </head>
 <body>
-
+<header>
+    <h1>Arkham Movies</h1>
+</header>
 </body>
 </html>
