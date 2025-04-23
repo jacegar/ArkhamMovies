@@ -7,7 +7,6 @@ import lombok.Setter;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -53,7 +52,7 @@ public class Movie {
     private String photoUrl;
 
     @OneToMany(mappedBy = "movie")
-    private List<Character> characters = new ArrayList<>();
+    private List<MovieCharacter> movieCharacters = new ArrayList<>();
 
     @ManyToMany
     private List<es.uma.taw.arkhammovies.entity.User> usersLiked = new ArrayList<>();

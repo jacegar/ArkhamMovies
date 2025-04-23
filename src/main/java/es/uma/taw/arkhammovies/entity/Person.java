@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import es.uma.taw.arkhammovies.entity.Character;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -38,6 +36,6 @@ public class Person {
     private String photoUrl;
 
     @OneToMany(mappedBy = "person")
-    private List<Character> characters = new ArrayList<>();
+    private List<MovieCharacter> movieCharacters = new ArrayList<>();
 
 }

@@ -14,11 +14,6 @@ public class Moviecrew {
     @EmbeddedId
     private MoviecrewId id;
 
-    @MapsId("personId")
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "person_id", nullable = false, referencedColumnName = "person_id")
-    private Crewmember person;
-
     @MapsId("movieId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "movie_id", nullable = false)

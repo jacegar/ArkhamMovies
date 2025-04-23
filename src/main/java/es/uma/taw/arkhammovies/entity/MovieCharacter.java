@@ -7,11 +7,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "`character`", indexes = {
+@Table(name = "`moviecharacter`", indexes = {
         @Index(name = "movie_id_idx", columnList = "movie_id"),
         @Index(name = "person_id_idx", columnList = "person_id")
 })
-public class Character {
+public class MovieCharacter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id", nullable = false)
