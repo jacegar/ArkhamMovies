@@ -10,6 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="../../css/index.css">
     <title>Title</title>
 </head>
 <%
@@ -24,12 +25,14 @@
             if(user == null){
         %>
             <!--Por ahora sin acciones porque no están implementadas-->
+        <div class="login-container">
             <form>
                 <input type="submit" value="Iniciar sesión">
             </form>
             <form>
                 <input type="submit" value="Registrarse">
             </form>
+        </div>
         <%}%>
     </header>
     <main>
@@ -40,8 +43,8 @@
                 <input type="submit" value="Buscar">
             </form>
         </div>
-        <div>
-            <div>
+        <div class="tendency">
+            <div class="tendency-title">
                 <h1>Más populares</h1>
                 <a>Ver más</a>
             </div>
