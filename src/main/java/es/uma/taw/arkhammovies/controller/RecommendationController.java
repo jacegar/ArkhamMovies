@@ -18,21 +18,19 @@ public class RecommendationController extends BaseController{
 
     @GetMapping("/")
     public String doListar(HttpSession session, Model model) {
-        if(isAuthenticated(session)){
-            //Añadir recomendacion personalizada
-        }else {
-            //Cogemos las primeras 5 peliculas para mostrarlas en la pagina principal
-            List<Movie> popularMovies = movieRepository.getMoviesSortedByPopularity();
-            if(popularMovies.size() > 8){
-                popularMovies = popularMovies.subList(0, 8);
-            }
-            for(Movie m : popularMovies){
-                System.out.println(m.getTitle());
-                System.out.println(m.getPopularity());
-                System.out.println(m.getPhotoUrl());
-            }
-            model.addAttribute("popularMovies", popularMovies);
+        List<Movie> popularMovies = movieRepository.getMoviesSortedByPopularity();
+        if(popularMovies.size() > 8){
+            popularMovies = popularMovies.subList(0, 8);
         }
+
+        List<Movie> recentMovies = movieRepository.getMoviesSortedByReleaseDate();
+        if(recentMovies.size() > 8){
+            recentMovies = recentMovies.subList(0, 8);
+        }
+
+        model.addAttribute("popularMovies", popularMovies);
+        model.addAttribute("recentMovies", recentMovies);
+
         return "index";
     }
 }

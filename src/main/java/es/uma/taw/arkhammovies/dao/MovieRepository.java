@@ -11,4 +11,9 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     //Devuelve las películas más populares, usado en la pantalla de inicio
     @Query("select m from Movie m order by m.popularity desc")
     public List<Movie> getMoviesSortedByPopularity();
+
+
+    //Devuelve las películas más recientes, usado en la pantalla de inicio
+    @Query("select m from Movie m order by m.releaseDate desc")
+    public List<Movie> getMoviesSortedByReleaseDate();
 }

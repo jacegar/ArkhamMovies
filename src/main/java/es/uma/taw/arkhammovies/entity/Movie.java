@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -37,7 +38,7 @@ public class Movie {
     private String overview;
 
     @Column(name = "release_date")
-    private Instant releaseDate;
+    private Date releaseDate;
 
     @Column(name = "status", length = 20)
     private String status;

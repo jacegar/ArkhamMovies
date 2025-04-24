@@ -17,6 +17,7 @@
     //Cargamos el usuario, que sera null si no está la sesión iniciada
     User user = (User) session.getAttribute("user");
     List<Movie> popularMovies = (List<Movie>) request.getAttribute("popularMovies");
+    List<Movie> recentMovies = (List<Movie>) request.getAttribute("recentMovies");
 %>
 <body>
     <header>
@@ -44,14 +45,13 @@
             </form>
         </div>
         <div class="tendency">
-            <div class="tendency-title">
+            <div class="list-header">
                 <h1>Más populares</h1>
                 <a>Ver más</a>
             </div>
             <ul>
             <%
-                if(!popularMovies.isEmpty()){
-                //Mostramos i películas
+                if(!(popularMovies == null) && !popularMovies.isEmpty()){
                     for(Movie m : popularMovies){
                     %>
                     <li>
@@ -61,6 +61,57 @@
                 <%}
                 }else{%>
                     <li>No hay películas disponibles, perdon por las molestias.</li>
+                <%}%>
+            </ul>
+        </div>
+
+        <%
+            //Si no ha iniciado sesion no podemos recomendarle películas
+            if(user != null){
+        %>
+        <div class="recommended">
+            <div class="list-header">
+                <h1>Para ti</h1>
+                <a>Ver más</a>
+            </div>
+            <ul>
+                <%
+                    //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
+                    if(!(popularMovies == null) && !popularMovies.isEmpty()){
+                        //Mostramos i películas
+                        for(Movie m : popularMovies){
+                %>
+                <li>
+                    <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
+                    <a><%=m.getTitle()%></a>
+                </li>
+                <%}
+                }else{%>
+                <li>No hay películas disponibles, perdon por las molestias.</li>
+                <%}%>
+            </ul>
+        </div>
+        <%}%>
+
+        <div class="recent">
+            <div class="list-header">
+                <h1>Más recientes</h1>
+                <a>Ver más</a>
+            </div>
+            <ul>
+                <%
+                    //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
+                    if(!(recentMovies == null) && !recentMovies.isEmpty()){
+                        //Mostramos i películas
+                        for(Movie m : recentMovies){
+                %>
+                <li>
+                    <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
+                    <a><%=m.getTitle()%></a>
+                </li>
+                <%}
+                }else{%>
+                <li>No hay películas disponibles, perdon por las molestias.</li>
                 <%}%>
             </ul>
         </div>
