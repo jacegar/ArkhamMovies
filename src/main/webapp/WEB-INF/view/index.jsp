@@ -15,7 +15,7 @@
 <%
     //Cargamos el usuario, que sera null si no está la sesión iniciada
     User user = (User) session.getAttribute("user");
-    List<Movie> recommendedMovies = (List<Movie>) request.getAttribute("recommendedMovies");
+    List<Movie> popularMovies = (List<Movie>) request.getAttribute("popularMovies");
 %>
 <body>
     <header>
@@ -41,12 +41,26 @@
             </form>
         </div>
         <div>
-            <h1>Más populares</h1>
-            <a>Ver más</a>
+            <div>
+                <h1>Más populares</h1>
+                <a>Ver más</a>
+            </div>
+            <ul>
+            <%
+                if(!popularMovies.isEmpty()){
+                //Mostramos i películas
+                    for(Movie m : popularMovies){
+                    %>
+                    <li>
+                        <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
+                        <a><%=m.getTitle()%></a>
+                    </li>
+                <%}
+                }else{%>
+                    <li>No hay películas disponibles, perdon por las molestias.</li>
+                <%}%>
+            </ul>
         </div>
-        <ul>
-            <li>Aqui deberia ir una pelicula</li>
-        </ul>
     </main>
 
 </body>

@@ -32,7 +32,7 @@ public class Person {
     @Column(name = "age", nullable = false)
     private Integer age;
 
-    @Column(name = "photoUrl", length = 256)
+    @Column(name = "photo_url", length = 256)
     private String photoUrl;
 
     @OneToMany(mappedBy = "person")

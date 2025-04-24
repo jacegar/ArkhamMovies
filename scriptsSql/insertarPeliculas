@@ -1,0 +1,4 @@
+insert into movie (title, popularity, photo_url)
+values ('Minecraft',100,'https://image.tmdb.org/t/p/original/rZYYmjgyF5UP1AVsvhzzDOFLCwG.jpg'),
+       ('La comunidad del anillo',99,'https://image.tmdb.org/t/p/original/9xtH1RmAzQ0rrMBNUMXstb2s3er.jpg'),
+       ('Dragon ball',55, 'https://image.tmdb.org/t/p/original/wMCD0CYAFlVxbP33Xgh7sexhRkC.jpg');

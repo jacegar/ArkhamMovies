@@ -21,8 +21,17 @@ public class RecommendationController extends BaseController{
         if(isAuthenticated(session)){
             //Añadir recomendacion personalizada
         }else {
-            List<Movie> recommendedMovies = movieRepository.getMoviesSortedByPopularity();
-            model.addAttribute("recommendedMovies", recommendedMovies);
+            //Cogemos las primeras 5 peliculas para mostrarlas en la pagina principal
+            List<Movie> popularMovies = movieRepository.getMoviesSortedByPopularity();
+            if(popularMovies.size() > 5){
+                popularMovies = popularMovies.subList(0, 5);
+            }
+            for(Movie m : popularMovies){
+                System.out.println(m.getTitle());
+                System.out.println(m.getPopularity());
+                System.out.println(m.getPhotoUrl());
+            }
+            model.addAttribute("popularMovies", popularMovies);
         }
         return "index";
     }

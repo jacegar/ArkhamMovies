@@ -48,7 +48,7 @@ public class Movie {
     @Column(name = "tagline", length = 128)
     private String tagline;
 
-    @Column(name = "photoUrl", length = 256)
+    @Column(name = "photo_url", length = 256)
     private String photoUrl;
 
     @OneToMany(mappedBy = "movie")
