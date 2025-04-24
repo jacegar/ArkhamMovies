@@ -23,8 +23,8 @@ public class RecommendationController extends BaseController{
         }else {
             //Cogemos las primeras 5 peliculas para mostrarlas en la pagina principal
             List<Movie> popularMovies = movieRepository.getMoviesSortedByPopularity();
-            if(popularMovies.size() > 5){
-                popularMovies = popularMovies.subList(0, 5);
+            if(popularMovies.size() > 8){
+                popularMovies = popularMovies.subList(0, 8);
             }
             for(Movie m : popularMovies){
                 System.out.println(m.getTitle());
