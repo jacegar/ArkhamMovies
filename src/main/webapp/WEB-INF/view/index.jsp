@@ -1,4 +1,6 @@
-<%@ page import="es.uma.taw.arkhammovies.entity.User" %><%--
+<%@ page import="es.uma.taw.arkhammovies.entity.User" %>
+<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: juana
   Date: 05/04/2025
@@ -13,6 +15,7 @@
 <%
     //Cargamos el usuario, que sera null si no está la sesión iniciada
     User user = (User) session.getAttribute("user");
+    List<Movie> recommendedMovies = (List<Movie>) request.getAttribute("recommendedMovies");
 %>
 <body>
     <header>
@@ -30,6 +33,17 @@
         <%}%>
     </header>
     <main>
+        <div>
+            <h2>Busca una película, actor, personaje...</h2>
+            <form method="post">
+                <input type="text" value="">
+                <input type="submit" value="Buscar">
+            </form>
+        </div>
+        <div>
+            <h1>Más populares</h1>
+            <a>Ver más</a>
+        </div>
         <ul>
             <li>Aqui deberia ir una pelicula</li>
         </ul>

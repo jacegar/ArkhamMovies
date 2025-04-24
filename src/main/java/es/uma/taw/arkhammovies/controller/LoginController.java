@@ -5,8 +5,5 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class LoginController extends BaseController {
-    @GetMapping("/")
-    public String prueba(){
-        return "index";
-    }
+
 }
