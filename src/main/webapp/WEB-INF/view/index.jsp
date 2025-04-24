@@ -11,7 +11,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/index.css">
-    <title>Title</title>
+    <title>Arkham Movies</title>
 </head>
 <%
     //Cargamos el usuario, que sera null si no está la sesión iniciada
