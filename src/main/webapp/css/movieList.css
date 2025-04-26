@@ -1,15 +1,3 @@
-.list-header{
-    display: flex;
-    flex-direction: row;
-
-}
-
-.list-header a{
-    align-self: flex-end;
-    margin-left: auto;
-    margin-right: 2rem;
-}
-
 ul{
     display: flex;
     flex-direction: row;

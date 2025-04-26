@@ -1,0 +1,15 @@
+header{
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    width: 100%;
+}
+
+.login-container{
+    align-self: flex-end;
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    margin-right: 2rem;
+}

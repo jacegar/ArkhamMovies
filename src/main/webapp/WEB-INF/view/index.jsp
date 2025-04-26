@@ -11,6 +11,7 @@
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/index.css">
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <title>Arkham Movies</title>
 </head>
 <%
@@ -44,10 +45,10 @@
                 <input type="submit" value="Buscar">
             </form>
         </div>
-        <div class="tendency">
+        <div class="popular">
             <div class="list-header">
                 <h1>Más populares</h1>
-                <a>Ver más</a>
+                <a href="/movies/list?criteria=0">Ver más</a>
             </div>
             <ul>
             <%
@@ -56,7 +57,7 @@
                     %>
                     <li>
                         <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
-                        <a><%=m.getTitle()%></a>
+                        <a href="movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
                     </li>
                 <%}
                 }else{%>
@@ -67,12 +68,13 @@
 
         <%
             //Si no ha iniciado sesion no podemos recomendarle películas
+            //todo implementar algoritmo recomendacion
             if(user != null){
         %>
         <div class="recommended">
             <div class="list-header">
                 <h1>Para ti</h1>
-                <a>Ver más</a>
+                <a href="/movies/list?criteria=1">Ver más</a>
             </div>
             <ul>
                 <%
@@ -96,7 +98,7 @@
         <div class="recent">
             <div class="list-header">
                 <h1>Más recientes</h1>
-                <a>Ver más</a>
+                <a href="/movies/list?criteria=2">Ver más</a>
             </div>
             <ul>
                 <%
