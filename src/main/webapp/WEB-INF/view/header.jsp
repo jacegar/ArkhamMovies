@@ -20,12 +20,11 @@
         <%
             if(user == null){
         %>
-        <!--Por ahora sin acciones porque no están implementadas-->
         <div class="login-container">
-            <form method="get" action="/login">
+            <form method="get" action="/user/login">
                 <input type="submit" value="Iniciar sesión">
             </form>
-            <form method="get" action="/register">
+            <form method="get" action="/user/register">
                 <input type="submit" value="Registrarse">
             </form>
         </div>

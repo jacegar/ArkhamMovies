@@ -1,5 +1,6 @@
 package es.uma.taw.arkhammovies.dto;
 
+import es.uma.taw.arkhammovies.entity.ReviewId;
 import lombok.Data;
 
 import java.util.List;
@@ -12,6 +13,6 @@ public class UserDTO {
     private String password;
     private Integer role;
     private List<Integer> moviesLiked;
-    private List<Integer> reviews;
+    private List<ReviewId> reviews;
     private List<Integer> moviesSaved;
 }

@@ -1,12 +1,14 @@
 package es.uma.taw.arkhammovies.entity;
 
+import es.uma.taw.arkhammovies.dto.DTO;
+import es.uma.taw.arkhammovies.dto.UserDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -16,7 +18,7 @@ import java.util.Set;
 }, uniqueConstraints = {
         @UniqueConstraint(name = "email_UNIQUE", columnNames = {"email"})
 })
-public class User {
+public class User implements Serializable, DTO<UserDTO> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
@@ -44,4 +46,28 @@ public class User {
     @ManyToMany
     private List<Movie> moviesSaved = new ArrayList<>();
 
+    @Override
+    public UserDTO toDTO() {
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setId(this.id);
+        userDTO.setNickname(this.nickname);
+        userDTO.setEmail(this.email);
+        userDTO.setPassword(this.password);
+        userDTO.setRole(this.role.getId());
+
+        List<Integer> moviesLikedIds = new ArrayList<>();
+        this.moviesLiked.forEach((final Movie movie) -> moviesLikedIds.add(movie.getId()));
+        userDTO.setMoviesLiked(moviesLikedIds);
+
+        List<ReviewId> reviewsIds = new ArrayList<>();
+        this.reviews.forEach((final Review review) -> reviewsIds.add(review.getId()));
+        userDTO.setReviews(reviewsIds);
+
+        List<Integer> moviesSavedIds = new ArrayList<>();
+        this.moviesSaved.forEach((final Movie movie) -> moviesSavedIds.add(movie.getId()));
+        userDTO.setMoviesSaved(moviesSavedIds);
+
+        return userDTO;
+    }
 }
