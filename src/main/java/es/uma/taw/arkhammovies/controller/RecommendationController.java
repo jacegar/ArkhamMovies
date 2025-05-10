@@ -1,7 +1,7 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dao.MovieRepository;
-import es.uma.taw.arkhammovies.entity.Movie;
+import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.service.MovieService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,17 +13,17 @@ import java.util.List;
 //Controlador de recomendación
 @Controller
 public class RecommendationController extends BaseController{
-    @Autowired protected MovieRepository movieRepository;
+    @Autowired protected MovieService movieService;
 
 
     @GetMapping("/")
     public String doListar(HttpSession session, Model model) {
-        List<Movie> popularMovies = movieRepository.getMoviesSortedByPopularity();
+        List<MovieDTO> popularMovies = movieService.getMoviesSortedByPopularity();
         if(popularMovies.size() > 8){
             popularMovies = popularMovies.subList(0, 8);
         }
 
-        List<Movie> recentMovies = movieRepository.getMoviesSortedByReleaseDate();
+        List<MovieDTO> recentMovies = movieService.getMoviesSortedByReleaseDate();
         if(recentMovies.size() > 8){
             recentMovies = recentMovies.subList(0, 8);
         }

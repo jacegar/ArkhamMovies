@@ -1,8 +1,8 @@
-<%@ page import="es.uma.taw.arkhammovies.entity.User" %>
-<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %><%--
   Created by IntelliJ IDEA.
   User: juana
   Date: 26/04/2025
@@ -12,8 +12,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <%
-        User user = (User) session.getAttribute("user");
-        Movie movie = (Movie) request.getAttribute("movie");
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String date = formatter.format(movie.getReleaseDate());
     %>

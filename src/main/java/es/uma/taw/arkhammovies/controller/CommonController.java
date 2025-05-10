@@ -1,7 +1,8 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dao.MovieRepository;
-import es.uma.taw.arkhammovies.entity.Movie;
+import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.service.MovieService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,19 +18,19 @@ import java.util.List;
 @RequestMapping("/movies")
 public class CommonController extends BaseController{
 
-    @Autowired protected MovieRepository movieRepository;
+    @Autowired protected MovieService movieService;
 
     //Usado en la pestaña de ver más
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
     @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
-        List<Movie> completeList;
+        List<MovieDTO> completeList;
 
         //todo añadir lista de usuario
         if(criteria == 2){
-            completeList = movieRepository.getMoviesSortedByReleaseDate();
+            completeList = movieService.getMoviesSortedByReleaseDate();
         }else{
-            completeList = movieRepository.getMoviesSortedByPopularity();
+            completeList = movieService.getMoviesSortedByPopularity();
         }
 
         model.addAttribute("movieList", completeList);
@@ -41,7 +42,7 @@ public class CommonController extends BaseController{
 
     @GetMapping("/movie")
     public String getMovie(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
-        Movie movie = movieRepository.findById(id).get();
+        MovieDTO movie = movieService.findMovie(id);
 
         model.addAttribute("movie", movie);
 

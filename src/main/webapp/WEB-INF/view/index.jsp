@@ -1,6 +1,6 @@
-<%@ page import="es.uma.taw.arkhammovies.entity.User" %>
-<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %><%--
   Created by IntelliJ IDEA.
   User: juana
   Date: 05/04/2025
@@ -16,9 +16,9 @@
 </head>
 <%
     //Cargamos el usuario, que sera null si no está la sesión iniciada
-    User user = (User) session.getAttribute("user");
-    List<Movie> popularMovies = (List<Movie>) request.getAttribute("popularMovies");
-    List<Movie> recentMovies = (List<Movie>) request.getAttribute("recentMovies");
+    UserDTO user = (UserDTO) session.getAttribute("user");
+    List<MovieDTO> popularMovies = (List<MovieDTO>) request.getAttribute("popularMovies");
+    List<MovieDTO> recentMovies = (List<MovieDTO>) request.getAttribute("recentMovies");
 %>
 <body>
     <header>
@@ -53,7 +53,7 @@
             <ul>
             <%
                 if(!(popularMovies == null) && !popularMovies.isEmpty()){
-                    for(Movie m : popularMovies){
+                    for(MovieDTO m : popularMovies){
                     %>
                     <li>
                         <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
@@ -81,7 +81,7 @@
                     //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
                     if(!(popularMovies == null) && !popularMovies.isEmpty()){
                         //Mostramos i películas
-                        for(Movie m : popularMovies){
+                        for(MovieDTO m : popularMovies){
                 %>
                 <li>
                     <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
@@ -105,7 +105,7 @@
                     //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
                     if(!(recentMovies == null) && !recentMovies.isEmpty()){
                         //Mostramos i películas
-                        for(Movie m : recentMovies){
+                        for(MovieDTO m : recentMovies){
                 %>
                 <li>
                     <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">

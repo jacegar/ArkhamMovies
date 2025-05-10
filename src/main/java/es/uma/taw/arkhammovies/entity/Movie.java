@@ -1,9 +1,12 @@
 package es.uma.taw.arkhammovies.entity;
 
+import es.uma.taw.arkhammovies.dto.DTO;
+import es.uma.taw.arkhammovies.dto.MovieDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,7 +16,7 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "movie")
-public class Movie {
+public class Movie implements DTO<MovieDTO>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "movie_id", nullable = false)
@@ -82,4 +85,43 @@ public class Movie {
     @ManyToMany
     private List<es.uma.taw.arkhammovies.entity.User> usersSaved = new ArrayList<>();
 
+    @Override
+    public MovieDTO toDTO() {
+        MovieDTO movieDTO = new MovieDTO();
+        movieDTO.setId(this.id);
+        movieDTO.setTitle(this.title);
+        movieDTO.setPopularity(this.popularity);
+        movieDTO.setRuntime(this.runtime);
+        movieDTO.setBudget(this.budget);
+        movieDTO.setRevenue(this.revenue);
+        movieDTO.setOverview(this.overview);
+        movieDTO.setReleaseDate(this.releaseDate);
+        movieDTO.setStatus(this.status);
+        movieDTO.setHomepage(this.homepage);
+        movieDTO.setTagline(this.tagline);
+        movieDTO.setPhotoUrl(this.photoUrl);
+
+        List<Integer> genresIds = new ArrayList<>();
+        this.genres.forEach((final Genre genre) -> genresIds.add(genre.getId()));
+        movieDTO.setGenres(genresIds);
+
+        List<Integer> keywordsIds = new ArrayList<>();
+        this.keywords.forEach((final Keyword keyword) -> keywordsIds.add(keyword.getId()));
+        movieDTO.setKeywords(keywordsIds);
+
+        List<Integer> languagesIds = new ArrayList<>();
+        this.languages.forEach((final Language language) -> languagesIds.add(language.getId()));
+        movieDTO.setLanguages(languagesIds);
+
+        //No se hasta que punto esto funciona
+        List<ReviewId> reviewsIds = new ArrayList<>();
+        this.reviews.forEach((final Review review) -> reviewsIds.add(review.getId()));
+        movieDTO.setReviews(reviewsIds);
+
+        List<Integer> usersSavedIds = new ArrayList<>();
+        this.usersSaved.forEach((final User user) -> usersSavedIds.add(user.getId()));
+        movieDTO.setUsersSaved(usersSavedIds);
+
+        return movieDTO;
+    }
 }

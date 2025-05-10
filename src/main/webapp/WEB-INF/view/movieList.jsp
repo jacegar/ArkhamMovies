@@ -1,6 +1,6 @@
-<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
 <%@ page import="java.util.List" %>
-<%@ page import="es.uma.taw.arkhammovies.entity.User" %><%--
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %><%--
   Created by IntelliJ IDEA.
   User: juana
   Date: 26/04/2025
@@ -15,8 +15,8 @@
     <title>Lista de películas</title>
 </head>
 <%
-  User user = (User) session.getAttribute("user");
-  List<Movie> movies = (List<Movie>) request.getAttribute("movieList");
+  UserDTO user = (UserDTO) session.getAttribute("user");
+  List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movieList");
   Integer criteria = (Integer) request.getAttribute("criteria");
 %>
 <body>
@@ -53,7 +53,7 @@
         <h1>Películas más populares</h1>
       <%}%>
         <ul>
-          <%for(Movie m : movies){%>
+          <%for(MovieDTO m : movies){%>
           <li>
             <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
             <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
