@@ -56,6 +56,7 @@ public class User implements Serializable, DTO<UserDTO> {
         userDTO.setPassword(this.password);
         userDTO.setRole(this.role.getId());
 
+        /* Da error al iniciar sesión, lo dejo comentado para seguir
         List<Integer> moviesLikedIds = new ArrayList<>();
         this.moviesLiked.forEach((final Movie movie) -> moviesLikedIds.add(movie.getId()));
         userDTO.setMoviesLiked(moviesLikedIds);
@@ -67,6 +68,7 @@ public class User implements Serializable, DTO<UserDTO> {
         List<Integer> moviesSavedIds = new ArrayList<>();
         this.moviesSaved.forEach((final Movie movie) -> moviesSavedIds.add(movie.getId()));
         userDTO.setMoviesSaved(moviesSavedIds);
+         */
 
         return userDTO;
     }
