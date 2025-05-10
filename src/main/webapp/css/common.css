@@ -5,11 +5,20 @@ header{
     width: 100%;
 }
 
-.login-container{
+.login-container, .user-container {
     align-self: flex-end;
     margin-left: auto;
     display: flex;
     flex-direction: row;
     gap: 2rem;
     margin-right: 2rem;
+}
+
+.user-container form input {
+    font-size: 20px;
+    padding: 0 10px;
+}
+
+.ban-button button {
+    margin-top: 33px;
 }

@@ -1,6 +1,7 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
+import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private MovieService movieService;
 
     protected String doUser(Model model, int option) {
         model.addAttribute("option", option);
@@ -24,12 +31,12 @@ public class UserController extends BaseController {
         return "user";
     }
 
-    @GetMapping("/register")
+    @PostMapping("/register")
     public String doRegister(Model model) {
         return doUser(model, 0);
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public String doLogin(Model model) {
         return doUser(model, 1);
     }
@@ -75,5 +82,29 @@ public class UserController extends BaseController {
     public String doAtras(Model model) {
 
         return "redirect:/";
+    }
+
+    @PostMapping("/{}")
+    public String doPerfil(Model model, HttpSession session) { // Está pochillo, falta arreglar lo de la bd
+        UserDTO userDTO = (UserDTO)session.getAttribute("user");
+        List<MovieDTO> likedMovies;
+        List<MovieDTO> savedMovies;
+
+        if (userDTO.getMoviesLiked() == null) {
+            likedMovies = new ArrayList<>();
+        } else {
+            likedMovies = this.movieService.findMoviesById(userDTO.getMoviesLiked());
+        }
+
+        if (userDTO.getMoviesSaved() == null) {
+            savedMovies = new ArrayList<>();
+        } else {
+            savedMovies = this.movieService.findMoviesById(userDTO.getMoviesSaved());
+        }
+
+        model.addAttribute("likedMovies", likedMovies);
+        model.addAttribute("savedMovies", savedMovies);
+
+        return "profile";
     }
 }
