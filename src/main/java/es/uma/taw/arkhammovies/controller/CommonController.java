@@ -30,9 +30,9 @@ public class CommonController extends BaseController{
 
         //todo añadir lista de usuario
         if(criteria == 2){
-            completeList = movieService.getMoviesSortedByReleaseDate();
+            completeList = movieService.getMoviesSortedByReleaseDate("");
         }else{
-            completeList = movieService.getMoviesSortedByPopularity();
+            completeList = movieService.getMoviesSortedByPopularity("");
         }
 
         model.addAttribute("movieList", completeList);
@@ -52,8 +52,21 @@ public class CommonController extends BaseController{
     }
 
     @PostMapping("/moviesbyTitle")
-    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "4") Integer criteria) {
-        List<MovieDTO> movies = movieService.getMoviesByTitle(title);
+    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "3") Integer criteria) {
+        List<MovieDTO> movies;
+        switch (criteria) {
+            case 0:
+                movies = movieService.getMoviesSortedByPopularity(title);
+                break;
+            case 2:
+                movies = movieService.getMoviesSortedByReleaseDate(title);
+                break;
+            case 3:
+                movies = movieService.getMoviesByTitle(title);
+                break;
+            default:
+                movies = movieService.getMoviesSortedByPopularity(title);
+        }
 
         model.addAttribute("movieList", movies);
         model.addAttribute("criteria", criteria);

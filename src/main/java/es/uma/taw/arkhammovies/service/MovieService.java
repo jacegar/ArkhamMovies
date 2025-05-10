@@ -14,14 +14,14 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;
 
 
-    public List<MovieDTO> getMoviesSortedByPopularity() {
-        List<Movie> movies = movieRepository.getMoviesSortedByPopularity();
+    public List<MovieDTO> getMoviesSortedByPopularity(String title) {
+        List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
 
         return this.entity2DTO(movies);
     }
 
-    public List<MovieDTO> getMoviesSortedByReleaseDate() {
-        List<Movie> movies = movieRepository.getMoviesSortedByReleaseDate();
+    public List<MovieDTO> getMoviesSortedByReleaseDate(String title) {
+        List<Movie> movies = movieRepository.getMoviesSortedByReleaseDate(title);
 
         return this.entity2DTO(movies);
     }

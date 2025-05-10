@@ -25,7 +25,8 @@
     <div>
       <h2>Filtra por un nombre</h2>
       <form method="post" action="/movies/moviesbyTitle">
-        <input type="text" name="title" value="<%=title%>">
+        <input type="text" name="title" value="<%=title==null?"":title%>">
+        <input type="hidden" name="criteria" value="<%=criteria%>">
         <button>Buscar</button>
       </form>
     </div>
