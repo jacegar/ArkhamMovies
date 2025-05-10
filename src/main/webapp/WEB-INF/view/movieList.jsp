@@ -17,24 +17,27 @@
 <%
   List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movieList");
   Integer criteria = (Integer) request.getAttribute("criteria");
+  String title = (String) request.getAttribute("title");
 %>
 <body>
   <jsp:include page="header.jsp" />
   <main>
     <div>
       <h2>Filtra por un nombre</h2>
-      <form method="post">
-        <input type="text" value="">
-        <input type="submit" value="Buscar">
+      <form method="post" action="/movies/moviesbyTitle">
+        <input type="text" name="title" value="<%=title%>">
+        <button>Buscar</button>
       </form>
     </div>
     <div>
-      <%if(criteria == 1){%>
+      <%if(criteria==0){%>
+      <h1>Películas más populares</h1>
+      <%}else if(criteria == 1){%>
         <h1>Películas para ti</h1>
       <%} else if (criteria == 2) {%>
         <h1>Estrenos más recientes</h1>
       <%}else{%>
-        <h1>Películas más populares</h1>
+        <h1>Películas:</h1>
       <%}%>
         <ul>
           <%for(MovieDTO m : movies){%>
@@ -45,6 +48,9 @@
           <%}%>
         </ul>
     </div>
+    <form method="post" action="/user/atras">
+      <button>Volver</button>
+    </form>
   </main>
 </body>
 </html>

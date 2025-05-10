@@ -25,9 +25,9 @@
     <main>
         <div>
             <h2>Busca una película, actor, personaje...</h2>
-            <form method="post">
-                <input type="text" value="">
-                <input type="submit" value="Buscar">
+            <form method="post" action="/movies/moviesbyTitle">
+                <input type="text" name="title">
+                <button>Buscar</button>
             </form>
         </div>
         <div class="popular">
