@@ -56,7 +56,7 @@ public class UserController extends BaseController {
     public String doProcessLogin(@ModelAttribute("user") UserDTO user,
                                  Model model,
                                  HttpSession session) {
-        
+
         if (user.getPassword().isEmpty() || user.getEmail().isEmpty()) {
             model.addAttribute("error", "Por favor, rellena todos los campos");
             return doUser(model, 1);
@@ -69,5 +69,11 @@ public class UserController extends BaseController {
             session.setAttribute("user", userDTO);
             return "redirect:/";
         }
+    }
+
+    @PostMapping("/atras")
+    public String doAtras(Model model) {
+
+        return "redirect:/";
     }
 }

@@ -51,6 +51,10 @@
         </table>
     </form:form>
 
+    <form method="post" action="/user/atras">
+        <button>Volver</button>
+    </form>
+
     <p style="color: red;"><%= (error == null ? "" : error) %></p>
 </body>
 </html>
