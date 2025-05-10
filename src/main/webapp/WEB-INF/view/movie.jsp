@@ -12,7 +12,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <%
-        UserDTO user = (UserDTO) session.getAttribute("user");
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String date = formatter.format(movie.getReleaseDate());
@@ -24,22 +23,7 @@
     <title><%=movie.getTitle()%></title>
 </head>
 <body>
-    <header>
-        <h1>Arkham Movies</h1>
-        <%
-            if(user == null){
-        %>
-        <!--Por ahora sin acciones porque no están implementadas-->
-        <div class="login-container">
-            <form>
-                <input type="submit" value="Iniciar sesión">
-            </form>
-            <form>
-                <input type="submit" value="Registrarse">
-            </form>
-        </div>
-        <%}%>
-    </header>
+    <jsp:include page="header.jsp" />
     <main>
         <h1><%=movie.getTitle()%></h1>
         <!--Aqui seria lo tipico que la imagen está a la izquierda y todos los datos a la derecha, pero falta el css -->
@@ -63,6 +47,7 @@
                     <a href="<%=movie.getHomepage()%>">Página de la película</a>
                 <%}%>
             </div>
+        </div>
     </main>
 </body>
 </html>

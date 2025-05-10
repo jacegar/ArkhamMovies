@@ -21,22 +21,7 @@
     List<MovieDTO> recentMovies = (List<MovieDTO>) request.getAttribute("recentMovies");
 %>
 <body>
-    <header>
-        <h1>Arkham Movies</h1>
-        <%
-            if(user == null){
-        %>
-            <!--Por ahora sin acciones porque no están implementadas-->
-        <div class="login-container">
-            <form>
-                <input type="submit" value="Iniciar sesión">
-            </form>
-            <form>
-                <input type="submit" value="Registrarse">
-            </form>
-        </div>
-        <%}%>
-    </header>
+    <jsp:include page="header.jsp" />
     <main>
         <div>
             <h2>Busca una película, actor, personaje...</h2>
