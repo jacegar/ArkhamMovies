@@ -38,12 +38,22 @@ public class User implements Serializable, DTO<UserDTO> {
     private Role role;
 
     @ManyToMany
+    @JoinTable(
+            name = "likedmovie",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
     private List<Movie> moviesLiked = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(
+            name = "savedmovie",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
     private List<Movie> moviesSaved = new ArrayList<>();
 
     @Override
@@ -56,7 +66,6 @@ public class User implements Serializable, DTO<UserDTO> {
         userDTO.setPassword(this.password);
         userDTO.setRole(this.role.getId());
 
-        /* Da error al iniciar sesión, lo dejo comentado para seguir
         List<Integer> moviesLikedIds = new ArrayList<>();
         this.moviesLiked.forEach((final Movie movie) -> moviesLikedIds.add(movie.getId()));
         userDTO.setMoviesLiked(moviesLikedIds);
@@ -68,7 +77,6 @@ public class User implements Serializable, DTO<UserDTO> {
         List<Integer> moviesSavedIds = new ArrayList<>();
         this.moviesSaved.forEach((final Movie movie) -> moviesSavedIds.add(movie.getId()));
         userDTO.setMoviesSaved(moviesSavedIds);
-         */
 
         return userDTO;
     }

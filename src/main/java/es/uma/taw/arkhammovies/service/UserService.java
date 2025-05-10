@@ -7,8 +7,6 @@ import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-
 @Service
 public class UserService extends DTOService<UserDTO, User> {
 

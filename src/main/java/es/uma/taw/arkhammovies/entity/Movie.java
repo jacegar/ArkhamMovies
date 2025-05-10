@@ -58,31 +58,37 @@ public class Movie implements DTO<MovieDTO>, Serializable {
     @OneToMany(mappedBy = "movie")
     private List<MovieCharacter> movieCharacters = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "moviesLiked")
     private List<es.uma.taw.arkhammovies.entity.User> usersLiked = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(name = "moviecompany",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id"))
     private List<Productioncompany> productioncompanies = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(name = "moviecountry",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<es.uma.taw.arkhammovies.entity.Productioncountry> productioncountries = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
     private List<es.uma.taw.arkhammovies.entity.Moviecrew> moviecrews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<Genre> genres = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<Keyword> keywords = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private List<Language> languages = new ArrayList<>();
 
     @OneToMany(mappedBy = "movie")
     private List<es.uma.taw.arkhammovies.entity.Review> reviews = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "moviesSaved")
     private List<es.uma.taw.arkhammovies.entity.User> usersSaved = new ArrayList<>();
 
     @Override
@@ -101,7 +107,6 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         movieDTO.setTagline(this.tagline);
         movieDTO.setPhotoUrl(this.photoUrl);
 
-        /* Error
         List<Integer> genresIds = new ArrayList<>();
         this.genres.forEach((final Genre genre) -> genresIds.add(genre.getId()));
         movieDTO.setGenres(genresIds);
@@ -122,7 +127,6 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         List<Integer> usersSavedIds = new ArrayList<>();
         this.usersSaved.forEach((final User user) -> usersSavedIds.add(user.getId()));
         movieDTO.setUsersSaved(usersSavedIds);
-         */
 
         return movieDTO;
     }
