@@ -101,6 +101,7 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         movieDTO.setTagline(this.tagline);
         movieDTO.setPhotoUrl(this.photoUrl);
 
+        /* Error
         List<Integer> genresIds = new ArrayList<>();
         this.genres.forEach((final Genre genre) -> genresIds.add(genre.getId()));
         movieDTO.setGenres(genresIds);
@@ -121,6 +122,7 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         List<Integer> usersSavedIds = new ArrayList<>();
         this.usersSaved.forEach((final User user) -> usersSavedIds.add(user.getId()));
         movieDTO.setUsersSaved(usersSavedIds);
+         */
 
         return movieDTO;
     }

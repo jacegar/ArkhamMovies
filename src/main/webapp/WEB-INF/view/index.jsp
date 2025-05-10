@@ -70,7 +70,7 @@
                 %>
                 <li>
                     <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
-                    <a><%=m.getTitle()%></a>
+                    <a href="movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
                 </li>
                 <%}
                 }else{%>
@@ -94,7 +94,7 @@
                 %>
                 <li>
                     <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
-                    <a><%=m.getTitle()%></a>
+                    <a href="movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
                 </li>
                 <%}
                 }else{%>
