@@ -55,6 +55,13 @@ public class MovieController {
         return "savemovie";
     }
 
+    @PostMapping("/delete")
+    public String doDelete(@RequestParam("id") Integer id) {
+        this.movieService.deleteMovieById(id);
+
+        return "redirect:/";
+    }
+
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
