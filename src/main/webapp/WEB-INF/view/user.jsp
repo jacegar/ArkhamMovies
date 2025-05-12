@@ -11,6 +11,7 @@
 <head>
     <title>User</title>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/user.css">
 </head>
 <%
     int option = (int)request.getAttribute("option");
@@ -42,19 +43,18 @@
                 <td>Contraseña:</td>
                 <td><form:password path="password" /></td>
             </tr>
-            <tr><td><br/></td></tr>
             <tr>
-                <td>
+                <td colspan="2">
                     <form:button>${option == 0 ? "Registrar" : "Iniciar sesión"}</form:button>
                 </td>
             </tr>
         </table>
     </form:form>
 
-    <form method="post" action="/user/atras">
+    <form method="post" action="/user/atras" class="back-button">
         <button>Volver</button>
     </form>
 
-    <p style="color: red;"><%= (error == null ? "" : error) %></p>
+    <p class="error"><%= (error == null ? "" : error) %></p>
 </body>
 </html>

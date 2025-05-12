@@ -1,0 +1,98 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    gap: 2rem;
+}
+
+main h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 0.5rem;
+}
+
+.movie-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.movie-container img {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    height: auto;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+}
+
+.buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: flex-start;
+}
+
+.buttons-container a img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.3s ease;
+}
+
+.buttons-container a img:hover {
+    transform: scale(1.1);
+}
+
+.movie-details p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.movie-details h2, .movie-details h3 {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.movie-details a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.movie-details a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+form button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
