@@ -12,13 +12,16 @@
     <title>Save Movie</title>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
 </head>
+<%
+    String error = (String)request.getAttribute("error");
+%>
 <body>
     <jsp:include page="header.jsp" />
     <h1>Nueva película</h1>
     <form:form action="/movie/save" method="post" modelAttribute="movie">
         <table>
             <tr>
-                <td>Título:</td>
+                <td><strong>Título*:</strong></td>
                 <td><form:input path="title" size="50" /></td>
             </tr>
             <tr>
@@ -34,7 +37,7 @@
                 <td><form:input path="budget" type="number" /></td>
             </tr>
             <tr>
-                <td>Fecha de estreno:</td>
+                <td><strong>Fecha de estreno*:</strong></td>
                 <td><form:input path="releaseDate" type="date" /></td>
             </tr>
             <tr>
@@ -50,5 +53,6 @@
             </tr>
         </table>
     </form:form>
+    <p class="error"><%= (error == null ? "" : error) %></p>
 </body>
 </html>

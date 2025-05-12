@@ -32,16 +32,23 @@ public class MovieController {
     }
 
     @PostMapping("/save")
-    public String doSave(@ModelAttribute("movie") MovieDTO movie) {
-        this.movieService.saveMovie(movie);
+    public String doSave(@ModelAttribute("movie") MovieDTO movie,
+                         Model model) {
+        if (movie.getTitle().isEmpty() || movie.getReleaseDate() == null) {
+            model.addAttribute("error",
+                    "Por favor, rellene todos los campos");
 
-        return "redirect:/";
+            return "savemovie";
+        } else {
+            this.movieService.saveMovie(movie);
+            return "redirect:/";
+        }
     }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+        binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));
     }
 }

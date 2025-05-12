@@ -48,3 +48,8 @@ header h1 {
 .ban-button button:hover {
     background-color: #c82333;
 }
+
+.error {
+    color: red;
+    font-size: 0.9rem;
+}
