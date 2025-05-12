@@ -44,5 +44,13 @@
         </li>
         <% } %>
     </ul>
+    <div class="button-container">
+        <form method="post" action="/user/logout">
+            <button>Cerrar Sesión</button>
+        </form>
+        <form method="post" action="/user/atras">
+            <button class="back-button">Volver</button>
+        </form>
+    </div>
 </body>
 </html>

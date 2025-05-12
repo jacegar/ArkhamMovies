@@ -41,6 +41,13 @@ public class UserController extends BaseController {
         return doUser(model, 1);
     }
 
+    @PostMapping("/logout")
+    public String doLogout(HttpSession session) {
+        session.invalidate();
+
+        return "redirect:/";
+    }
+
     @PostMapping("/process_register")
     public String doProcessRegister(@ModelAttribute("user") UserDTO user,
                                     Model model,
