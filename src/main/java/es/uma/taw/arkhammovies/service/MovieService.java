@@ -91,4 +91,19 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         userRepository.save(user);
         return user.toDTO();
     }
+
+    public void saveMovie(MovieDTO movieDTO) {
+        Movie movie = new Movie();
+
+        movie.setId(movieDTO.getId());
+        movie.setTitle(movieDTO.getTitle());
+        movie.setTagline(movieDTO.getTagline());
+        movie.setOverview(movieDTO.getOverview());
+        movie.setBudget(movieDTO.getBudget());
+        movie.setReleaseDate(movieDTO.getReleaseDate());
+        movie.setHomepage(movieDTO.getHomepage());
+        movie.setPhotoUrl(movieDTO.getPhotoUrl());
+
+        this.movieRepository.save(movie);
+    }
 }

@@ -1,0 +1,54 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: vital
+  Date: 12/05/2025
+  Time: 13:12
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Save Movie</title>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+</head>
+<body>
+    <jsp:include page="header.jsp" />
+    <h1>Nueva película</h1>
+    <form:form action="/movie/save" method="post" modelAttribute="movie">
+        <table>
+            <tr>
+                <td>Título:</td>
+                <td><form:input path="title" size="50" /></td>
+            </tr>
+            <tr>
+                <td>Frase:</td>
+                <td><form:input path="tagline" size="50" /></td>
+            </tr>
+            <tr>
+                <td>Descripción:</td>
+                <td><form:textarea path="overview" rows="5" cols="40" /></td>
+            </tr>
+            <tr>
+                <td>Presupuesto:</td>
+                <td><form:input path="budget" type="number" /></td>
+            </tr>
+            <tr>
+                <td>Fecha de estreno:</td>
+                <td><form:input path="releaseDate" type="date" /></td>
+            </tr>
+            <tr>
+                <td>Página de la película (enlace):</td>
+                <td><form:input path="homepage" type="url" /></td>
+            </tr>
+            <tr>
+                <td>Portada (enlace):</td>
+                <td><form:input path="photoUrl" type="url" /></td>
+            </tr>
+            <tr>
+                <td><form:button>Guardar</form:button></td>
+            </tr>
+        </table>
+    </form:form>
+</body>
+</html>
