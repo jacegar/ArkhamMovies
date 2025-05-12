@@ -58,15 +58,21 @@
             </div>
         </div>
         <div class="action-buttons">
-            <form method="post" action="/movie/edit">
-                <input type="hidden" name="id" value="<%= movie.getId() %>" />
-                <button>Editar</button>
-            </form>
-            <form method="post" action="/movie/delete">
-                <input type="hidden" name="id" value="<%= movie.getId() %>" />
-                <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar la película' +
-                        ' <%= movie.getTitle() %>?')">Borrar</button>
-            </form>
+            <%
+                if (user!=null && user.getRole()==0){
+            %>
+                <form method="post" action="/movie/edit">
+                    <input type="hidden" name="id" value="<%= movie.getId() %>" />
+                    <button>Editar</button>
+                </form>
+                <form method="post" action="/movie/delete">
+                    <input type="hidden" name="id" value="<%= movie.getId() %>" />
+                    <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar la película' +
+                            ' <%= movie.getTitle() %>?')">Borrar</button>
+                </form>
+            <%
+                }
+            %>
             <form method="post" action="/user/atras">
                 <button class="back-button">Volver</button>
             </form>
