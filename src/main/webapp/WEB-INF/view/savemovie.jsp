@@ -52,10 +52,17 @@
                     <td><form:input path="photoUrl" type="url" /></td>
                 </tr>
                 <tr>
-                    <td><form:button>Guardar</form:button></td>
+                    <td>
+                        <form:button>Guardar</form:button>
+                        </form:form>
+                    </td>
+                    <td>
+                        <form method="post" action="/user/atras">
+                            <button class="back-button">Volver</button>
+                        </form>
+                    </td>
                 </tr>
             </table>
-        </form:form>
         <p class="error"><%= (error == null ? "" : error) %></p>
     </div>
 </body>

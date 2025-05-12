@@ -39,7 +39,7 @@
             <ul>
                 <% for (MovieDTO m : movies) { %>
                 <li>
-                    <img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300">
+                    <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
                     <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
                 </li>
                 <% } %>

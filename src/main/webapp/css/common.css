@@ -1,11 +1,9 @@
-/* Common styles for all pages */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
 }
 
-/* Common style for all h1 elements */
 h1 {
     font-family: 'Arial', sans-serif;
     color: #333;
@@ -42,7 +40,7 @@ header h1 {
     background-color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    width: auto; /* Adjust width to fit content */
+    width: auto;
 }
 
 .login-container form input:hover, .user-container form input:hover {

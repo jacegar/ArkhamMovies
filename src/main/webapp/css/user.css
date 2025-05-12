@@ -35,12 +35,12 @@ form table td {
     padding: 0.5rem;
     font-size: 1rem;
     color: #555;
-    text-align: center; /* Center the buttons horizontally */
+    text-align: center;
 }
 
 form input, form button {
-    width: auto; /* Adjust width to fit content */
-    padding: 0.5rem 1.5rem; /* Add horizontal padding for better appearance */
+    width: auto;
+    padding: 0.5rem 1.5rem;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -57,7 +57,7 @@ form button {
     color: #fff;
     cursor: pointer;
     border: none;
-    margin: 0 auto; /* Center the button within its container */
+    margin: 0 auto;
 }
 
 form button:hover {
@@ -79,7 +79,7 @@ form .back-button button {
     background-color: #6c757d;
     color: #fff;
     border: none;
-    padding: 0.5rem 1.5rem; /* Add horizontal padding for consistency */
+    padding: 0.5rem 1.5rem;
     border-radius: 4px;
     cursor: pointer;
 }
