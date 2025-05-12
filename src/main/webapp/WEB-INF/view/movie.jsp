@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="java.util.Locale" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.text.SimpleDateFormat" %>
@@ -15,6 +16,9 @@
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         String date = formatter.format(movie.getReleaseDate());
+        boolean isLiked = (boolean) request.getAttribute("isLiked");
+        boolean isSaved = (boolean) request.getAttribute("isSaved");
+        UserDTO user = (UserDTO) session.getAttribute("user");
     %>
 
 <head>
@@ -29,6 +33,26 @@
         <!--Aqui seria lo tipico que la imagen está a la izquierda y todos los datos a la derecha, pero falta el css -->
         <div>
             <img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>" width="400" height="600">
+            <!-- Hay que añadir aqui el caso de que la sesion no este iniciada-->
+            <%if(user != null){%>
+            <div class="buttons-container">
+                <a href="/movies/flipLike?movieId=<%=movie.getId()%>">
+                    <%if(!isLiked){%>
+                        <img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-coeur-rouge.png" width="40px" height="40px"/>
+                    <%}else{%>
+                        <img src="https://cdn-icons-png.flaticon.com/512/4209/4209081.png" width="40px" height="40px"/>
+                    <%}%>
+                </a>
+                <a href="/movies/flipSave?movieId=<%=movie.getId()%>">
+                    <%if(!isSaved){%>
+                        <img src="../../img/save-instagram.png" width="40px" height="40px"/>
+                    <%}else{%>
+                        <img src="../../img/bookmark.png" width="40px" height="40px"/>
+                    <%}%>
+                </a>
+            </div>
+            <%}%>
+
             <p><%=movie.getTagline()%></p>
             <div>
                 <h2>Descripción</h2>

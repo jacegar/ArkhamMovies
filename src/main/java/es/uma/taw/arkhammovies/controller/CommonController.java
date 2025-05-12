@@ -2,16 +2,14 @@ package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Movie;
 import es.uma.taw.arkhammovies.service.MovieService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,8 +43,18 @@ public class CommonController extends BaseController{
     @GetMapping("/movie")
     public String getMovie(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
         MovieDTO movie = movieService.findMovie(id);
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        boolean isLiked = false;
+        boolean isSaved = false;
+
+        if(user != null){
+            isLiked = user.getMoviesLiked() != null && user.getMoviesLiked().contains(movie.getId());
+            isSaved = user.getMoviesSaved() != null && user.getMoviesSaved().contains(movie.getId());
+        }
 
         model.addAttribute("movie", movie);
+        model.addAttribute("isLiked", isLiked);
+        model.addAttribute("isSaved", isSaved);
 
         return "movie";
     }
@@ -75,4 +83,25 @@ public class CommonController extends BaseController{
         return "movieList";
     }
 
+    @GetMapping("/flipLike")
+    public String flipLike(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        MovieDTO movie = movieService.findMovie(movieId);
+
+        user = movieService.flipLike(movie.getId(), user.getId());
+        session.setAttribute("user", user); //Recargamos el usuario con los cambios en los likes
+
+        return "redirect:/movies/movie?id=" + movieId;
+    }
+
+    @GetMapping("/flipSave")
+    public String flipSave(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        MovieDTO movie = movieService.findMovie(movieId);
+
+        user = movieService.flipSave(movie.getId(), user.getId());
+        session.setAttribute("user", user); //Recargamos el usuario con los cambios en los likes
+
+        return "redirect:/movies/movie?id=" + movieId;
+    }
 }
