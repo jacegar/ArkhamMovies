@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Header</title>
+    <link rel="stylesheet" type="text/css" href="../../css/header.css">
 </head>
 <%
     UserDTO user = (UserDTO) session.getAttribute("user");

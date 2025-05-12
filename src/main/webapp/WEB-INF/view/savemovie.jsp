@@ -11,49 +11,52 @@
 <head>
     <title>Save Movie</title>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/savemovie.css">
 </head>
 <%
     String error = (String)request.getAttribute("error");
 %>
 <body>
     <jsp:include page="header.jsp" />
-    <h1>${esEditar ? "Editar " : "Nueva "}película</h1>
-    <form:form action="/movie/save" method="post" modelAttribute="movie">
-        <form:hidden path="id" />
-        <table>
-            <tr>
-                <td><strong>Título*:</strong></td>
-                <td><form:input path="title" size="50" /></td>
-            </tr>
-            <tr>
-                <td>Frase:</td>
-                <td><form:input path="tagline" size="50" /></td>
-            </tr>
-            <tr>
-                <td>Descripción:</td>
-                <td><form:textarea path="overview" rows="5" cols="40" /></td>
-            </tr>
-            <tr>
-                <td>Presupuesto:</td>
-                <td><form:input path="budget" type="number" /></td>
-            </tr>
-            <tr>
-                <td><strong>Fecha de estreno*:</strong></td>
-                <td><form:input path="releaseDate" type="date" /></td>
-            </tr>
-            <tr>
-                <td>Página de la película (enlace):</td>
-                <td><form:input path="homepage" type="url" /></td>
-            </tr>
-            <tr>
-                <td>Portada (enlace):</td>
-                <td><form:input path="photoUrl" type="url" /></td>
-            </tr>
-            <tr>
-                <td><form:button>Guardar</form:button></td>
-            </tr>
-        </table>
-    </form:form>
-    <p class="error"><%= (error == null ? "" : error) %></p>
+    <div class="content-wrapper">
+        <h1>${esEditar ? "Editar " : "Nueva "}película</h1>
+        <form:form action="/movie/save" method="post" modelAttribute="movie">
+            <form:hidden path="id" />
+            <table>
+                <tr>
+                    <td><strong>Título*:</strong></td>
+                    <td><form:input path="title" size="50" /></td>
+                </tr>
+                <tr>
+                    <td>Frase:</td>
+                    <td><form:input path="tagline" size="50" /></td>
+                </tr>
+                <tr>
+                    <td>Descripción:</td>
+                    <td><form:textarea path="overview" rows="5" cols="40" /></td>
+                </tr>
+                <tr>
+                    <td>Presupuesto:</td>
+                    <td><form:input path="budget" type="number" /></td>
+                </tr>
+                <tr>
+                    <td><strong>Fecha de estreno*:</strong></td>
+                    <td><form:input path="releaseDate" type="date" /></td>
+                </tr>
+                <tr>
+                    <td>Página de la película (enlace):</td>
+                    <td><form:input path="homepage" type="url" /></td>
+                </tr>
+                <tr>
+                    <td>Portada (enlace):</td>
+                    <td><form:input path="photoUrl" type="url" /></td>
+                </tr>
+                <tr>
+                    <td><form:button>Guardar</form:button></td>
+                </tr>
+            </table>
+        </form:form>
+        <p class="error"><%= (error == null ? "" : error) %></p>
+    </div>
 </body>
 </html>

@@ -1,19 +1,3 @@
-/* Common styles for all pages */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-}
-
-/* Common style for all h1 elements */
-h1 {
-    font-family: 'Arial', sans-serif;
-    color: #333;
-    border-bottom: 2px solid #007BFF;
-    padding-bottom: 0.5rem;
-    display: inline-block;
-}
-
 header {
     display: flex;
     align-items: center;
@@ -21,12 +5,19 @@ header {
     padding: 1rem 2rem;
     background-color: #f8f9fa;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
 }
 
 header h1 {
+    font-family: 'Arial', sans-serif;
     font-size: 1.5rem;
     color: #333;
     margin: 0;
+    border-bottom: 2px solid #007BFF; /* Add blue underline to header h1 */
+    padding-bottom: 0.5rem;
+    display: inline-block;
+    text-align: left;
 }
 
 .login-container, .user-container {
@@ -34,12 +25,22 @@ header h1 {
     gap: 1rem;
 }
 
+.login-container form, .user-container form {
+    /* Remove form styling for login/user containers */
+    border: none;
+    padding: 0;
+    margin: 0;
+    background-color: transparent;
+    box-shadow: none;
+    max-width: none;
+}
+
 .login-container form input, .user-container form input {
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
-    border: 1px solid #ddd;
+    border: none; /* Remove border from these inputs */
     border-radius: 4px;
-    background-color: #fff;
+    background-color: #f0f0f0; /* Lighter background to still show as a button */
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
     width: auto; /* Adjust width to fit content */
@@ -48,24 +49,4 @@ header h1 {
 .login-container form input:hover, .user-container form input:hover {
     background-color: #007BFF;
     color: #fff;
-}
-
-.ban-button button {
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 4px;
-    background-color: #dc3545;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.ban-button button:hover {
-    background-color: #c82333;
-}
-
-.error {
-    color: red;
-    font-size: 0.9rem;
 }

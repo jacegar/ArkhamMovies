@@ -82,6 +82,24 @@ main h1 {
     text-decoration: underline;
 }
 
+/* Add a container for the action buttons */
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+/* Style for the forms containing action buttons */
+.action-buttons form {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+}
+
 form button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -91,8 +109,27 @@ form button {
     color: #fff;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-width: 100px; /* Make all buttons the same width */
 }
 
 form button:hover {
     background-color: #0056b3;
+}
+
+/* Add specific styling for delete button */
+.delete-button {
+    background-color: #dc3545 !important;
+}
+
+.delete-button:hover {
+    background-color: #c82333 !important;
+}
+
+/* Add specific styling for back button */
+.back-button {
+    background-color: #6c757d !important;
+}
+
+.back-button:hover {
+    background-color: #5a6268 !important;
 }
