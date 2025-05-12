@@ -17,8 +17,9 @@
 %>
 <body>
     <jsp:include page="header.jsp" />
-    <h1>Nueva película</h1>
+    <h1>${esEditar ? "Editar " : "Nueva "}película</h1>
     <form:form action="/movie/save" method="post" modelAttribute="movie">
+        <form:hidden path="id" />
         <table>
             <tr>
                 <td><strong>Título*:</strong></td>

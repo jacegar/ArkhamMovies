@@ -47,16 +47,20 @@
                 <% } %>
                 <p><%=movie.getTagline()%></p>
                 <h2>Descripción</h2>
-                <p><%=movie.getOverview()%></p>
+                <p><%=movie.getOverview().isEmpty() ? "Sin descripción" : movie.getOverview() %></p>
                 <h3>Presupuesto</h3>
-                <p><%=movie.getBudget()%> €</p>
+                <p><%=movie.getBudget() == null ? "Desconocido" : movie.getBudget() + " €" %></p>
                 <h3>Fecha de estreno</h3>
                 <p><%=date%></p>
-                <% if (!movie.getHomepage().equals("N/A")) { %>
+                <% if (!movie.getHomepage().equals("N/A") && !movie.getHomepage().isEmpty()) { %>
                     <a href="<%=movie.getHomepage()%>">Página de la película</a>
                 <% } %>
             </div>
         </div>
+        <form method="post" action="/movie/edit">
+            <input type="hidden" name="id" value="<%= movie.getId() %>" />
+            <button>Editar</button>
+        </form>
         <form method="post" action="/user/atras">
             <button>Volver</button>
         </form>
