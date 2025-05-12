@@ -25,9 +25,9 @@
         </div>
         <%} else {%>
         <div class="user-container">
-            <form method="post" action="/user/${user.getNickname()}">
-                <input type="submit" value="<%= user.getNickname() %>">
-            </form>
+            <a href="/user/${user.getNickname()}">
+                <button><%= user.getNickname() %></button>
+            </a>
         </div>
         <%}%>
     </header>

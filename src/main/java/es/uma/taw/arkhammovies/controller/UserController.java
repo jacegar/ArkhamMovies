@@ -92,8 +92,8 @@ public class UserController extends BaseController {
         return "redirect:/";
     }
 
-    @PostMapping("/{}")
-    public String doPerfil(Model model, HttpSession session) { // Está pochillo, falta arreglar lo de la bd
+    @GetMapping("/{nickname}")
+    public String doPerfil(@PathVariable String nickname, Model model, HttpSession session) {
         UserDTO userDTO = (UserDTO)session.getAttribute("user");
         List<MovieDTO> likedMovies;
         List<MovieDTO> savedMovies;
