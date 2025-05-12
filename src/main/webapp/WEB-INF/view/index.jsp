@@ -23,11 +23,17 @@
 <body>
     <jsp:include page="header.jsp" />
     <main>
+        <%
+            if (user!=null && user.getRole()==0){
+        %>
         <div>
             <form method="post" action="/movie/new">
                 <button>Agregar una película</button>
             </form>
         </div>
+        <%
+            }
+        %>
         <div>
             <h2>Busca una película, actor, personaje...</h2>
             <form method="post" action="/movies/moviesbyTitle">
