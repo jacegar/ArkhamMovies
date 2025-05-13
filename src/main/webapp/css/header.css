@@ -25,16 +25,9 @@ header h1 {
     gap: 1rem;
 }
 
-.login-container form, .user-container form {
-    border: none;
-    padding: 0;
-    margin: 0;
-    background-color: transparent;
-    box-shadow: none;
-    max-width: none;
-}
-
-.login-container form input, .user-container form input {
+.login-container .button-link,
+.user-container .button-link {
+    display: inline-block;
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border: none;
@@ -42,10 +35,12 @@ header h1 {
     background-color: #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    width: auto;
+    text-decoration: none;
+    color: inherit;
 }
 
-.login-container form input:hover, .user-container form input:hover {
+.login-container .button-link:hover,
+.user-container .button-link:hover {
     background-color: #007BFF;
     color: #fff;
 }

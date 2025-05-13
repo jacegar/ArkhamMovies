@@ -32,12 +32,12 @@ public class UserController extends BaseController {
         return "user";
     }
 
-    @PostMapping("/register")
+    @GetMapping("/register")
     public String doRegister(Model model) {
         return doUser(model, 0);
     }
 
-    @PostMapping("/login")
+    @GetMapping("/login")
     public String doLogin(Model model) {
         return doUser(model, 1);
     }
@@ -93,8 +93,8 @@ public class UserController extends BaseController {
         return "redirect:/";
     }
 
-    @PostMapping("/{}")
-    public String doPerfil(Model model, HttpSession session) { // Está pochillo, falta arreglar lo de la bd
+    @GetMapping("/{}")
+    public String doPerfil(Model model, HttpSession session) {
         UserDTO userDTO = (UserDTO)session.getAttribute("user");
         List<MovieDTO> likedMovies;
         List<MovieDTO> savedMovies;

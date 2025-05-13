@@ -16,18 +16,12 @@
             if(user == null){
         %>
         <div class="login-container">
-            <form method="post" action="/user/login">
-                <input type="submit" value="Iniciar sesión">
-            </form>
-            <form method="post" action="/user/register">
-                <input type="submit" value="Registrarse">
-            </form>
+            <a href="/user/login" class="button-link">Iniciar sesión</a>
+            <a href="/user/register" class="button-link">Registrarse</a>
         </div>
         <%} else {%>
         <div class="user-container">
-            <form method="post" action="/user/${user.getNickname()}">
-                <input type="submit" value="<%= user.getNickname() %>">
-            </form>
+            <a href="/user/${user.getNickname()}" class="button-link"><%= user.getNickname() %></a>
         </div>
         <%}%>
     </header>
