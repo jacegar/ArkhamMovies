@@ -43,4 +43,15 @@ public class UserService extends DTOService<UserDTO, User> {
 
         return user != null ? this.toDTO(user) : null;
     }
+
+    public boolean removeUserByEmail(String email) {
+        boolean eliminado = false;
+        User user = this.userRepository.findUserByEmail(email);
+
+        if (user != null) {
+            this.userRepository.delete(user);
+            eliminado = true;
+        }
+        return eliminado;
+    }
 }

@@ -17,7 +17,7 @@
     <header>
         <h1>Bienvenido, <%= user.getNickname() %></h1>
         <% if (user.getRole() == 0) { %>
-        <form>
+        <form method="post" action="/user/vetar">
             <div class="ban-button">
                 <button>Vetar</button>
             </div>

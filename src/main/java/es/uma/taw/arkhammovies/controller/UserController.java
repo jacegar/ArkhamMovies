@@ -1,6 +1,7 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
+import es.uma.taw.arkhammovies.entity.User;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -114,5 +115,23 @@ public class UserController extends BaseController {
         model.addAttribute("savedMovies", savedMovies);
 
         return "profile";
+    }
+
+    @PostMapping("/vetar")
+    public String doVetar(Model model, HttpSession session,
+                          @RequestParam (required = false) String email) {
+
+        if (email!=null) {
+            if (!email.isEmpty()) {
+                boolean eliminado = userService.removeUserByEmail(email);
+                String mensaje = eliminado?"El usuario ha sido eliminado":"No se ha encontrado ningún usuario con ese email";
+                model.addAttribute("mensaje", mensaje);
+            }
+            else{
+                model.addAttribute("mensaje", "Debes introducir un email");
+            }
+        }
+
+        return "vetar";
     }
 }
