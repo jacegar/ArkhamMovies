@@ -34,7 +34,9 @@ header h1 {
     max-width: none;
 }
 
-.login-container a button, .user-container a button {
+.login-container .button-link,
+.user-container .button-link {
+    display: inline-block;
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border: none;
@@ -42,10 +44,12 @@ header h1 {
     background-color: #f0f0f0;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-    width: auto;
+    text-decoration: none;
+    color: inherit;
 }
 
-.login-container a button:hover, .user-container a button:hover {
+.login-container .button-link:hover,
+.user-container .button-link:hover {
     background-color: #007BFF;
     color: #fff;
 }

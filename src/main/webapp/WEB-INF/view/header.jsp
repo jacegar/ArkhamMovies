@@ -16,18 +16,12 @@
             if(user == null){
         %>
         <div class="login-container">
-            <a href="/user/login">
-                <button>Iniciar sesión</button>
-            </a>
-            <a href="/user/register">
-                <button>Registrarse</button>
-            </a>
+            <a href="/user/login" class="button-link">Iniciar sesión</a>
+            <a href="/user/register" class="button-link">Registrarse</a>
         </div>
         <%} else {%>
         <div class="user-container">
-            <a href="/user/${user.getNickname()}">
-                <button><%= user.getNickname() %></button>
-            </a>
+            <a href="/user/${user.getNickname()}" class="button-link"><%= user.getNickname() %></a>
         </div>
         <%}%>
     </header>
