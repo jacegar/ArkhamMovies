@@ -34,7 +34,7 @@ header h1 {
     max-width: none;
 }
 
-.login-container form input, .user-container a button {
+.login-container a button, .user-container a button {
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
     border: none;
@@ -45,7 +45,7 @@ header h1 {
     width: auto;
 }
 
-.login-container form input:hover, .user-container a button:hover {
+.login-container a button:hover, .user-container a button:hover {
     background-color: #007BFF;
     color: #fff;
 }

@@ -16,12 +16,12 @@
             if(user == null){
         %>
         <div class="login-container">
-            <form method="post" action="/user/login">
-                <input type="submit" value="Iniciar sesión">
-            </form>
-            <form method="post" action="/user/register">
-                <input type="submit" value="Registrarse">
-            </form>
+            <a href="/user/login">
+                <button>Iniciar sesión</button>
+            </a>
+            <a href="/user/register">
+                <button>Registrarse</button>
+            </a>
         </div>
         <%} else {%>
         <div class="user-container">
