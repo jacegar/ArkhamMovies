@@ -25,7 +25,7 @@
     <main>
         <h1><%=movie.getTitle()%></h1>
         <div class="movie-container">
-            <img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>">
+            <a href="/movies/movie?id=<%=movie.getId()%>"><img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>"></a>
             <div class="movie-details">
                 <% if (user != null) { %>
                 <div class="buttons-container">
