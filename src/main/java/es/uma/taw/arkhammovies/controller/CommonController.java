@@ -124,9 +124,6 @@ public class CommonController extends BaseController{
 
         MovieDTO movie = movieService.findMovie(movieId);
 
-        user = movieService.flipSave(movie.getId(), user.getId());
-        session.setAttribute("user", user);
-
         reviewService.addReview(movie.getId(), user.getId(), score, review);
         return "redirect:/movies/movie?id=" + movieId;
 
