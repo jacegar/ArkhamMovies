@@ -2,9 +2,12 @@ package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Movie;
+import es.uma.taw.arkhammovies.entity.Review;
 import es.uma.taw.arkhammovies.service.MovieService;
+import es.uma.taw.arkhammovies.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import java.util.List;
 public class CommonController extends BaseController{
 
     @Autowired protected MovieService movieService;
+    @Autowired protected ReviewService reviewService;
 
     //Usado en la pestaña de ver más
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
@@ -53,6 +57,8 @@ public class CommonController extends BaseController{
         }
 
         model.addAttribute("movie", movie);
+        List<ReviewDTO> reviews = this.reviewService.findByMovieId(id);
+        model.addAttribute("reviews", reviews);
         model.addAttribute("isLiked", isLiked);
         model.addAttribute("isSaved", isSaved);
 
@@ -104,4 +110,25 @@ public class CommonController extends BaseController{
 
         return "redirect:/movies/movie?id=" + movieId;
     }
+
+    @PostMapping("/addReview")
+    public String doAddReview(HttpSession session, Model model,
+                              @RequestParam("movieId") Integer movieId,
+                              @RequestParam("score") Integer score,
+                              @RequestParam("reviewText") String review) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if(user == null) {
+            return "redirect:/user/login";
+        }
+
+        MovieDTO movie = movieService.findMovie(movieId);
+
+        user = movieService.flipSave(movie.getId(), user.getId());
+        session.setAttribute("user", user);
+
+        reviewService.addReview(movie.getId(), user.getId(), score, review);
+        return "redirect:/movies/movie?id=" + movieId;
+
+    }
+
 }

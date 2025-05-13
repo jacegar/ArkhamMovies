@@ -4,6 +4,8 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.ReviewDTO" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <%
@@ -13,6 +15,7 @@
         boolean isLiked = (boolean) request.getAttribute("isLiked");
         boolean isSaved = (boolean) request.getAttribute("isSaved");
         UserDTO user = (UserDTO) session.getAttribute("user");
+        List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
     %>
 
 <head>
@@ -56,6 +59,31 @@
                     <a href="<%=movie.getHomepage()%>">Página de la película</a>
                 <% } %>
             </div>
+        </div>
+        <div class="review-section">
+            <form method="post" action="/movies/addReview">
+                <input type="text" value="" name="reviewText"/>
+                <input type="radio" value= "0" name="score"/> 0
+                <input type="radio" value= "1" name="score"/> 1
+                <input type="radio" value= "2" name="score"/> 2
+                <input type="radio" value= "3" name="score"/> 3
+                <input type="radio" value= "4" name="score"/> 4
+                <input type="radio" value= "5" name="score"/> 5
+                <input type="radio" value= "6" name="score"/> 6
+                <input type="radio" value= "7" name="score"/> 7
+                <input type="radio" value= "8" name="score"/> 8
+                <input type="radio" value= "9" name="score"/> 9
+                <input type="radio" value= "10" name="score"/> 10 <br/>
+                <input type="hidden" value="<%=movie.getId()%>" name="movieId"/>
+                <input type="submit" value="Submit Review"/>
+            </form>
+            <%
+                for(ReviewDTO review : reviews) {
+            %>
+                <%=review.getUser_id().getEmail()%> | <%=review.getScore()%> | <%=review.getText()%> <br/>
+            <%
+                }
+            %>
         </div>
         <div class="action-buttons">
             <%
