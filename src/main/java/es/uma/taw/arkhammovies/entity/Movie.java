@@ -55,7 +55,7 @@ public class Movie implements DTO<MovieDTO>, Serializable {
     @Column(name = "photo_url", length = 256)
     private String photoUrl;
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<MovieCharacter> movieCharacters = new ArrayList<>();
 
     @ManyToMany(mappedBy = "moviesLiked")
@@ -73,7 +73,7 @@ public class Movie implements DTO<MovieDTO>, Serializable {
             inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<es.uma.taw.arkhammovies.entity.Productioncountry> productioncountries = new ArrayList<>();
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<es.uma.taw.arkhammovies.entity.Moviecrew> moviecrews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "movies")
@@ -85,7 +85,7 @@ public class Movie implements DTO<MovieDTO>, Serializable {
     @ManyToMany(mappedBy = "movies")
     private List<Language> languages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "movie")
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<es.uma.taw.arkhammovies.entity.Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "moviesSaved")
