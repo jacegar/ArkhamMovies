@@ -74,7 +74,6 @@
                 <%
                     //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
                     if(!(popularMovies == null) && !popularMovies.isEmpty()){
-                        //Mostramos i películas
                         for(MovieDTO m : popularMovies){
                 %>
                 <li>
@@ -96,9 +95,7 @@
             </div>
             <ul>
                 <%
-                    //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
                     if(!(recentMovies == null) && !recentMovies.isEmpty()){
-                        //Mostramos i películas
                         for(MovieDTO m : recentMovies){
                 %>
                 <li>
