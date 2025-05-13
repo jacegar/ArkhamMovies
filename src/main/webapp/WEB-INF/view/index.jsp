@@ -26,10 +26,8 @@
         <%
             if (user!=null && user.getRole()==0){
         %>
-        <div>
-            <form method="post" action="/movie/new">
-                <button>Agregar una película</button>
-            </form>
+        <div class="center-container">
+            <a href="/movie/new" class="add-movie-button">Agregar una película</a>
         </div>
         <%
             }

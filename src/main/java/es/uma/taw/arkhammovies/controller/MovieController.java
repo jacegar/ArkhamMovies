@@ -1,13 +1,17 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.service.MovieService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -19,8 +23,14 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
-    @PostMapping("/new")
-    public String doCreate(Model model) {
+    @GetMapping("/new")
+    public String doCreate(Model model, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() != 0) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         MovieDTO movieDTO = new MovieDTO();
         boolean esEditar = false;
 
@@ -44,8 +54,14 @@ public class MovieController {
         }
     }
 
-    @PostMapping("/edit")
-    public String doEdit(@RequestParam("id") Integer id, Model model) {
+    @GetMapping("/edit")
+    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() != 0) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         MovieDTO movie = this.movieService.findMovie(id);
         boolean esEditar = true;
 

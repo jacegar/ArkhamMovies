@@ -61,10 +61,7 @@
             <%
                 if (user!=null && user.getRole()==0){
             %>
-                <form method="post" action="/movie/edit">
-                    <input type="hidden" name="id" value="<%= movie.getId() %>" />
-                    <button>Editar</button>
-                </form>
+                <a href="/movie/edit?id=<%= movie.getId() %>" class="edit-button">Editar</a>
                 <form method="post" action="/movie/delete">
                     <input type="hidden" name="id" value="<%= movie.getId() %>" />
                     <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar la película' +
