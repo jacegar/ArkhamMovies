@@ -48,7 +48,7 @@ public class UserService extends DTOService<UserDTO, User> {
         boolean eliminado = false;
         User user = this.userRepository.findUserByEmail(email);
 
-        if (user != null) {
+        if (user != null && user.getRole().getId()!=0) { // No se pueden borrar admins, se hace desde la BD
             this.userRepository.delete(user);
             eliminado = true;
         }
