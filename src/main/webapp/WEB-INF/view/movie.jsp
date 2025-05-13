@@ -61,6 +61,7 @@
             </div>
         </div>
         <div class="review-section">
+            <h3>Añadir una reseña:</h3>
             <form method="post" action="/movies/addReview">
                 <input type="text" value="" name="reviewText"/>
                 <input type="radio" value= "0" name="score"/> 0
@@ -75,12 +76,20 @@
                 <input type="radio" value= "9" name="score"/> 9
                 <input type="radio" value= "10" name="score"/> 10 <br/>
                 <input type="hidden" value="<%=movie.getId()%>" name="movieId"/>
-                <input type="submit" value="Submit Review"/>
+                <input type="submit" value="Añadir reseña"/>
             </form>
+            <h3>Reseñas de otros usuarios:</h3>
+            <%
+                if (reviews.isEmpty()){
+            %>
+                No hay reseñas para esta película aún.
+            <%
+                }
+            %>
             <%
                 for(ReviewDTO review : reviews) {
             %>
-                <%=review.getUser_id().getEmail()%> | <%=review.getScore()%> | <%=review.getText()%>
+                <%=review.getUser_id().getNickname()%> | <%=review.getScore()%> | <%=review.getText()%>
             <%
                 if(user != null && (user.getRole() == 0 || review.getUser_id().getId() == user.getId())) {
             %>
