@@ -22,7 +22,7 @@ public class ReviewService extends DTOService<ReviewDTO, Review>{
     @Autowired UserRepository userRepository;
 
     public List<ReviewDTO> findByMovieId(Integer movieId) {
-        List<Review> reviews = this.reviewRepository.getMoviesByMovieId(movieId);
+        List<Review> reviews = this.reviewRepository.getReviewsByMovieId(movieId);
         return this.entity2DTO(reviews);
     }
 
@@ -45,6 +45,12 @@ public class ReviewService extends DTOService<ReviewDTO, Review>{
 
         this.reviewRepository.save(reviewObj);
     }
+
+    public void removeById(Integer movieId, Integer userId) {
+        Review review = this.reviewRepository.getReviewById(movieId, userId);
+        this.reviewRepository.delete(review);
+    }
+
     @Override
     public List<ReviewDTO> entity2DTO(List<Review> reviews) {
         return reviews.stream().map(this::toDTO).collect(Collectors.toList());

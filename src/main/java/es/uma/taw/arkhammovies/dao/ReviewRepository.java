@@ -9,6 +9,9 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     @Query("select r from Review r where r.movie.id = :movieId")
-    public List<Review> getMoviesByMovieId(Integer movieId);
+    public List<Review> getReviewsByMovieId(Integer movieId);
+
+    @Query("select r from Review r where r.movie.id = :movieId and r.user.id = :userId")
+    public Review getReviewById(Integer movieId, Integer userId);
 
 }

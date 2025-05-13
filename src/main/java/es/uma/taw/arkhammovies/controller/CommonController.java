@@ -6,6 +6,7 @@ import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Movie;
 import es.uma.taw.arkhammovies.entity.Review;
+import es.uma.taw.arkhammovies.entity.ReviewId;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
@@ -129,6 +130,12 @@ public class CommonController extends BaseController{
         reviewService.addReview(movie.getId(), user.getId(), score, review);
         return "redirect:/movies/movie?id=" + movieId;
 
+    }
+
+    @GetMapping("/removeReview")
+    public String doRemoveReview(@RequestParam("movieId") Integer movieId, @RequestParam("userId") Integer userId) {
+        this.reviewService.removeById(movieId, userId);
+        return "redirect:/movies/movie?id=" + movieId;
     }
 
 }

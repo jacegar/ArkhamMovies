@@ -80,7 +80,17 @@
             <%
                 for(ReviewDTO review : reviews) {
             %>
-                <%=review.getUser_id().getEmail()%> | <%=review.getScore()%> | <%=review.getText()%> <br/>
+                <%=review.getUser_id().getEmail()%> | <%=review.getScore()%> | <%=review.getText()%>
+            <%
+                if(user != null && (user.getRole() == 0 || review.getUser_id().getId() == user.getId())) {
+            %>
+                <a href="/movies/removeReview?movieId=<%=review.getMovie_id().getId()%>&userId=<%=review.getUser_id().getId()%>">
+                    <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+                </a>
+            <%
+                }
+            %>
+            <br/>
             <%
                 }
             %>
