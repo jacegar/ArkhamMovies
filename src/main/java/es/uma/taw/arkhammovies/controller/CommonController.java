@@ -117,18 +117,18 @@ public class CommonController extends BaseController{
     @PostMapping("/addReview")
     public String doAddReview(HttpSession session, Model model,
                               @RequestParam("movieId") Integer movieId,
-                              @RequestParam("score") Integer score,
+                              @RequestParam(required = false, name = "score") Integer score,
                               @RequestParam("reviewText") String review) {
         UserDTO user = (UserDTO) session.getAttribute("user");
         if(user == null) {
             return "redirect:/user/login";
         }
+        else if (score != null){
+            MovieDTO movie = movieService.findMovie(movieId);
+            reviewService.addReview(movie.getId(), user.getId(), score, review);
+        }
 
-        MovieDTO movie = movieService.findMovie(movieId);
-
-        reviewService.addReview(movie.getId(), user.getId(), score, review);
         return "redirect:/movies/movie?id=" + movieId;
-
     }
 
     @GetMapping("/removeReview")
