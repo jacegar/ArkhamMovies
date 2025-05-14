@@ -89,7 +89,8 @@
             <%
                 for(ReviewDTO review : reviews) {
             %>
-                <%=review.getUser_id().getNickname()%> | <%=review.getScore()%> | <%=review.getText()%>
+            <a href="/user/<%= review.getUser_id().getNickname() %>" class="button-link"><%= review.getUser_id().getNickname() %></a>
+            | <%=review.getScore()%> | <%=review.getText()%>
             <%
                 if(user != null && (user.getRole() == 0 || review.getUser_id().getId() == user.getId())) {
             %>

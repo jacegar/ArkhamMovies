@@ -9,14 +9,15 @@
     <link rel="stylesheet" type="text/css" href="../../css/profile.css">
 </head>
 <%
-    UserDTO user = (UserDTO)session.getAttribute("user");
+    UserDTO user = (UserDTO)request.getAttribute("user");
+    UserDTO userSession = (UserDTO)session.getAttribute("user");
     List<MovieDTO> likedMovies = (List<MovieDTO>)request.getAttribute("likedMovies");
     List<MovieDTO> savedMovies = (List<MovieDTO>)request.getAttribute("savedMovies");
 %>
 <body>
     <header>
-        <h1>Bienvenido, <%= user.getNickname() %></h1>
-        <% if (user.getRole() == 0) { %>
+        <h1><%= user.getNickname() %></h1>
+        <% if (userSession != null && userSession.getRole() == 0) { %>
         <form method="post" action="/user/vetar">
             <div class="ban-button">
                 <button>Vetar</button>
@@ -45,9 +46,11 @@
         <% } %>
     </ul>
     <div class="button-container">
+        <% if (userSession != null) { %>
         <form method="post" action="/user/logout">
             <button>Cerrar Sesión</button>
         </form>
+        <% } %>
         <form method="post" action="/user/atras">
             <button class="back-button">Volver</button>
         </form>

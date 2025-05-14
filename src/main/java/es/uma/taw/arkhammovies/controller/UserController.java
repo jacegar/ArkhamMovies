@@ -58,7 +58,10 @@ public class UserController extends BaseController {
             model.addAttribute("error", "Por favor, rellena todos los campos");
             return doUser(model, 0);
         } else if (this.userService.findUserByEmail(user.getEmail()) != null) {
-            model.addAttribute("error", "El usuario ya existe");
+            model.addAttribute("error", "El correo ya está en uso");
+            return doUser(model, 0);
+        } else if (this.userService.findUserByNickname(user.getNickname()) != null) {
+            model.addAttribute("error", "El alias ya está en uso");
             return doUser(model, 0);
         } else {
             this.userService.registerUser(user);
@@ -93,9 +96,12 @@ public class UserController extends BaseController {
         return "redirect:/";
     }
 
-    @GetMapping("/{}")
-    public String doPerfil(Model model, HttpSession session) {
-        UserDTO userDTO = (UserDTO)session.getAttribute("user");
+    @GetMapping("/{nickname}")
+    public String doPerfil(@PathVariable("nickname") String nickname,
+                           Model model,
+                           HttpSession session) {
+
+        UserDTO userDTO = this.userService.findUserByNickname(nickname);
         List<MovieDTO> likedMovies;
         List<MovieDTO> savedMovies;
 
@@ -113,6 +119,7 @@ public class UserController extends BaseController {
 
         model.addAttribute("likedMovies", likedMovies);
         model.addAttribute("savedMovies", savedMovies);
+        model.addAttribute("user", userDTO);
 
         return "profile";
     }

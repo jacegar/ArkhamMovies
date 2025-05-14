@@ -55,4 +55,10 @@ public class UserService extends DTOService<UserDTO, User> {
         }
         return eliminado;
     }
+
+    public UserDTO findUserByNickname(String nickname) {
+        User user = this.userRepository.findUserByNickname(nickname);
+
+        return user != null ? this.toDTO(user) : null;
+    }
 }
