@@ -18,6 +18,7 @@
     //Cargamos el usuario, que sera null si no está la sesión iniciada
     UserDTO user = (UserDTO) session.getAttribute("user");
     List<MovieDTO> popularMovies = (List<MovieDTO>) request.getAttribute("popularMovies");
+    List<MovieDTO> recommendedMovies = (List<MovieDTO>) request.getAttribute("recommendedMovies");
     List<MovieDTO> recentMovies = (List<MovieDTO>) request.getAttribute("recentMovies");
 %>
 <body>
@@ -60,21 +61,15 @@
             </ul>
         </div>
 
-        <%
-            //Si no ha iniciado sesion no podemos recomendarle películas
-            //todo implementar algoritmo recomendacion
-            if(user != null){
-        %>
         <div class="recommended">
             <div class="list-header">
-                <h1>Para ti</h1>
+                <h1>Podrían gustarte</h1>
                 <a href="/movies/list?criteria=1">Ver más</a>
             </div>
             <ul>
                 <%
-                    //Coge la lista anterior, reemplazar cuando tengamos crud de usuario hecho
-                    if(!(popularMovies == null) && !popularMovies.isEmpty()){
-                        for(MovieDTO m : popularMovies){
+                    if(!(recommendedMovies == null) && !recommendedMovies.isEmpty()){
+                        for(MovieDTO m : recommendedMovies){
                 %>
                 <li>
                     <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
@@ -86,7 +81,6 @@
                 <%}%>
             </ul>
         </div>
-        <%}%>
 
         <div class="recent">
             <div class="list-header">

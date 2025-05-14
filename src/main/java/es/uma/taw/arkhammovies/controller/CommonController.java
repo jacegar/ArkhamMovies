@@ -30,9 +30,11 @@ public class CommonController extends BaseController{
     @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
         List<MovieDTO> completeList;
+        UserDTO user = (UserDTO) session.getAttribute("user");
 
-        //todo añadir lista de usuario
-        if(criteria == 2){
+        if(criteria == 1){
+            completeList = movieService.getRecommendedMovies(user);
+        }else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
         }else{
             completeList = movieService.getMoviesSortedByPopularity("");

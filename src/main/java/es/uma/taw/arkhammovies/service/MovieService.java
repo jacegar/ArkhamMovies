@@ -1,10 +1,12 @@
 package es.uma.taw.arkhammovies.service;
 
+import es.uma.taw.arkhammovies.dao.GenreRepository;
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dao.UserRepository;
 import es.uma.taw.arkhammovies.dto.DTO;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.entity.Genre;
 import es.uma.taw.arkhammovies.entity.Movie;
 import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +14,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;
     @Autowired protected UserRepository userRepository;
+    @Autowired protected GenreRepository genreRepository;
+
+    public List<MovieDTO> getAllMovies() {
+        List<Movie> movies = movieRepository.findAll();
+
+        return this.entity2DTO(movies);
+    }
 
     public List<MovieDTO> getMoviesSortedByPopularity(String title) {
         List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
@@ -27,6 +37,19 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public List<MovieDTO> getMoviesSortedByReleaseDate(String title) {
         List<Movie> movies = movieRepository.getMoviesSortedByReleaseDate(title);
 
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getRecommendedMovies(UserDTO user) {
+        List<Genre> likedGenres = genreRepository.getLikedGenresOrderedByFrequency(user.getId());
+        if(likedGenres.size() > 3){
+            likedGenres = likedGenres.subList(0, 3);
+        }
+        List<Integer> likedGenresIds = new ArrayList<>();
+
+        likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
+
+        List<Movie> movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(),likedGenresIds);
         return this.entity2DTO(movies);
     }
 
