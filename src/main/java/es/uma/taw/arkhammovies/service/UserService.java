@@ -30,6 +30,7 @@ public class UserService extends DTOService<UserDTO, User> {
         user.setRole(this.roleRepository.findById(1).get()); // Suponiendo que el id 1 sea rol usuario
 
         this.userRepository.save(user);
+        userDTO.setId(user.getId());
     }
 
     public UserDTO findUserByEmail(String email) {
