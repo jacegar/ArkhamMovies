@@ -19,13 +19,13 @@ public class RecommendationController extends BaseController{
     @GetMapping("/")
     public String doListar(HttpSession session, Model model) {
         List<MovieDTO> popularMovies = movieService.getMoviesSortedByPopularity("");
-        if(popularMovies.size() > 8){
-            popularMovies = popularMovies.subList(0, 8);
+        if(popularMovies.size() > 6){
+            popularMovies = popularMovies.subList(0, 6);
         }
 
         List<MovieDTO> recentMovies = movieService.getMoviesSortedByReleaseDate("");
-        if(recentMovies.size() > 8){
-            recentMovies = recentMovies.subList(0, 8);
+        if(recentMovies.size() > 6){
+            recentMovies = recentMovies.subList(0, 6);
         }
 
         model.addAttribute("popularMovies", popularMovies);

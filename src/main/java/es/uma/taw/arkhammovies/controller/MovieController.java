@@ -48,10 +48,15 @@ public class MovieController {
                     "Por favor, rellene todos los campos");
 
             return "savemovie";
-        } else {
-            this.movieService.saveMovie(movie);
-            return "redirect:/";
         }
+
+        if (movie.getPhotoUrl().isEmpty()) {
+            movie.setPhotoUrl("https://donaldthompson.com/wp-content/uploads/2024/10/placeholder-image-vertical.png");
+        }
+
+        this.movieService.saveMovie(movie);
+        return "redirect:/";
+
     }
 
     @GetMapping("/edit")
