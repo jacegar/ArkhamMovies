@@ -76,11 +76,11 @@ public class UserController extends BaseController {
                                  Model model,
                                  HttpSession session) {
 
-        if (user.getPassword().isEmpty() || user.getEmail().isEmpty()) {
+        if (user.getPassword().isEmpty() || user.getNickname().isEmpty()) {
             model.addAttribute("error", "Por favor, rellena todos los campos");
             return doUser(model, 1);
         }
-        UserDTO userDTO = this.userService.findUserByEmailAndPassword(user.getEmail(), user.getPassword());
+        UserDTO userDTO = this.userService.findUserByNicknameAndPassword(user.getNickname(), user.getPassword());
         if (userDTO == null) {
             model.addAttribute("error", "Credenciales incorrectas");
             return doUser(model, 1);

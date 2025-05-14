@@ -18,20 +18,20 @@
 
     <form:form method="post" action="/user/${formAction}" modelAttribute="user">
         <table>
+            <tr>
+                <td>Alias:</td>
+                <td><form:input path="nickname" /></td>
+            </tr>
             <%
                 if (option == 0) {
             %>
                     <tr>
-                        <td>Alias:</td>
-                        <td><form:input path="nickname" /></td>
+                        <td>Email:</td>
+                        <td><form:input path="email" /></td>
                     </tr>
             <%
                 }
             %>
-            <tr>
-                <td>Email:</td>
-                <td><form:input path="email" /></td>
-            </tr>
             <tr>
                 <td>Contraseña:</td>
                 <td><form:password path="password" /></td>

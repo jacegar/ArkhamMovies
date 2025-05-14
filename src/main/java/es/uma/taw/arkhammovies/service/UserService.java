@@ -16,8 +16,8 @@ public class UserService extends DTOService<UserDTO, User> {
     @Autowired
     protected RoleRepository roleRepository;
 
-    public UserDTO findUserByEmailAndPassword(String email, String password) {
-        User user = this.userRepository.findUserByEmailAndPassword(email, password);
+    public UserDTO findUserByNicknameAndPassword(String nickname, String password) {
+        User user = this.userRepository.findUserByNicknameAndPassword(nickname, password);
 
         return user != null ? this.toDTO(user) : null;
     }
