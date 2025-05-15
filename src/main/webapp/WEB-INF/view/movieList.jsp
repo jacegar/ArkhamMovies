@@ -37,6 +37,15 @@
                 <% } %>
             </h1>
             <ul>
+                <%
+                    if (movies.isEmpty()){
+                %>
+                <li>
+                    No hay películas disponibles, perdon por las molestias.
+                </li>
+                <%
+                    }
+                %>
                 <% for (MovieDTO m : movies) { %>
                 <li>
                     <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
