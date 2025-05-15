@@ -40,7 +40,7 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         return this.entity2DTO(movies);
     }
 
-    public List<MovieDTO> getRecommendedMovies(UserDTO user) {
+    public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {
         List<Genre> likedGenres = genreRepository.getLikedGenresOrderedByFrequency(user.getId());
         if(likedGenres.size() > 3){
             likedGenres = likedGenres.subList(0, 3);
@@ -49,7 +49,7 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
 
-        List<Movie> movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(),likedGenresIds);
+        List<Movie> movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(),likedGenresIds, title);
         return this.entity2DTO(movies);
     }
 

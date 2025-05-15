@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Collections;
 import java.util.List;
 
 //Controlador para tareas comunes que no encajan en ningun rol, ej ver datos de una pelicula o buscar una pelicula concreta en la pagina
@@ -30,7 +31,12 @@ public class CommonController extends BaseController{
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if(criteria == 1){
-            completeList = movieService.getRecommendedMovies(user);
+            if(user == null || user.getMoviesLiked() == null || user.getMoviesLiked().isEmpty()){
+                completeList = movieService.getAllMovies();
+                Collections.shuffle(completeList);
+            }else{
+                completeList = movieService.getRecommendedMovies(user, "");
+            }
         }else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
         }else{
@@ -68,18 +74,26 @@ public class CommonController extends BaseController{
     @PostMapping("/moviesbyTitle")
     public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "3") Integer criteria) {
         List<MovieDTO> movies;
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
         switch (criteria) {
             case 0:
                 movies = movieService.getMoviesSortedByPopularity(title);
                 break;
+            case 1:
+                if(user == null || user.getMoviesLiked() == null || user.getMoviesLiked().isEmpty()){
+                    movies = movieService.getMoviesByTitle(title);
+                    Collections.shuffle(movies);
+                }else{
+                    movies = movieService.getRecommendedMovies(user, title);
+                }
+                break;
             case 2:
                 movies = movieService.getMoviesSortedByReleaseDate(title);
                 break;
-            case 3:
+            default:
                 movies = movieService.getMoviesByTitle(title);
                 break;
-            default:
-                movies = movieService.getMoviesSortedByPopularity(title);
         }
 
         model.addAttribute("movieList", movies);

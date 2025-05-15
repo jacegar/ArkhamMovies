@@ -1,8 +1,6 @@
 package es.uma.taw.arkhammovies.dao;
 
-import es.uma.taw.arkhammovies.entity.Genre;
 import es.uma.taw.arkhammovies.entity.Movie;
-import jakarta.persistence.OrderBy;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +23,6 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
 
     //Devuelve peliculas que pertenezcan a alguno de los generos de la lista, y que no esten en la lista de gustados por el usuario
     @Query("select distinct m from Movie m join m.genres g where g.id in :genresIds and m not in " +
-            "(select m from Movie m join m.usersLiked u on u.id = :userId)")
-    public List<Movie> getRecommendedMoviesByUserAndGenres(@Param("userId") Integer userId, @Param("genresIds") List<Integer> genresIds);
+            "(select m from Movie m join m.usersLiked u on u.id = :userId) and m.title ilike %:title%")
+    public List<Movie> getRecommendedMoviesByUserAndGenres(@Param("userId") Integer userId, @Param("genresIds") List<Integer> genresIds, String title);
 }
