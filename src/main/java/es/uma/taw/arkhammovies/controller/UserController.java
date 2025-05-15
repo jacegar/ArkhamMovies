@@ -1,7 +1,6 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
-import es.uma.taw.arkhammovies.entity.User;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -23,9 +22,9 @@ public class UserController extends BaseController {
     @Autowired
     private MovieService movieService;
 
-    protected String doUser(Model model, int option) {
+    protected String doUser(Model model, int option, UserDTO user) {
         model.addAttribute("option", option);
-        model.addAttribute("user", new UserDTO());
+        model.addAttribute("user", user);
         String formAction = option == 0 ? "process_register" : "process_login";
         model.addAttribute("formAction", formAction);
 
@@ -34,12 +33,12 @@ public class UserController extends BaseController {
 
     @GetMapping("/register")
     public String doRegister(Model model) {
-        return doUser(model, 0);
+        return doUser(model, 0, new UserDTO());
     }
 
     @GetMapping("/login")
     public String doLogin(Model model) {
-        return doUser(model, 1);
+        return doUser(model, 1, new UserDTO());
     }
 
     @PostMapping("/logout")
@@ -56,13 +55,13 @@ public class UserController extends BaseController {
 
         if (user.getNickname().isEmpty() || user.getPassword().isEmpty() || user.getEmail().isEmpty()) {
             model.addAttribute("error", "Por favor, rellena todos los campos");
-            return doUser(model, 0);
+            return doUser(model, 0, user);
         } else if (this.userService.findUserByEmail(user.getEmail()) != null) {
             model.addAttribute("error", "El correo ya está en uso");
-            return doUser(model, 0);
+            return doUser(model, 0, user);
         } else if (this.userService.findUserByNickname(user.getNickname()) != null) {
             model.addAttribute("error", "El alias ya está en uso");
-            return doUser(model, 0);
+            return doUser(model, 0, user);
         } else {
             this.userService.registerUser(user);
             user.setRole(1);
@@ -78,12 +77,12 @@ public class UserController extends BaseController {
 
         if (user.getPassword().isEmpty() || user.getNickname().isEmpty()) {
             model.addAttribute("error", "Por favor, rellena todos los campos");
-            return doUser(model, 1);
+            return doUser(model, 1, user);
         }
         UserDTO userDTO = this.userService.findUserByNicknameAndPassword(user.getNickname(), user.getPassword());
         if (userDTO == null) {
             model.addAttribute("error", "Credenciales incorrectas");
-            return doUser(model, 1);
+            return doUser(model, 1, user);
         } else {
             session.setAttribute("user", userDTO);
             return "redirect:/";

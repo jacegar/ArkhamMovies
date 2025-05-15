@@ -42,10 +42,12 @@ public class MovieController {
 
     @PostMapping("/save")
     public String doSave(@ModelAttribute("movie") MovieDTO movie,
-                         Model model) {
+                         Model model,
+                         @RequestParam("esEditar") boolean esEditar) {
         if (movie.getTitle().isEmpty() || movie.getReleaseDate() == null) {
             model.addAttribute("error",
-                    "Por favor, rellene todos los campos");
+                    "Por favor, rellene todos los campos obligatorios");
+            model.addAttribute("esEditar", esEditar);
 
             return "savemovie";
         }
@@ -56,7 +58,6 @@ public class MovieController {
 
         this.movieService.saveMovie(movie);
         return "redirect:/";
-
     }
 
     @GetMapping("/edit")

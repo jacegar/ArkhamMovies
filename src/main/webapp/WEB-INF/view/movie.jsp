@@ -78,6 +78,7 @@
                 <input type="hidden" value="<%=movie.getId()%>" name="movieId"/>
                 <input type="submit" value="Añadir reseña"/>
             </form>
+            <p class="error">${error == null ? "" : error}</p>
             <h3>Reseñas de otros usuarios:</h3>
             <%
                 if (reviews.isEmpty()){

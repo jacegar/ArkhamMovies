@@ -1,12 +1,8 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
-import es.uma.taw.arkhammovies.entity.Movie;
-import es.uma.taw.arkhammovies.entity.Review;
-import es.uma.taw.arkhammovies.entity.ReviewId;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
@@ -14,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -115,7 +112,7 @@ public class CommonController extends BaseController{
     }
 
     @PostMapping("/addReview")
-    public String doAddReview(HttpSession session, Model model,
+    public String doAddReview(HttpSession session, RedirectAttributes redirectAttributes,
                               @RequestParam("movieId") Integer movieId,
                               @RequestParam(required = false, name = "score") Integer score,
                               @RequestParam("reviewText") String review) {
@@ -123,9 +120,11 @@ public class CommonController extends BaseController{
         if(user == null) {
             return "redirect:/user/login";
         }
-        else if (score != null){
+        else if (score != null && !review.isEmpty()){
             MovieDTO movie = movieService.findMovie(movieId);
             reviewService.addReview(movie.getId(), user.getId(), score, review);
+        } else { // Atributos para redirección
+            redirectAttributes.addFlashAttribute("error", "Por favor, rellene todos los campos");
         }
 
         return "redirect:/movies/movie?id=" + movieId;
