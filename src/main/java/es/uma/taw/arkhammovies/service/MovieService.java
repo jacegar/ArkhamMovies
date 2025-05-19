@@ -118,11 +118,15 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         movie.setId(movieDTO.getId());
         movie.setTitle(movieDTO.getTitle());
-        movie.setTagline(movieDTO.getTagline());
-        movie.setOverview(movieDTO.getOverview());
+        movie.setPopularity(movieDTO.getPopularity());
+        movie.setRuntime(movieDTO.getRuntime());
         movie.setBudget(movieDTO.getBudget());
+        movie.setRevenue(movieDTO.getRevenue());
+        movie.setOverview(movieDTO.getOverview());
         movie.setReleaseDate(movieDTO.getReleaseDate());
+        movie.setStatus(movieDTO.getStatus());
         movie.setHomepage(movieDTO.getHomepage());
+        movie.setTagline(movieDTO.getTagline());
         movie.setPhotoUrl(movieDTO.getPhotoUrl());
 
         List<Genre> genres = genreRepository.findAllById(movieDTO.getGenres());

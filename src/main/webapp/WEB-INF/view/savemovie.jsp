@@ -22,6 +22,10 @@
         <h1>${esEditar ? "Editar " : "Nueva "}película</h1>
         <form:form action="/movie/save" method="post" modelAttribute="movie">
             <form:hidden path="id" />
+            <form:hidden path="popularity" />
+            <form:hidden path="runtime" />
+            <form:hidden path="revenue" />
+            <form:hidden path="status" />
             <input type="hidden" name="esEditar" value="${esEditar}" />
             <table>
                 <tr>
