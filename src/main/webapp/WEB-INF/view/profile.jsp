@@ -32,6 +32,13 @@
         <li>
             <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
             <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+            <% if (userSession != null && userSession.getId() == user.getId()) { %>
+            <a href="/movies/flipLike?movieId=<%=m.getId()%>&tipo=false">
+                <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+            </a>
+            <%
+                }
+            %>
         </li>
         <% } %>
     </ul>
@@ -42,6 +49,13 @@
         <li>
             <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
             <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+            <% if (userSession != null && userSession.getId() == user.getId()) { %>
+                <a href="/movies/flipSave?movieId=<%=m.getId()%>&tipo=false">
+                    <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+                </a>
+            <%
+                }
+            %>
         </li>
         <% } %>
     </ul>

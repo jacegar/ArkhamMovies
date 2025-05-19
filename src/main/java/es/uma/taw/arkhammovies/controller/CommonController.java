@@ -104,25 +104,36 @@ public class CommonController extends BaseController{
     }
 
     @GetMapping("/flipLike")
-    public String flipLike(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId) {
+    public String flipLike(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId, @RequestParam Boolean tipo) {
         UserDTO user = (UserDTO) session.getAttribute("user");
         MovieDTO movie = movieService.findMovie(movieId);
 
         user = movieService.flipLike(movie.getId(), user.getId());
         session.setAttribute("user", user); //Recargamos el usuario con los cambios en los likes
 
-        return "redirect:/movies/movie?id=" + movieId;
+        if (tipo) {
+            return "redirect:/movies/movie?id=" + movieId;
+        }
+        else{
+            return "redirect:/user/" + user.getNickname();
+        }
     }
 
     @GetMapping("/flipSave")
-    public String flipSave(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId) {
+    public String flipSave(HttpSession session, Model model, @ModelAttribute("movieId") Integer movieId,@RequestParam Boolean tipo) {
         UserDTO user = (UserDTO) session.getAttribute("user");
         MovieDTO movie = movieService.findMovie(movieId);
 
         user = movieService.flipSave(movie.getId(), user.getId());
-        session.setAttribute("user", user); //Recargamos el usuario con los cambios en los likes
+        session.setAttribute("user", user); //Recargamos el usuario con los cambios en los guardados
 
-        return "redirect:/movies/movie?id=" + movieId;
+        if (tipo) {
+            return "redirect:/movies/movie?id=" + movieId;
+        }
+        else{
+            return "redirect:/user/" + user.getNickname();
+        }
+
     }
 
     @PostMapping("/addReview")

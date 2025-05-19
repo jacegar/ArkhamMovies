@@ -32,14 +32,14 @@
             <div class="movie-details">
                 <% if (user != null) { %>
                 <div class="buttons-container">
-                    <a href="/movies/flipLike?movieId=<%=movie.getId()%>">
+                    <a href="/movies/flipLike?movieId=<%=movie.getId()%>&tipo=true">
                         <% if (!isLiked) { %>
                             <img src="https://icones.pro/wp-content/uploads/2021/02/icone-de-coeur-rouge.png" alt="Like">
                         <% } else { %>
                             <img src="https://cdn-icons-png.flaticon.com/512/4209/4209081.png" alt="Unlike">
                         <% } %>
                     </a>
-                    <a href="/movies/flipSave?movieId=<%=movie.getId()%>">
+                    <a href="/movies/flipSave?movieId=<%=movie.getId()%>&tipo=true">
                         <% if (!isSaved) { %>
                             <img src="../../img/save-instagram.png" alt="Save">
                         <% } else { %>
