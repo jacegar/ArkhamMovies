@@ -6,6 +6,7 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.ReviewDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.GenreDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
     <%
@@ -16,6 +17,7 @@
         boolean isSaved = (boolean) request.getAttribute("isSaved");
         UserDTO user = (UserDTO) session.getAttribute("user");
         List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
+        List<GenreDTO> genres = (List<GenreDTO>) request.getAttribute("genres");
     %>
 
 <head>
@@ -58,6 +60,20 @@
                 <% if (!movie.getHomepage().equals("N/A") && !movie.getHomepage().isEmpty()) { %>
                     <a href="<%=movie.getHomepage()%>">Página de la película</a>
                 <% } %>
+                <ul>
+                    <% if(movie.getGenres() == null || movie.getGenres().isEmpty()){%>
+                        <p>La pelicula no tiene géneros</p>
+                    <%}else{ %>
+                        <p>Géneros: </p>
+                        <%for(GenreDTO genre : genres) {
+                            if (movie.getGenres().contains(genre.getId())) {%>
+                                <li>
+                                    <%=genre.getName()%>
+                                </li>
+                            <%}
+                        }
+                    }%>
+                </ul>
             </div>
         </div>
         <div class="review-section">

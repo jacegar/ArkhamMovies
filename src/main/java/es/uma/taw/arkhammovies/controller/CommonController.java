@@ -3,8 +3,11 @@ package es.uma.taw.arkhammovies.controller;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.entity.Genre;
+import es.uma.taw.arkhammovies.service.GenreService;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.ReviewService;
+import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,6 +25,7 @@ public class CommonController extends BaseController{
 
     @Autowired protected MovieService movieService;
     @Autowired protected ReviewService reviewService;
+    @Autowired protected GenreService genreService;
 
     //Usado en la pestaña de ver más
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
@@ -67,6 +71,8 @@ public class CommonController extends BaseController{
         model.addAttribute("reviews", reviews);
         model.addAttribute("isLiked", isLiked);
         model.addAttribute("isSaved", isSaved);
+        model.addAttribute("genres", genreService.getAllGenres());
+
 
         return "movie";
     }

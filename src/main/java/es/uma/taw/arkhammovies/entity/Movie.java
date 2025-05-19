@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -76,7 +75,10 @@ public class Movie implements DTO<MovieDTO>, Serializable {
     @OneToMany(mappedBy = "movie")
     private List<es.uma.taw.arkhammovies.entity.Moviecrew> moviecrews = new ArrayList<>();
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany
+    @JoinTable(name = "moviegenre",
+            joinColumns = @JoinColumn(name = "movie_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id"))
     private List<Genre> genres = new ArrayList<>();
 
     @ManyToMany(mappedBy = "movies")
@@ -119,7 +121,6 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         this.languages.forEach((final Language language) -> languagesIds.add(language.getId()));
         movieDTO.setLanguages(languagesIds);
 
-        //No se hasta que punto esto funciona
         List<ReviewId> reviewsIds = new ArrayList<>();
         this.reviews.forEach((final Review review) -> reviewsIds.add(review.getId()));
         movieDTO.setReviews(reviewsIds);

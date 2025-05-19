@@ -3,7 +3,6 @@ package es.uma.taw.arkhammovies.service;
 import es.uma.taw.arkhammovies.dao.GenreRepository;
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dao.UserRepository;
-import es.uma.taw.arkhammovies.dto.DTO;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Genre;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MovieService extends DTOService<MovieDTO, Movie> {
@@ -126,6 +124,9 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         movie.setReleaseDate(movieDTO.getReleaseDate());
         movie.setHomepage(movieDTO.getHomepage());
         movie.setPhotoUrl(movieDTO.getPhotoUrl());
+
+        List<Genre> genres = genreRepository.findAllById(movieDTO.getGenres());
+        movie.setGenres(genres);
 
         this.movieRepository.save(movie);
     }

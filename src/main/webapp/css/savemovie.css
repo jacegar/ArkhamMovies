@@ -32,7 +32,7 @@ form:not(.login-container form):not(.user-container form):not(td form[action="/u
     align-items: center;
     gap: 1rem;
     margin: 0 auto;
-    max-width: 600px;
+    max-width: 1000px; /* Ensanchar el formulario */
     padding: 1.5rem;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -110,4 +110,45 @@ form button:hover {
     font-size: 0.9rem;
     text-align: center;
     margin-top: 1rem;
+}
+
+/* Géneros: checkboxes en 4 columnas y alineación label-checkbox */
+.genre-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+    gap: 0.7rem 2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    align-items: center; /* Centra verticalmente todos los elementos del grid */
+}
+
+/* Fuerza a los spans hijos a ser flex y alinear contenido */
+.genre-checkboxes > span,
+.genre-checkboxes > label,
+.genre-checkboxes > div {
+    display: flex !important;
+    align-items: center !important; /* Centra verticalmente checkbox y texto */
+    gap: 0.4rem;
+    white-space: nowrap;
+    margin-bottom: 0.2rem;
+    font-size: 1rem;
+    color: #333;
+    min-height: 32px; /* Ajusta según el tamaño del checkbox para forzar alineación */
+}
+
+/* Elimina margen de los inputs y texto */
+.genre-checkboxes input[type="checkbox"] {
+    margin: 0 0.4rem 0 0;
+    vertical-align: middle;
+    width: 18px;
+    height: 18px;
+}
+
+/* Elimina reglas innecesarias para label dentro de genre-checkboxes */
+.genre-checkboxes label {
+    display: contents;
+    margin: 0;
+    padding: 0;
+    min-width: unset;
+    white-space: unset;
 }

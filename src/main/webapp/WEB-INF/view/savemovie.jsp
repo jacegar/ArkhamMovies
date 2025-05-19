@@ -46,11 +46,21 @@
                 </tr>
                 <tr>
                     <td>Página de la película (enlace):</td>
-                    <td><form:input path="homepage" type="url" /></td>
+                    <td><form:input path="homepage"/></td>
                 </tr>
                 <tr>
                     <td>Portada (enlace):</td>
                     <td><form:input path="photoUrl" type="url" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        Géneros:
+                    </td>
+                    <td>
+                        <div class="genre-checkboxes">
+                            <form:checkboxes path="genres" items="${generos}" itemLabel="name" itemValue="id"></form:checkboxes>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td>

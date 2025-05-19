@@ -2,6 +2,7 @@ package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.service.GenreService;
 import es.uma.taw.arkhammovies.service.MovieService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class MovieController {
     @Autowired
     MovieService movieService;
 
+    @Autowired
+    GenreService genreService;
+
     @GetMapping("/new")
     public String doCreate(Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -34,6 +38,7 @@ public class MovieController {
         MovieDTO movieDTO = new MovieDTO();
         boolean esEditar = false;
 
+        model.addAttribute("generos", genreService.getAllGenres());
         model.addAttribute("movie", movieDTO);
         model.addAttribute("esEditar", esEditar);
 
@@ -44,7 +49,9 @@ public class MovieController {
     public String doSave(@ModelAttribute("movie") MovieDTO movie,
                          Model model,
                          @RequestParam("esEditar") boolean esEditar) {
+
         if (movie.getTitle().isEmpty() || movie.getReleaseDate() == null) {
+            model.addAttribute("generos", genreService.getAllGenres());
             model.addAttribute("error",
                     "Por favor, rellene todos los campos obligatorios");
             model.addAttribute("esEditar", esEditar);
@@ -71,6 +78,7 @@ public class MovieController {
         MovieDTO movie = this.movieService.findMovie(id);
         boolean esEditar = true;
 
+        model.addAttribute("generos", genreService.getAllGenres());
         model.addAttribute("movie", movie);
         model.addAttribute("esEditar", esEditar);
 
