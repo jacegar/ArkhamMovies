@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -23,6 +24,11 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public List<MovieDTO> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
 
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getMoviesById(List<Integer> movieIds) {
+        List<Movie> movies = movieRepository.findAllById(movieIds);
         return this.entity2DTO(movies);
     }
 
@@ -39,15 +45,25 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     }
 
     public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {
+        List<Movie> movies;
+
         List<Genre> likedGenres = genreRepository.getLikedGenresOrderedByFrequency(user.getId());
         if(likedGenres.size() > 3){
             likedGenres = likedGenres.subList(0, 3);
         }
-        List<Integer> likedGenresIds = new ArrayList<>();
 
-        likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
+        if(likedGenres.isEmpty()){
+            movies = movieRepository.getMoviesByTitle(title);
+            movies.removeAll(movieRepository.getLikedMoviesByUser(user.getId()));
+            Collections.shuffle(movies);
+        }else {
+            List<Integer> likedGenresIds = new ArrayList<>();
 
-        List<Movie> movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(),likedGenresIds, title);
+            likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
+
+            movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(), likedGenresIds, title);
+        }
+
         return this.entity2DTO(movies);
     }
 
