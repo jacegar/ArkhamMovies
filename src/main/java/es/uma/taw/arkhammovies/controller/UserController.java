@@ -140,4 +140,31 @@ public class UserController extends BaseController {
 
         return "vetar";
     }
+
+    @GetMapping("/estadisticas")
+    public String doEstadisticas(@RequestParam("nickname") String nickname,
+                                 Model model,
+                                 HttpSession session) {
+        UserDTO userDTO = this.userService.findUserByNickname(nickname);
+        List<MovieDTO> likedMovies;
+        List<MovieDTO> savedMovies;
+
+        if (userDTO.getMoviesLiked() == null) {
+            likedMovies = new ArrayList<>();
+        } else {
+            likedMovies = this.movieService.findMoviesById(userDTO.getMoviesLiked());
+        }
+
+        if (userDTO.getMoviesSaved() == null) {
+            savedMovies = new ArrayList<>();
+        } else {
+            savedMovies = this.movieService.findMoviesById(userDTO.getMoviesSaved());
+        }
+
+        model.addAttribute("likedMovies", likedMovies);
+        model.addAttribute("savedMovies", savedMovies);
+        model.addAttribute("user", userDTO);
+
+        return "estadisticas";
+    }
 }

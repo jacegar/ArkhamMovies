@@ -1,0 +1,83 @@
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
+<%@ page import="java.util.List" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Profile</title>
+    <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/profile.css">
+</head>
+<%
+    UserDTO user = (UserDTO)request.getAttribute("user");
+    UserDTO userSession = (UserDTO)session.getAttribute("user");
+    List<MovieDTO> likedMovies = (List<MovieDTO>)request.getAttribute("likedMovies");
+    List<MovieDTO> savedMovies = (List<MovieDTO>)request.getAttribute("savedMovies");
+%>
+<body>
+<header>
+    <h1><%= user.getNickname() %></h1>
+    <% if (userSession != null && userSession.getRole() == 0) { %>
+    <form method="post" action="/user/vetar">
+        <div class="ban-button">
+            <button>Vetar</button>
+        </div>
+    </form>
+    <% } %>
+</header>
+
+<h2>Lista de películas que te gustan</h2>
+<ul>
+    <% for (MovieDTO m : likedMovies) { %>
+    <li>
+        <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
+        <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+        <% if (userSession != null && userSession.getId() == user.getId()) { %>
+        <a href="/movies/flipLike?movieId=<%=m.getId()%>&tipo=false">
+            <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+        </a>
+        <%
+            }
+        %>
+    </li>
+    <% } %>
+</ul>
+
+<h2>Lista de películas guardadas sin like</h2>
+<ul>
+    <%
+        for (MovieDTO s : savedMovies) {
+            int contador = 0;
+
+            for (MovieDTO liked : likedMovies) {
+                if (!s.getId().equals(liked.getId())) {
+                    contador++;
+                }
+            }
+
+            if (contador == likedMovies.size()) {
+    %>
+    <li>
+        <a href="/movies/movie?id=<%=s.getId()%>">
+            <img src="<%=s.getPhotoUrl()%>" alt="Foto de <%=s.getTitle()%>" width="200" height="300">
+        </a>
+        <a href="/movies/movie?id=<%=s.getId()%>"><%=s.getTitle()%></a>
+        <% if (userSession != null && userSession.getId() == user.getId()) { %>
+        <a href="/movies/flipSave?movieId=<%=s.getId()%>&tipo=false">
+            <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+        </a>
+        <% } %>
+    </li>
+    <%
+            }
+        }
+    %>
+</ul>
+
+<div class="button-container">
+    <form method="post" action="/user/atras">
+        <button class="back-button">Volver</button>
+    </form>
+</div>
+</body>
+</html>

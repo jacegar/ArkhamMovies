@@ -26,6 +26,11 @@
         <% } %>
     </header>
 
+    <h2>Información del usuario</h2>
+    <strong>Email:</strong> <%= user.getEmail() %> <br>
+    <strong>Nickname:</strong> <%= user.getNickname() %> <br>
+    <strong>Contraseña:</strong> <input type="password" value="<%= user.getPassword() %>" readonly>
+
     <h2>Lista de películas que te gustan</h2>
     <ul>
         <% for (MovieDTO m : likedMovies) { %>
@@ -67,6 +72,10 @@
         <% } %>
         <form method="post" action="/user/atras">
             <button class="back-button">Volver</button>
+        </form>
+        <form method="get" action="/user/estadisticas">
+            <input type="hidden" name="nickname" value="<%= user.getNickname() %>" />
+            <button type="submit">Estadísticas</button>
         </form>
     </div>
 </body>
