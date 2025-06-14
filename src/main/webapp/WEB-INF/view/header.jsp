@@ -11,7 +11,7 @@
 %>
 <body>
     <header>
-        <h1>Arkham Movies</h1>
+        <h1><a href="/">Arkham Movies</a></h1>
         <%
             if(user == null){
         %>
