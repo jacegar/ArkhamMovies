@@ -111,7 +111,7 @@ public class CommonController extends BaseController{
         }
 
         List<MovieCharacterDTO> characters;
-        characters = characterService.getAllCharacters();
+        characters = characterService.getCharactersByName(title);
 
         model.addAttribute("characterList", characters);
         model.addAttribute("movieList", movies);

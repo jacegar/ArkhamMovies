@@ -46,7 +46,7 @@ public class RecommendationController extends BaseController{
             recentMovies = recentMovies.subList(0, 6);
         }
 
-        List<MovieCharacterDTO> characters = characterService.getAllCharacters();
+        List<MovieCharacterDTO> characters = characterService.getCharactersByName("");
 
         model.addAttribute("popularMovies", popularMovies);
         model.addAttribute("recommendedMovies", recommendedMovies);
