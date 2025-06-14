@@ -1,7 +1,9 @@
 package es.uma.taw.arkhammovies.controller;
 
+import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.service.MovieCharacterService;
 import es.uma.taw.arkhammovies.service.MovieService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +18,7 @@ import java.util.List;
 @Controller
 public class RecommendationController extends BaseController{
     @Autowired protected MovieService movieService;
-
+    @Autowired protected MovieCharacterService characterService;
 
     @GetMapping("/")
     public String doListar(HttpSession session, Model model) {
@@ -44,9 +46,12 @@ public class RecommendationController extends BaseController{
             recentMovies = recentMovies.subList(0, 6);
         }
 
+        List<MovieCharacterDTO> characters = characterService.getAllCharacters();
+
         model.addAttribute("popularMovies", popularMovies);
         model.addAttribute("recommendedMovies", recommendedMovies);
         model.addAttribute("recentMovies", recentMovies);
+        model.addAttribute("characters", characters);
 
         return "index";
     }

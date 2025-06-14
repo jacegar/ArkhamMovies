@@ -1,13 +1,11 @@
 package es.uma.taw.arkhammovies.controller;
 
+import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Genre;
-import es.uma.taw.arkhammovies.service.GenreService;
-import es.uma.taw.arkhammovies.service.MovieService;
-import es.uma.taw.arkhammovies.service.ReviewService;
-import es.uma.taw.arkhammovies.service.UserService;
+import es.uma.taw.arkhammovies.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +24,7 @@ public class CommonController extends BaseController{
     @Autowired protected MovieService movieService;
     @Autowired protected ReviewService reviewService;
     @Autowired protected GenreService genreService;
+    @Autowired protected MovieCharacterService characterService;
 
     //Usado en la pestaña de ver más
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
@@ -77,6 +76,15 @@ public class CommonController extends BaseController{
         return "movie";
     }
 
+    @GetMapping("/character")
+    public String getCharacter(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
+        MovieCharacterDTO character = characterService.findCharacter(id);
+
+        model.addAttribute("character", character);
+
+        return "character";
+    }
+
     @PostMapping("/moviesbyTitle")
     public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "3") Integer criteria) {
         List<MovieDTO> movies;
@@ -102,6 +110,10 @@ public class CommonController extends BaseController{
                 break;
         }
 
+        List<MovieCharacterDTO> characters;
+        characters = characterService.getAllCharacters();
+
+        model.addAttribute("characterList", characters);
         model.addAttribute("movieList", movies);
         model.addAttribute("criteria", criteria);
         model.addAttribute("title", title);

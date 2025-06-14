@@ -1,8 +1,13 @@
 package es.uma.taw.arkhammovies.entity;
 
+import es.uma.taw.arkhammovies.dto.DTO;
+import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
+import es.uma.taw.arkhammovies.dto.MovieDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.io.Serializable;
 
 @Getter
 @Setter
@@ -11,7 +16,7 @@ import lombok.Setter;
         @Index(name = "movie_id_idx", columnList = "movie_id"),
         @Index(name = "person_id_idx", columnList = "person_id")
 })
-public class MovieCharacter {
+public class MovieCharacter implements DTO<MovieCharacterDTO>, Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "character_id", nullable = false)
@@ -37,4 +42,17 @@ public class MovieCharacter {
     @JoinColumn(name = "person_id")
     private es.uma.taw.arkhammovies.entity.Person person;
 
+    @Override
+    public MovieCharacterDTO toDTO() {
+        MovieCharacterDTO characterDTO = new MovieCharacterDTO();
+        characterDTO.setId(this.id);
+        characterDTO.setName(this.name);
+        characterDTO.setSurname1(this.surname1);
+        characterDTO.setSurname2(this.surname2);
+        characterDTO.setPhotoUrl(this.photoUrl);
+        characterDTO.setMovie(this.movie.getId());
+        characterDTO.setPerson(this.person.getId());
+
+        return characterDTO;
+    }
 }

@@ -1,6 +1,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.entity.MovieCharacter" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,6 +11,7 @@
     <title>Lista de películas</title>
 </head>
 <%
+    List<MovieCharacterDTO>characters = (List<MovieCharacterDTO>) request.getAttribute("characterList");
     List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movieList");
     Integer criteria = (Integer) request.getAttribute("criteria");
     String title = (String) request.getAttribute("title");
@@ -50,6 +53,28 @@
                 <li>
                     <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
                     <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
+        <div>
+            <h1>
+                Personajes:
+            </h1>
+            <ul>
+                <%
+                    if (characters.isEmpty()){
+                %>
+                <li>
+                    No hay personajes disponibles, perdon por las molestias.
+                </li>
+                <%
+                    }
+                %>
+                <% for (MovieCharacterDTO c : characters) { %>
+                <li>
+                    <a href="/movies/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
+                    <a href="/movies/character?id=<%=c.getId()%>"><%=c.getName()%></a>
                 </li>
                 <% } %>
             </ul>
