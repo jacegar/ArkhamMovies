@@ -20,65 +20,69 @@
     <jsp:include page="header.jsp" />
     <main>
         <div>
-            <h2>Filtra por un nombre</h2>
+            <h2>Filtra por nombre</h2>
             <form method="post" action="/movies/moviesbyTitle">
                 <input type="text" name="title" value="<%=title == null ? "" : title %>">
                 <input type="hidden" name="criteria" value="<%=criteria%>">
                 <button>Buscar</button>
             </form>
         </div>
-        <div>
-            <h1>
-                <% if (criteria == 0) { %>
-                    Películas más populares
-                <% } else if (criteria == 1) { %>
-                    Películas para ti
-                <% } else if (criteria == 2) { %>
-                    Estrenos más recientes
-                <% } else { %>
-                    Películas:
-                <% } %>
-            </h1>
-            <ul>
-                <%
-                    if (movies.isEmpty()){
-                %>
-                <li>
-                    No hay películas disponibles, perdon por las molestias.
-                </li>
-                <%
-                    }
-                %>
-                <% for (MovieDTO m : movies) { %>
-                <li>
-                    <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
-                    <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
-                </li>
-                <% } %>
-            </ul>
-        </div>
-        <div>
-            <h1>
-                Personajes:
-            </h1>
-            <ul>
-                <%
-                    if (characters.isEmpty()){
-                %>
-                <li>
-                    No hay personajes disponibles, perdon por las molestias.
-                </li>
-                <%
-                    }
-                %>
-                <% for (MovieCharacterDTO c : characters) { %>
-                <li>
-                    <a href="/movies/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
-                    <a href="/movies/character?id=<%=c.getId()%>"><%=c.getName()%></a>
-                </li>
-                <% } %>
-            </ul>
-        </div>
+        <% if (movies!=null){ %>
+            <div>
+                <h1>
+                    <% if (criteria == 0) { %>
+                        Películas más populares
+                    <% } else if (criteria == 1) { %>
+                        Películas para ti
+                    <% } else if (criteria == 2) { %>
+                        Estrenos más recientes
+                    <% } else { %>
+                        Películas:
+                    <% } %>
+                </h1>
+                <ul>
+                    <%
+                        if (movies.isEmpty()){
+                    %>
+                    <li>
+                        No hay películas disponibles, perdon por las molestias.
+                    </li>
+                    <%
+                        }
+                    %>
+                    <% for (MovieDTO m : movies) { %>
+                    <li>
+                        <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
+                        <a href="/movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        <% } %>
+        <% if (characters!=null){ %>
+            <div>
+                <h1>
+                    Personajes:
+                </h1>
+                <ul>
+                    <%
+                        if (characters.isEmpty()){
+                    %>
+                    <li>
+                        No hay personajes disponibles, perdon por las molestias.
+                    </li>
+                    <%
+                        }
+                    %>
+                    <% for (MovieCharacterDTO c : characters) { %>
+                    <li>
+                        <a href="/movies/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
+                        <a href="/movies/character?id=<%=c.getId()%>"><%=c.getName()%></a>
+                    </li>
+                    <% } %>
+                </ul>
+            </div>
+        <% } %>
         <form method="post" action="/user/atras">
             <button>Volver</button>
         </form>

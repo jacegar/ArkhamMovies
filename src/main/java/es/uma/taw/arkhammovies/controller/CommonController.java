@@ -30,10 +30,14 @@ public class CommonController extends BaseController{
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
     @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
-        List<MovieDTO> completeList;
+        List<MovieDTO> completeList = null;
+        List<MovieCharacterDTO> characters = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if(criteria == 1){
+        if (criteria == 0){
+            completeList = movieService.getMoviesSortedByPopularity("");
+        }
+        else if(criteria == 1){
             if(user == null || user.getMoviesLiked() == null || user.getMoviesLiked().isEmpty()){
                 completeList = movieService.getAllMovies();
                 Collections.shuffle(completeList);
@@ -42,11 +46,12 @@ public class CommonController extends BaseController{
             }
         }else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
-        }else{
-            completeList = movieService.getMoviesSortedByPopularity("");
+        }else{ // criteria == 3
+            characters = characterService.getCharactersByName("");
         }
 
         model.addAttribute("movieList", completeList);
+        model.addAttribute("characterList", characters);
         model.addAttribute("criteria", criteria);
 
         return "movieList";
@@ -86,8 +91,9 @@ public class CommonController extends BaseController{
     }
 
     @PostMapping("/moviesbyTitle")
-    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "3") Integer criteria) {
-        List<MovieDTO> movies;
+    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "999") Integer criteria) {
+        List<MovieDTO> movies = null;
+        List<MovieCharacterDTO> characters = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         switch (criteria) {
@@ -105,13 +111,14 @@ public class CommonController extends BaseController{
             case 2:
                 movies = movieService.getMoviesSortedByReleaseDate(title);
                 break;
+            case 3:
+                characters = characterService.getCharactersByName(title);
+                break;
             default:
+                characters = characterService.getCharactersByName(title);
                 movies = movieService.getMoviesByTitle(title);
                 break;
         }
-
-        List<MovieCharacterDTO> characters;
-        characters = characterService.getCharactersByName(title);
 
         model.addAttribute("characterList", characters);
         model.addAttribute("movieList", movies);

@@ -1,13 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %><%--
-  Created by IntelliJ IDEA.
-  User: juana
-  Date: 05/04/2025
-  Time: 14:48
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -36,7 +30,7 @@
             }
         %>
         <div>
-            <h2>Busca una película, actor, personaje...</h2>
+            <h2>Busca una película o personaje</h2>
             <form method="post" action="/movies/moviesbyTitle">
                 <input type="text" name="title">
                 <button>Buscar</button>
@@ -108,7 +102,7 @@
         <div class="characters">
             <div class="list-header">
                 <h1>Personajes</h1>
-                <a href="/movies/list?criteria=1">Ver más</a>
+                <a href="/movies/list?criteria=3">Ver más</a>
             </div>
             <ul>
                 <%
