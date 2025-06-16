@@ -22,7 +22,7 @@
 <body>
     <jsp:include page="header.jsp" />
     <div>
-      <h2>Busca una película o personaje</h2>
+      <h2>Busca una película, personaje o actor</h2>
       <form method="post" action="/movies/searchbyTitle">
         <input type="text" name="title">
         <button>Buscar</button>
@@ -32,7 +32,7 @@
       <div class="list-header">
         <h1>Personajes</h1>
         <%-->Aqui habria que anadir un enlace a la tipica pagina que muestra todos los personajes y no solo algunos--%>
-        <a href="/characters/inicio">Ver más</a>
+          <a href="/movies/list?criteria=3">Ver más</a>
       </div>
       <ul>
         <%

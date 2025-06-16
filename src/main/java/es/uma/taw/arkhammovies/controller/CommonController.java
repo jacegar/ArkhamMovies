@@ -1,9 +1,6 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
-import es.uma.taw.arkhammovies.dto.MovieDTO;
-import es.uma.taw.arkhammovies.dto.ReviewDTO;
-import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.dto.*;
 import es.uma.taw.arkhammovies.entity.Genre;
 import es.uma.taw.arkhammovies.service.*;
 import jakarta.servlet.http.HttpSession;
@@ -25,12 +22,15 @@ public class CommonController extends BaseController{
     @Autowired protected ReviewService reviewService;
     @Autowired protected GenreService genreService;
     @Autowired protected MovieCharacterService characterService;
+    @Autowired protected PersonService personService;
 
     //Usado en las pestañas de ver más para ver todas las peliculas según cierto criterio
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
     @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
         List<MovieDTO> completeList = null;
+        List<MovieCharacterDTO> characterDTOList = null;
+        List<PersonDTO> personDTOList = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (criteria == 0){
@@ -45,11 +45,15 @@ public class CommonController extends BaseController{
             }
         }else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
-        }else{ // criteria >= 3
-            completeList = movieService.getMoviesSortedByPopularity("");
+        }else if(criteria == 3){
+            characterDTOList = characterService.getCharactersByName("");
+        } else { // criteria >= 4
+            personDTOList = personService.getPeopleByName("");
         }
 
         model.addAttribute("movieList", completeList);
+        model.addAttribute("characterList", characterDTOList);
+        model.addAttribute("personList", personDTOList);
         model.addAttribute("criteria", criteria);
 
         return "searchList";
@@ -83,6 +87,7 @@ public class CommonController extends BaseController{
     public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "999") Integer criteria) {
         List<MovieDTO> movies = null;
         List<MovieCharacterDTO> characters = null;
+        List<PersonDTO> people = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         switch (criteria) {
@@ -103,12 +108,17 @@ public class CommonController extends BaseController{
             case 3:
                 characters = characterService.getCharactersByName(title);
                 break;
+            case 4:
+                people = personService.getPeopleByName(title);
+                break;
             default:
                 characters = characterService.getCharactersByName(title);
                 movies = movieService.getMoviesByTitle(title);
+                people = personService.getPeopleByName(title);
                 break;
         }
 
+        model.addAttribute("personList", people);
         model.addAttribute("characterList", characters);
         model.addAttribute("movieList", movies);
         model.addAttribute("criteria", criteria);

@@ -1,8 +1,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.entity.MovieCharacter" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,6 +10,7 @@
     <title>Lista de películas</title>
 </head>
 <%
+    List<PersonDTO> people = (List<PersonDTO>) request.getAttribute("personList");
     List<MovieCharacterDTO>characters = (List<MovieCharacterDTO>) request.getAttribute("characterList");
     List<MovieDTO> movies = (List<MovieDTO>) request.getAttribute("movieList");
     Integer criteria = (Integer) request.getAttribute("criteria");
@@ -22,7 +22,7 @@
         <div>
             <h2>Filtra por nombre</h2>
             <form method="post" action="/movies/searchbyTitle">
-                <input type="text" name="title" value="<%=title == null ? "" : title %>">
+                <input type="text" name="title" value="<%=title == null ? "" : title %>" maxlength="500">
                 <input type="hidden" name="criteria" value="<%=criteria%>">
                 <button>Buscar</button>
             </form>
@@ -62,7 +62,7 @@
         <% if (characters!=null){ %>
             <div class="list-container">
                 <h1>
-                    Personajes:
+                    Personajes
                 </h1>
                 <ul>
                     <%
@@ -76,12 +76,36 @@
                     %>
                     <% for (MovieCharacterDTO c : characters) { %>
                     <li>
-                        <a href="/movies/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
-                        <a href="/movies/character?id=<%=c.getId()%>"><%=c.getName()%></a>
+                        <a href="/characters/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
+                        <a href="/characters/character?id=<%=c.getId()%>"><%=c.getName()%></a>
                     </li>
                     <% } %>
                 </ul>
             </div>
+        <% } %>
+        <% if (people!=null){ %>
+        <div class="list-container">
+            <h1>
+                Personas
+            </h1>
+            <ul>
+                <%
+                    if (people.isEmpty()){
+                %>
+                <li>
+                    No hay personas disponibles, perdon por las molestias.
+                </li>
+                <%
+                    }
+                %>
+                <% for (PersonDTO p : people) { %>
+                <li>
+                    <a href="/people/person?id=<%=p.getId()%>"><img src="<%=p.getPhotoUrl()%>" alt="Foto de <%=p.getName()%>" width="200" height="300"></a>
+                    <a href="/people/person?id=<%=p.getId()%>"><%=p.getName()%></a>
+                </li>
+                <% } %>
+            </ul>
+        </div>
         <% } %>
         <form method="post" action="/user/atras">
             <button>Volver</button>
