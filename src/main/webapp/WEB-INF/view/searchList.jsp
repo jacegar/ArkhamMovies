@@ -6,7 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="../../css/movieList.css">
+    <link rel="stylesheet" type="text/css" href="../../css/searchList.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <title>Lista de películas</title>
 </head>
@@ -21,14 +21,14 @@
     <main>
         <div>
             <h2>Filtra por nombre</h2>
-            <form method="post" action="/movies/moviesbyTitle">
+            <form method="post" action="/movies/searchbyTitle">
                 <input type="text" name="title" value="<%=title == null ? "" : title %>">
                 <input type="hidden" name="criteria" value="<%=criteria%>">
                 <button>Buscar</button>
             </form>
         </div>
         <% if (movies!=null){ %>
-            <div>
+            <div class="list-container">
                 <h1>
                     <% if (criteria == 0) { %>
                         Películas más populares
@@ -60,7 +60,7 @@
             </div>
         <% } %>
         <% if (characters!=null){ %>
-            <div>
+            <div class="list-container">
                 <h1>
                     Personajes:
                 </h1>

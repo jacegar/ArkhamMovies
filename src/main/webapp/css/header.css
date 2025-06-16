@@ -11,14 +11,16 @@ header {
 
 header h1 {
     font-family: 'Arial', sans-serif;
-    font-size: 1.5rem;
-    color: #333;
+    font-size: 1.8rem;
+    color: #222;
     margin: 0;
     border-bottom: 2px solid #007BFF;
     padding-bottom: 0.5rem;
     display: inline-block;
     text-align: left;
+    font-weight: bold;
 }
+
 
 header h1 a {
     text-decoration: none;
@@ -27,6 +29,41 @@ header h1 a {
 }
 
 header h1 a:hover, header h1 a:focus {
+    color: #007BFF;
+}
+
+.wrapperEnlaces {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem; /* Más separación entre h2 */
+    margin-left: 2.5rem; /* Separación respecto a h1 */
+    align-items: flex-end; /* Alinea abajo respecto al h1 */
+    flex: 1 1 auto;
+    justify-content: flex-start;
+}
+
+header h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.25rem;
+    color: #222;
+    margin: 0;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 0.2rem;
+    display: inline-block;
+    text-align: left;
+    font-weight: bold;
+    background: none;
+    opacity: 1;
+    transition: color 0.3s;
+}
+
+header h2 a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+header h2 a:hover, header h1 a:focus {
     color: #007BFF;
 }
 

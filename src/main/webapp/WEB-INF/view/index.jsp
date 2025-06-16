@@ -15,7 +15,6 @@
     List<MovieDTO> popularMovies = (List<MovieDTO>) request.getAttribute("popularMovies");
     List<MovieDTO> recommendedMovies = (List<MovieDTO>) request.getAttribute("recommendedMovies");
     List<MovieDTO> recentMovies = (List<MovieDTO>) request.getAttribute("recentMovies");
-    List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
 %>
 <body>
     <jsp:include page="header.jsp" />
@@ -31,7 +30,7 @@
         %>
         <div>
             <h2>Busca una película o personaje</h2>
-            <form method="post" action="/movies/moviesbyTitle">
+            <form method="post" action="/movies/searchbyTitle">
                 <input type="text" name="title">
                 <button>Buscar</button>
             </form>
@@ -91,27 +90,6 @@
                 <li>
                     <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
                     <a href="movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
-                </li>
-                <%}
-                }else{%>
-                <li>No hay películas disponibles, perdon por las molestias.</li>
-                <%}%>
-            </ul>
-        </div>
-
-        <div class="characters">
-            <div class="list-header">
-                <h1>Personajes</h1>
-                <a href="/movies/list?criteria=3">Ver más</a>
-            </div>
-            <ul>
-                <%
-                    if(!characters.isEmpty()){
-                        for(MovieCharacterDTO c : characters){
-                %>
-                <li>
-                    <a href="/movies/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
-                    <a href="/movies/character?id=<%=c.getId()%>"><%=c.getName()%></a>
                 </li>
                 <%}
                 }else{%>

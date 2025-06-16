@@ -12,6 +12,11 @@
 <body>
     <header>
         <h1><a href="/">Arkham Movies</a></h1>
+        <div class = "wrapperEnlaces">
+            <h2><a href="/">Películas</a></h2>
+            <h2><a href="/characters/inicio">Personajes</a></h2>
+            <h2><a href="/">Personas</a></h2>
+        </div>
         <%
             if(user == null){
         %>

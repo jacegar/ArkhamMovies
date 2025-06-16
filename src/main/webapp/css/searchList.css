@@ -8,6 +8,11 @@ ul {
     justify-content: center;
 }
 
+.list-container{
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
 li {
     display: flex;
     flex-direction: column;

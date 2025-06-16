@@ -26,12 +26,11 @@ public class CommonController extends BaseController{
     @Autowired protected GenreService genreService;
     @Autowired protected MovieCharacterService characterService;
 
-    //Usado en la pestaña de ver más
+    //Usado en las pestañas de ver más para ver todas las peliculas según cierto criterio
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
     @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
         List<MovieDTO> completeList = null;
-        List<MovieCharacterDTO> characters = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (criteria == 0){
@@ -46,15 +45,14 @@ public class CommonController extends BaseController{
             }
         }else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
-        }else{ // criteria == 3
-            characters = characterService.getCharactersByName("");
+        }else{ // criteria >= 3
+            completeList = movieService.getMoviesSortedByPopularity("");
         }
 
         model.addAttribute("movieList", completeList);
-        model.addAttribute("characterList", characters);
         model.addAttribute("criteria", criteria);
 
-        return "movieList";
+        return "searchList";
     }
 
 
@@ -81,16 +79,7 @@ public class CommonController extends BaseController{
         return "movie";
     }
 
-    @GetMapping("/character")
-    public String getCharacter(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
-        MovieCharacterDTO character = characterService.findCharacter(id);
-
-        model.addAttribute("character", character);
-
-        return "character";
-    }
-
-    @PostMapping("/moviesbyTitle")
+    @PostMapping("/searchbyTitle")
     public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "999") Integer criteria) {
         List<MovieDTO> movies = null;
         List<MovieCharacterDTO> characters = null;
@@ -125,7 +114,7 @@ public class CommonController extends BaseController{
         model.addAttribute("criteria", criteria);
         model.addAttribute("title", title);
 
-        return "movieList";
+        return "searchList";
     }
 
     @GetMapping("/flipLike")

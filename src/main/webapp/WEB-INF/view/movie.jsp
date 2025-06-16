@@ -79,7 +79,7 @@
         <div class="review-section">
             <h3>Añadir una reseña:</h3>
             <form method="post" action="/movies/addReview">
-                <input type="text" value="" name="reviewText" maxlength="70"/>
+                <textarea value="" rows="2" cols="100" name="reviewText" maxlength="200"></textarea><br/>
                 <input type="radio" value= "0" name="score"/> 0
                 <input type="radio" value= "1" name="score"/> 1
                 <input type="radio" value= "2" name="score"/> 2
