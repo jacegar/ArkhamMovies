@@ -21,6 +21,15 @@
 
 <body>
     <jsp:include page="header.jsp" />
+    <%
+        if (user!=null && user.getRole()==0){
+    %>
+    <div class="center-container">
+        <a href="/characters/new" class="add-movie-button">Agregar un personaje</a>
+    </div>
+    <%
+        }
+    %>
     <div>
       <h2>Busca una película, personaje o actor</h2>
       <form method="post" action="/movies/searchbyTitle">

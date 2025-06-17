@@ -56,6 +56,35 @@ main h1 {
     transform: scale(1.1);
 }
 
+form button, .add-movie-button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button:hover, .add-movie-button:hover {
+    background-color: #0056b3;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.75rem;
+}
+
+.add-movie-button {
+    text-decoration: none;
+    min-width: 150px;
+    display: inline-block;
+    text-align: center;
+}
+
 .movie-details p {
     font-size: 1rem;
     color: #555;

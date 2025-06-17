@@ -1,9 +1,11 @@
 <%@ page import="es.uma.taw.arkhammovies.entity.Person" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <%
     PersonDTO person = (PersonDTO) request.getAttribute("person");
+    UserDTO user = (UserDTO) session.getAttribute("user");
 %>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -13,6 +15,15 @@
 <body>
 <jsp:include page="header.jsp" />
 <main>
+    <%
+        if (user!=null && user.getRole()==0){
+    %>
+    <div class="center-container">
+        <a href="/characters/new?personId=<%=person.getId()%>" class="add-movie-button">Agregar un personaje</a>
+    </div>
+    <%
+        }
+    %>
     <h1><%=person.getName()%></h1>
     <div class="movie-container">
         <a href="/people/person?id=<%=person.getId()%>"><img src="<%=person.getPhotoUrl()%>" alt="Foto de <%=person.getName()%>" width="400" height="600"></a>

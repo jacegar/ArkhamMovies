@@ -1,8 +1,10 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <%
     MovieCharacterDTO character = (MovieCharacterDTO) request.getAttribute("character");
+    UserDTO user = (UserDTO) session.getAttribute("user");
   %>
 <head>
   <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -25,6 +27,18 @@
       </div>
     </div>
     <div class="action-buttons">
+      <%
+        if (user!=null && user.getRole()==0){
+      %>
+      <a href="/characters/edit?id=<%= character.getId() %>" class="edit-button">Editar</a>
+      <form method="post" action="/characters/delete">
+        <input type="hidden" name="id" value="<%= character.getId() %>" />
+        <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar el personaje' +
+                ' <%= character.getName() %>?')">Borrar</button>
+      </form>
+      <%
+        }
+      %>
       <form method="post" action="/user/atras">
         <button class="back-button">Volver</button>
       </form>

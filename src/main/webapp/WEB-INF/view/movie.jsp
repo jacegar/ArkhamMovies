@@ -1,6 +1,4 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page import="java.util.Locale" %>
-<%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
@@ -28,6 +26,15 @@
 <body>
     <jsp:include page="header.jsp" />
     <main>
+        <%
+            if (user!=null && user.getRole()==0){
+        %>
+        <div class="center-container">
+            <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
+        </div>
+        <%
+            }
+        %>
         <h1><%=movie.getTitle()%></h1>
         <div class="movie-container">
             <a href="/movies/movie?id=<%=movie.getId()%>"><img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>"></a>
