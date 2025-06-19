@@ -44,8 +44,13 @@ public class CharacterController extends BaseController{
     @GetMapping("/character")
     public String getCharacter(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
         MovieCharacterDTO character = characterService.findCharacter(id);
+        MovieDTO movie = movieService.findMovie(character.getMovie());
+        //character.getPerson() puede devolver nulo, faltaria tener en cuenta este caso
+        PersonDTO person = personService.findPerson(character.getPerson());
 
         model.addAttribute("character", character);
+        model.addAttribute("movie", movie);
+        model.addAttribute("person", person);
 
         return "character";
     }
