@@ -7,6 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+//Autor: Juan Acevedo García 100%
+
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
     @Query("select g from Genre g join g.moviesgenre m join m.usersLiked u " +
             "where u.id = :userId " +

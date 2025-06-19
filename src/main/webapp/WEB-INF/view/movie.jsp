@@ -1,12 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.ReviewDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.GenreDTO" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+    <!--Autor: Juan Acevedo García 60% -->
     <%
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -16,6 +14,7 @@
         UserDTO user = (UserDTO) session.getAttribute("user");
         List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
         List<GenreDTO> genres = (List<GenreDTO>) request.getAttribute("genres");
+        List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
     %>
 
 <head>
@@ -82,7 +81,23 @@
                     }%>
                 </ul>
             </div>
+
+            <% if(characters != null && !characters.isEmpty()){ %>
+            <div class="movie-characters">
+                <h2>Personajes:</h2>
+                <ul>
+                <%for(MovieCharacterDTO character : characters){%>
+                    <li>
+                        <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>"></a>
+                        <a href="/characters/character?id=<%=character.getId()%>"><%=character.getName()%></a>
+                    </li>
+                <%}%>
+                </ul>
+            </div>
+            <% } %>
+
         </div>
+
         <div class="review-section">
             <h3>Añadir una reseña:</h3>
             <form method="post" action="/movies/addReview">

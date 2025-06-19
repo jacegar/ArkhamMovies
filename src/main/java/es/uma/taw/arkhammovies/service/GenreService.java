@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+//Autor: Juan Acevedo García 100%
+
 @Service
 public class GenreService extends DTOService<GenreDTO, Genre>{
     @Autowired

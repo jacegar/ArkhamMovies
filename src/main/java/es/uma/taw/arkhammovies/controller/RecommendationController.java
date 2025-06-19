@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Collections;
 import java.util.List;
 
+//Autor: Juan Acevedo Garcia 90%
+
 //Controlador de recomendación
 @Controller
 public class RecommendationController extends BaseController{

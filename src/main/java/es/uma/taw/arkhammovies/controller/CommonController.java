@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Collections;
 import java.util.List;
 
+//Autor: Juan Acevedo García (30%)
+
 //Controlador para tareas comunes que no encajan en ningun rol, ej ver datos de una pelicula o buscar una pelicula concreta en la pagina
 @Controller
 @RequestMapping("/movies")
@@ -64,6 +66,7 @@ public class CommonController extends BaseController{
     public String getMovie(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
         MovieDTO movie = movieService.findMovie(id);
         UserDTO user = (UserDTO) session.getAttribute("user");
+        List<MovieCharacterDTO> characters = characterService.getCharactersFromMovie(movie.getId());
         boolean isLiked = false;
         boolean isSaved = false;
 
@@ -78,7 +81,7 @@ public class CommonController extends BaseController{
         model.addAttribute("isLiked", isLiked);
         model.addAttribute("isSaved", isSaved);
         model.addAttribute("genres", genreService.getAllGenres());
-
+        model.addAttribute("characters", characters);
 
         return "movie";
     }

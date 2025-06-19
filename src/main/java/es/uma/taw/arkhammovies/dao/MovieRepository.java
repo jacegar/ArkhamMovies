@@ -7,6 +7,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+//Autor: Juan Acevedo García 50%
+
 public interface MovieRepository extends JpaRepository<Movie, Integer> {
     //Devuelve las películas más populares, usado en la pantalla de inicio
     @Query("select m from Movie m where m.title ilike %:title% order by m.popularity desc")

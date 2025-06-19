@@ -6,6 +6,8 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+//Autor: Juan Acevedo García 100%
+
 @Data
 public class MovieDTO {
     private Integer id;

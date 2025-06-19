@@ -29,9 +29,8 @@
     <h2>Información del usuario</h2>
     <strong>Email:</strong> <%= user.getEmail() %> <br>
     <strong>Nickname:</strong> <%= user.getNickname() %> <br>
-    <strong>Contraseña:</strong> <input type="password" value="<%= user.getPassword() %>" readonly>
 
-    <h2>Lista de películas que te gustan</h2>
+    <h2>Peliculas favoritas:</h2>
     <ul>
         <% for (MovieDTO m : likedMovies) { %>
         <li>
@@ -48,7 +47,7 @@
         <% } %>
     </ul>
 
-    <h2>Lista de películas guardadas</h2>
+    <h2>Películas guardadas</h2>
     <ul>
         <% for (MovieDTO m : savedMovies) { %>
         <li>
@@ -65,7 +64,7 @@
         <% } %>
     </ul>
     <div class="button-container">
-        <% if (userSession != null) { %>
+        <% if (userSession != null && userSession.getId().equals(user.getId())) { %>
         <form method="post" action="/user/logout">
             <button>Cerrar Sesión</button>
         </form>
