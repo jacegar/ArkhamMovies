@@ -32,8 +32,8 @@ public class CharacterController extends BaseController{
         List<MovieCharacterDTO> characters = null;
 
         characters = characterService.getCharactersByName("");
-        if(characters.size() > 12){
-            characters = characters.subList(0, 12);
+        if(characters.size() > 6){
+            characters = characters.subList(0, 6);
         }
 
         model.addAttribute("characters", characters);

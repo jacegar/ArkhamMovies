@@ -27,10 +27,8 @@
         <div class="name-container-character">
           <h2>Nombre:</h2>
           <p><%=character.getName()%></p>
-          <%if(character.getSurname1() != null && character.getSurname2() != null){%>
           <h2>Apellido:</h2>
-          <p><%=(character.getSurname1().isEmpty() && character.getSurname2().isEmpty()) ? "Desconocido":character.getSurname1() + " " + character.getSurname2()%></p>
-          <%}%>
+          <p><%=(character.getSurname1()==null && character.getSurname2()==null) ? "Desconocido":character.getSurname1() + " " + character.getSurname2()%></p>
         </div>
 
           <div class="movie-container-character">

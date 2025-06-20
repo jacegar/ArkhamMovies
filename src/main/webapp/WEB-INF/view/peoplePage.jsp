@@ -44,7 +44,7 @@
       %>
       <li>
         <a href="/people/person?id=<%=p.getId()%>"><img src="<%=p.getPhotoUrl()%>" alt="Foto de <%=p.getName()%>" width="200" height="300"></a>
-        <a href="/people/person?id=<%=p.getId()%>"><%=p.getName()%></a>
+        <a href="/people/person?id=<%=p.getId()%>"><%=p.getName()%> <%=p.getSurname1()==null?"":p.getSurname1()%> <%=p.getSurname2()==null?"":p.getSurname2()%></a>
       </li>
       <%}
       }else{%>

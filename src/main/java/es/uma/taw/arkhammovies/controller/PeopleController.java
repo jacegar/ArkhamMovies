@@ -28,8 +28,8 @@ public class PeopleController extends BaseController{
         List<PersonDTO> people = null;
 
         people = personService.getPeopleByName("");
-        if(people.size() > 12){
-            people = people.subList(0, 12);
+        if(people.size() > 6){
+            people = people.subList(0, 6);
         }
 
         model.addAttribute("people", people);

@@ -32,10 +32,8 @@
             <div class="movie-details">
                 <h2>Nombre:</h2>
                 <p><%=person.getName()%></p>
-                <%if(person.getSurname1() != null && person.getSurname2() != null){%>
                 <h2>Apellido:</h2>
-                <p><%=(person.getSurname1().isEmpty() && person.getSurname2().isEmpty()) ? "Desconocido":person.getSurname1() + " " + person.getSurname2()%></p>
-                <%}%>
+                <p><%=(person.getSurname1()==null && person.getSurname2()==null) ? "Desconocido":(person.getSurname1()==null?"":person.getSurname1()) + " " + (person.getSurname2()==null?"":person.getSurname2())%></p>
                 <h2>Género:</h2>
                 <p><%=person.getGender()=='M'?"Masculino":"Femenino"%></p>
                 <h2>Edad:</h2>
