@@ -1,7 +1,6 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <!--Autor: Juan Acevedo García 80% -->

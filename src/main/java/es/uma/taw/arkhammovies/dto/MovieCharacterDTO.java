@@ -1,10 +1,6 @@
 package es.uma.taw.arkhammovies.dto;
 
-import es.uma.taw.arkhammovies.entity.Movie;
-import es.uma.taw.arkhammovies.entity.Person;
 import lombok.Data;
-
-import java.util.List;
 
 @Data
 public class MovieCharacterDTO {
