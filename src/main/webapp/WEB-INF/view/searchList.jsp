@@ -80,7 +80,7 @@
                     <% for (MovieCharacterDTO c : characters) { %>
                     <li>
                         <a href="/characters/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
-                        <a href="/characters/character?id=<%=c.getId()%>"><%=c.getName()%></a>
+                        <a href="/characters/character?id=<%=c.getId()%>"><%=c.getName()%> <%=c.getSurname1()==null?"":c.getSurname1()%> <%=c.getSurname2()==null?"":c.getSurname2()%></a>
                     </li>
                     <% } %>
                 </ul>
@@ -104,7 +104,7 @@
                 <% for (PersonDTO p : people) { %>
                 <li>
                     <a href="/people/person?id=<%=p.getId()%>"><img src="<%=p.getPhotoUrl()%>" alt="Foto de <%=p.getName()%>" width="200" height="300"></a>
-                    <a href="/people/person?id=<%=p.getId()%>"><%=p.getName()%></a>
+                    <a href="/people/person?id=<%=p.getId()%>"><%=p.getName()%> <%=p.getSurname1()==null?"":p.getSurname1()%> <%=p.getSurname2()==null?"":p.getSurname2()%></a>
                 </li>
                 <% } %>
             </ul>

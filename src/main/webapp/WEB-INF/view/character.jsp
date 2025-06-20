@@ -14,38 +14,37 @@
 <head>
   <link rel="stylesheet" type="text/css" href="../../css/common.css">
   <link rel="stylesheet" type="text/css" href="../../css/movie.css">
-  <link rel="stylesheet" type="text/css" href="../../css/character.css">
   <title><%=character.getName()%></title>
 </head>
 <body>
   <jsp:include page="header.jsp" />
   <main>
     <h1><%=character.getName()%></h1>
-    <div class="character-container">
+    <div class="movie-container">
       <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>" width="400" height="600"></a>
       <div class="movie-details">
-        <div class="name-container-character">
-          <h2>Nombre:</h2>
-          <p><%=character.getName()%></p>
-          <h2>Apellido:</h2>
-          <p><%=(character.getSurname1()==null && character.getSurname2()==null) ? "Desconocido":character.getSurname1() + " " + character.getSurname2()%></p>
-        </div>
+        <h2>Nombre:</h2>
+        <p><%=character.getName()%></p>
+        <h2>Apellido:</h2>
+        <p><%=(character.getSurname1()==null && character.getSurname2()==null) ? "Desconocido":(character.getSurname1()==null?"":character.getSurname1()) + " " + (character.getSurname2()==null?"":character.getSurname2())%></p>
 
-          <div class="movie-container-character">
-            <h2>Aparece en:</h2>
-            <a href="/movies/movie?id=<%=movie.getId()%>"> <img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>" width="140" height="210"></a>
-            <a href="/movies/movie?id=<%=movie.getId()%>"><%=movie.getTitle()%></a>
-          </div>
-
-          <%if(person != null){%>
-          <div class="person-container-character">
-            <h2>Interpretado por:</h2>
-            <a href="/people/person?id=<%=person.getId()%>"><img src="<%=person.getPhotoUrl()%>" alt="Foto de <%=person.getName()%>" width="140" height="210"></a>
-            <a href="/people/person?id=<%=person.getId()%>"><%=person.getName()%></a>
-          </div>
-          <%}%>
-        </div>
+        <table>
+          <tr>
+            <td>
+              <h2>Aparece en:</h2>
+              <a href="/movies/movie?id=<%=movie.getId()%>"> <img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>" width="140" height="210"></a> <br/>
+              <a href="/movies/movie?id=<%=movie.getId()%>"><%=movie.getTitle()%></a>
+            </td>
+            <td>
+              <h2>Interpretado por:</h2>
+              <a href="/people/person?id=<%=person.getId()%>"><img src="<%=person.getPhotoUrl()%>" alt="Foto de <%=person.getName()%>" width="140" height="210"></a> <br/>
+              <a href="/people/person?id=<%=person.getId()%>"><%=person.getName()%></a>
+            </td>
+          </tr>
+        </table>
+        
       </div>
+    </div>
 
     <div class="action-buttons">
       <%

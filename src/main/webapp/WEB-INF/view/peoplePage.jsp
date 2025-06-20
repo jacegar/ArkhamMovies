@@ -35,7 +35,7 @@
     <div class="list-header">
       <h1>Actores</h1>
       <%-->Aqui habria que anadir un enlace a la tipica pagina que muestra todos las personas y no solo algunos--%>
-      <a href="/movies/list?criteria=4">Ver más</a>
+      <a href="/movies/list?criteria=5">Ver más</a>
     </div>
     <ul>
       <%

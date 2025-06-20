@@ -48,14 +48,14 @@ public class RecommendationController extends BaseController{
             recentMovies = recentMovies.subList(0, 6);
         }
 
-        List<MovieCharacterDTO> characters = characterService.getCharactersByName("");
-
-        List<MovieDTO> orderedMovies = movieService.getMoviesSortedByAverageScore();
+        List<MovieDTO> orderedMovies = movieService.getMoviesSortedByAverageScore("");
+        if(orderedMovies.size() > 6){
+            orderedMovies = orderedMovies.subList(0, 6);
+        }
 
         model.addAttribute("popularMovies", popularMovies);
         model.addAttribute("recommendedMovies", recommendedMovies);
         model.addAttribute("recentMovies", recentMovies);
-        model.addAttribute("characters", characters);
         model.addAttribute("orderedMovies", orderedMovies);
         
         return "index";

@@ -3,7 +3,6 @@ package es.uma.taw.arkhammovies.service;
 import es.uma.taw.arkhammovies.dao.GenreRepository;
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dao.UserRepository;
-import es.uma.taw.arkhammovies.service.ReviewService;
 
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.ReviewDTO;
@@ -38,8 +37,8 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         return this.entity2DTO(movies);
      }
 
-        public List<MovieDTO> getMoviesSortedByAverageScore() {
-            List<Movie> movies = movieRepository.getMoviesSortedByAverageScore();
+        public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
+            List<Movie> movies = movieRepository.getMoviesSortedByAverageScore(title);
             return this.entity2DTO(movies);
         }
 

@@ -52,7 +52,7 @@ public class CommonController extends BaseController{
             characterDTOList = characterService.getCharactersByName("");
         }
         else if(criteria == 4) {
-            completeList = movieService.getMoviesSortedByAverageScore();
+            completeList = movieService.getMoviesSortedByAverageScore("");
         }
         else { // criteria >= 5
             personDTOList = personService.getPeopleByName("");
@@ -117,6 +117,9 @@ public class CommonController extends BaseController{
                 characters = characterService.getCharactersByName(title);
                 break;
             case 4:
+                movies = movieService.getMoviesSortedByAverageScore(title);
+                break;
+            case 5:
                 people = personService.getPeopleByName(title);
                 break;
             default:
