@@ -13,6 +13,11 @@
     UserDTO userSession = (UserDTO)session.getAttribute("user");
     List<MovieDTO> likedMovies = (List<MovieDTO>)request.getAttribute("likedMovies");
     List<MovieDTO> savedMovies = (List<MovieDTO>)request.getAttribute("savedMovies");
+
+    int minutos = 0;
+    for (MovieDTO m : likedMovies){
+        minutos+= m.getRuntime()==null?0:m.getRuntime();
+    }
 %>
 <body>
     <header>
@@ -26,9 +31,10 @@
         <% } %>
     </header>
 
-    <h2>Información del usuario</h2>
-    <strong>Email:</strong> <%= user.getEmail() %> <br>
-    <strong>Nickname:</strong> <%= user.getNickname() %> <br>
+    <h2>Información del usuario</h2> <br/>
+    <p><strong>Email:</strong> <%= user.getEmail() %> </p>
+    <p><strong>Nickname:</strong> <%= user.getNickname() %> </p>
+    <p><strong>Total de minutos vistos:</strong> <%= minutos %></p> <br/>
 
     <h2>Peliculas favoritas</h2>
     <ul>
