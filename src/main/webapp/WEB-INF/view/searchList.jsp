@@ -37,7 +37,9 @@
                         Películas para ti
                     <% } else if (criteria == 2) { %>
                         Estrenos más recientes
-                    <% } else { %>
+                    <% } else if(criteria == 4) { %>
+                        Películas con mejor media
+                    <%}else { %>
                         Películas:
                     <% } %>
                 </h1>

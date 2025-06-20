@@ -3,7 +3,10 @@ package es.uma.taw.arkhammovies.service;
 import es.uma.taw.arkhammovies.dao.GenreRepository;
 import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dao.UserRepository;
+import es.uma.taw.arkhammovies.service.ReviewService;
+
 import es.uma.taw.arkhammovies.dto.MovieDTO;
+import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Genre;
 import es.uma.taw.arkhammovies.entity.Movie;
@@ -22,6 +25,7 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;
     @Autowired protected UserRepository userRepository;
     @Autowired protected GenreRepository genreRepository;
+    protected ReviewService reviewService;
 
     public List<MovieDTO> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
@@ -32,7 +36,12 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public List<MovieDTO> getMoviesById(List<Integer> movieIds) {
         List<Movie> movies = movieRepository.findAllById(movieIds);
         return this.entity2DTO(movies);
-    }
+     }
+
+        public List<MovieDTO> getMoviesSortedByAverageScore() {
+            List<Movie> movies = movieRepository.getMoviesSortedByAverageScore();
+            return this.entity2DTO(movies);
+        }
 
     public List<MovieDTO> getMoviesSortedByPopularity(String title) {
         List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
@@ -45,6 +54,17 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         return this.entity2DTO(movies);
     }
+    public Double getAverageScore(Integer movieId) {
+    List<ReviewDTO> reviews = reviewService.findByMovieId(movieId);
+    if (reviews == null || reviews.isEmpty()) {
+        return null;
+    }
+    double sum = 0;
+    for (ReviewDTO review : reviews) {
+        sum += review.getScore();
+    }
+    return sum / reviews.size();
+}
 
     public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {
         List<Movie> movies;

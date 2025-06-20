@@ -26,14 +26,14 @@ public class CommonController extends BaseController{
     @Autowired protected PersonService personService;
 
     //Usado en las pestañas de ver más para ver todas las peliculas según cierto criterio
-    //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes
-    @GetMapping("/list")
+    //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes, 4 -> mejor valoración media
+   @GetMapping("/list")
     public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
         List<MovieDTO> completeList = null;
         List<MovieCharacterDTO> characterDTOList = null;
         List<PersonDTO> personDTOList = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
-
+        
         if (criteria == 0){
             completeList = movieService.getMoviesSortedByPopularity("");
         }
@@ -44,11 +44,17 @@ public class CommonController extends BaseController{
             }else{
                 completeList = movieService.getRecommendedMovies(user, "");
             }
-        }else if(criteria == 2){
+        }
+        else if(criteria == 2){
             completeList = movieService.getMoviesSortedByReleaseDate("");
-        }else if(criteria == 3){
+        }
+        else if(criteria == 3){
             characterDTOList = characterService.getCharactersByName("");
-        } else { // criteria >= 4
+        }
+        else if(criteria == 4) {
+            completeList = movieService.getMoviesSortedByAverageScore();
+        }
+        else { // criteria >= 5
             personDTOList = personService.getPeopleByName("");
         }
 

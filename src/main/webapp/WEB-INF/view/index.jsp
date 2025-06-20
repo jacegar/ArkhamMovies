@@ -15,7 +15,8 @@
     List<MovieDTO> popularMovies = (List<MovieDTO>) request.getAttribute("popularMovies");
     List<MovieDTO> recommendedMovies = (List<MovieDTO>) request.getAttribute("recommendedMovies");
     List<MovieDTO> recentMovies = (List<MovieDTO>) request.getAttribute("recentMovies");
-%>
+    List<MovieDTO> orderedMovies = (List<MovieDTO>) request.getAttribute("orderedMovies");
+    %>
 <body>
     <jsp:include page="header.jsp" />
     <main>
@@ -86,6 +87,27 @@
                 <%
                     if(!(recentMovies == null) && !recentMovies.isEmpty()){
                         for(MovieDTO m : recentMovies){
+                %>
+                <li>
+                    <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
+                    <a href="movies/movie?id=<%=m.getId()%>"><%=m.getTitle()%></a>
+                </li>
+                <%}
+                }else{%>
+                <li>No hay películas disponibles, perdon por las molestias.</li>
+                <%}%>
+            </ul>
+        </div>
+
+        <div class="top">
+            <div class="list-header">
+                <h1>Top Peliculas</h1>
+                <a href="/movies/list?criteria=4">Ver más</a>
+            </div>
+            <ul>
+                <%
+                    if(!(orderedMovies == null) && !orderedMovies.isEmpty()){
+                        for(MovieDTO m : orderedMovies){
                 %>
                 <li>
                     <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>

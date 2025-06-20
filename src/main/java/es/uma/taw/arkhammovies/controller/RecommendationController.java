@@ -50,11 +50,14 @@ public class RecommendationController extends BaseController{
 
         List<MovieCharacterDTO> characters = characterService.getCharactersByName("");
 
+        List<MovieDTO> orderedMovies = movieService.getMoviesSortedByAverageScore();
+
         model.addAttribute("popularMovies", popularMovies);
         model.addAttribute("recommendedMovies", recommendedMovies);
         model.addAttribute("recentMovies", recentMovies);
         model.addAttribute("characters", characters);
-
+        model.addAttribute("orderedMovies", orderedMovies);
+        
         return "index";
     }
 }
