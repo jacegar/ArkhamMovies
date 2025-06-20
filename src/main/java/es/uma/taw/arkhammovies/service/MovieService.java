@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//Autor: Juan Acevedo García 80%
+//Autor: Juan Acevedo García 75%
 
 @Service
 public class MovieService extends DTOService<MovieDTO, Movie> {
@@ -37,10 +37,10 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         return this.entity2DTO(movies);
      }
 
-        public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
-            List<Movie> movies = movieRepository.getMoviesSortedByAverageScore(title);
-            return this.entity2DTO(movies);
-        }
+     public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
+        List<Movie> movies = movieRepository.getMoviesSortedByAverageScore(title);
+        return this.entity2DTO(movies);
+    }
 
     public List<MovieDTO> getMoviesSortedByPopularity(String title) {
         List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
@@ -53,17 +53,20 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         return this.entity2DTO(movies);
     }
+
     public Double getAverageScore(Integer movieId) {
-    List<ReviewDTO> reviews = reviewService.findByMovieId(movieId);
-    if (reviews == null || reviews.isEmpty()) {
-        return null;
+        List<ReviewDTO> reviews = reviewService.findByMovieId(movieId);
+
+        if (reviews == null || reviews.isEmpty()) {
+            return null;
+        }
+
+        double sum = 0;
+        for (ReviewDTO review : reviews) {
+            sum += review.getScore();
+        }
+        return sum / reviews.size();
     }
-    double sum = 0;
-    for (ReviewDTO review : reviews) {
-        sum += review.getScore();
-    }
-    return sum / reviews.size();
-}
 
     public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {
         List<Movie> movies;
@@ -84,6 +87,12 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
             movies = movieRepository.getRecommendedMoviesByUserAndGenres(user.getId(), likedGenresIds, title);
         }
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getMoviesWherePersonIsCrew(Integer personId) {
+        List<Movie> movies = movieRepository.getMoviesWherePersonIsCrew(personId);
 
         return this.entity2DTO(movies);
     }

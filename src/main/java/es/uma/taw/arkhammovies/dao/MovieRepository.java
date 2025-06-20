@@ -34,4 +34,8 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     
     @Query("SELECT m FROM Movie m LEFT JOIN m.reviews r where m.title ilike %:title% GROUP BY m.id ORDER BY AVG(r.score) DESC")
     List<Movie> getMoviesSortedByAverageScore(String title);
+
+    //Devuelve las peliculas en las que una persona ha trabajado como crewmember
+    @Query("SELECT m FROM Movie m join m.moviecrews mc where mc.person.id = :personId")
+    List<Movie> getMoviesWherePersonIsCrew(@Param("personId")Integer personId);
 }

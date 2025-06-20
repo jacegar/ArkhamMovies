@@ -1,13 +1,15 @@
-<%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.*" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<!--Autor: Juan Acevedo García 25% -->
 <%
     PersonDTO person = (PersonDTO) request.getAttribute("person");
     UserDTO user = (UserDTO) session.getAttribute("user");
     List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
+    List<MoviecrewDTO> jobs = (List<MoviecrewDTO>) request.getAttribute("jobs");
+    Map<Integer, MovieDTO> moviesWorked = (Map<Integer, MovieDTO>) request.getAttribute("moviesWorked");
 %>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
@@ -48,6 +50,22 @@
                     <li>
                         <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>"></a>
                         <a href="/characters/character?id=<%=character.getId()%>"><%=character.getName()%></a>
+                    </li>
+                    <%}%>
+                </ul>
+            </div>
+            <% } %>
+
+            <% if(jobs != null && !jobs.isEmpty()){%>
+            <div class="movie-characters">
+                <h2>Ha trabajado en:</h2>
+                <ul>
+                    <%for(MoviecrewDTO job : jobs){
+                    MovieDTO movieWorked = moviesWorked.get(job.getMovieId());%>
+                    <li class="person-jobs">
+                        <a href="/movies/movie?id=<%=job.getMovieId()%>"><img src="<%=movieWorked.getPhotoUrl()%>" alt="Foto de <%=movieWorked.getTitle()%>"></a>
+                        <a href="/movies/movie?id=<%=job.getMovieId()%>"><%=movieWorked.getTitle()%></a>
+                        <p class="crewmember-job"><%=job.getJob()%></p>
                     </li>
                     <%}%>
                 </ul>

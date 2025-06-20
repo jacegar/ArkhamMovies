@@ -41,6 +41,8 @@ public class Person implements DTO<PersonDTO>, Serializable {
     @OneToMany(mappedBy = "person")
     private List<MovieCharacter> movieCharacters = new ArrayList<>();
 
+    @OneToMany(mappedBy = "person")
+    private List<Moviecrew> movieCrew = new ArrayList<>();
 
     @Override
     public PersonDTO toDTO() {

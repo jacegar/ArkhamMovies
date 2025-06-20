@@ -334,3 +334,31 @@ form button:hover, .edit-button:hover {
     background: #fff;
     margin-bottom: 0.3rem;
 }
+
+.movie-characters li.person-jobs {
+    background: #f4f8fb;
+    border: 1px solid #d0e2f2;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 0.5rem 0.7rem 1.2rem 0.7rem; /* más espacio abajo para el trabajo */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+    max-width: 90px;
+    min-height: 150px;
+    max-height: 170px;
+    transition: box-shadow 0.2s;
+    position: relative;
+}
+
+.movie-characters li.person-jobs .crewmember-job {
+    color: #888;
+    font-size: 0.95em;
+    margin: 0.3em 0 0 0;
+    font-weight: 400;
+    text-align: center;
+    width: 100%;
+    line-height: 1.2;
+    word-break: break-word;
+}

@@ -30,7 +30,7 @@
             }
         %>
         <div>
-            <h2>Busca una película, personaje o actor</h2>
+            <h2>Busca una película, personaje, persona...</h2>
             <form method="post" action="/movies/searchbyTitle">
                 <input type="text" name="title" maxlength="500">
                 <button>Buscar</button>

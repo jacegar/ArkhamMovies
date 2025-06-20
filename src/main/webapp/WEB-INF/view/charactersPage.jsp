@@ -25,7 +25,7 @@
         }
     %>
     <div>
-      <h2>Busca una película, personaje o actor</h2>
+      <h2>Busca una película, personaje, persona...</h2>
       <form method="post" action="/movies/searchbyTitle">
         <input type="text" name="title">
         <button>Buscar</button>
@@ -34,7 +34,6 @@
     <div class="characters">
       <div class="list-header">
         <h1>Personajes</h1>
-        <%-->Aqui habria que anadir un enlace a la tipica pagina que muestra todos los personajes y no solo algunos--%>
           <a href="/movies/list?criteria=3">Ver más</a>
       </div>
       <ul>

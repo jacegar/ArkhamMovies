@@ -1,9 +1,9 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
-import es.uma.taw.arkhammovies.dto.PersonDTO;
-import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.dto.*;
 import es.uma.taw.arkhammovies.service.MovieCharacterService;
+import es.uma.taw.arkhammovies.service.MovieService;
+import es.uma.taw.arkhammovies.service.MoviecrewService;
 import es.uma.taw.arkhammovies.service.PersonService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+//Autor: Juan Acevedo García (10%)
 
 @Controller
 @RequestMapping("/people")
@@ -22,17 +26,28 @@ public class PeopleController extends BaseController{
     protected PersonService personService;
     @Autowired
     private MovieCharacterService movieCharacterService;
+    @Autowired
+    private MoviecrewService moviecrewService;
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/inicio")
     public String getPeoplePage(HttpSession session, Model model) {
-        List<PersonDTO> people = null;
+        List<PersonDTO> actors = null;
+        List<PersonDTO> crewmembers = null;
 
-        people = personService.getPeopleByName("");
-        if(people.size() > 6){
-            people = people.subList(0, 6);
+        actors = personService.getActorsByName("");
+        if(actors.size() > 6){
+            actors = actors.subList(0, 6);
         }
 
-        model.addAttribute("people", people);
+        crewmembers = personService.getCrewmembersByName("");
+        if(crewmembers.size() > 6){
+            crewmembers = crewmembers.subList(0, 6);
+        }
+
+        model.addAttribute("actors", actors);
+        model.addAttribute("crewmembers", crewmembers);
 
         return "peoplePage";
     }
@@ -41,9 +56,18 @@ public class PeopleController extends BaseController{
     public String getPerson(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
         PersonDTO person = personService.findPerson(id);
         List<MovieCharacterDTO> characters = movieCharacterService.getCharactersFromPerson(person.getId());
+        List<MoviecrewDTO> jobs = moviecrewService.getMoviecrewsByPerson(person.getId());
+
+        List<MovieDTO> moviesWorked = movieService.getMoviesWherePersonIsCrew(person.getId());
+        Map<Integer, MovieDTO> movieMap = new HashMap<Integer, MovieDTO>();
+        for (MovieDTO movie : moviesWorked) {
+            movieMap.put(movie.getId(), movie);
+        }
 
         model.addAttribute("person", person);
         model.addAttribute("characters", characters);
+        model.addAttribute("jobs", jobs);
+        model.addAttribute("moviesWorked", movieMap);
 
         return "person";
     }
