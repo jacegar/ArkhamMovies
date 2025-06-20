@@ -2,7 +2,6 @@ package es.uma.taw.arkhammovies.entity;
 
 import es.uma.taw.arkhammovies.dto.DTO;
 import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
-import es.uma.taw.arkhammovies.dto.MovieDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

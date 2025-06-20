@@ -1,12 +1,6 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page import="java.util.List" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %><%--
-  Created by IntelliJ IDEA.
-  User: juana
-  Date: 16/06/2025
-  Time: 19:41
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="../../css/character.css">
   <title><%=character.getName()%></title>
 </head>
-  <body>
+<body>
   <jsp:include page="header.jsp" />
   <main>
     <h1><%=character.getName()%></h1>
@@ -36,7 +36,7 @@
           <div class="movie-container-character">
             <h2>Aparece en:</h2>
             <a href="/movies/movie?id=<%=movie.getId()%>"> <img src="<%=movie.getPhotoUrl()%>" alt="Foto de <%=movie.getTitle()%>" width="140" height="210"></a>
-            <a href="movies/movie?id=<%=movie.getId()%>"><%=movie.getTitle()%></a>
+            <a href="/movies/movie?id=<%=movie.getId()%>"><%=movie.getTitle()%></a>
           </div>
 
           <%if(person != null){%>
@@ -67,5 +67,5 @@
       </form>
     </div>
   </main>
-  </body>
+</body>
 </html>

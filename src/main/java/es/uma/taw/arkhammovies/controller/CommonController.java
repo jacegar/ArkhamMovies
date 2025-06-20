@@ -1,7 +1,6 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
-import es.uma.taw.arkhammovies.entity.Genre;
 import es.uma.taw.arkhammovies.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;

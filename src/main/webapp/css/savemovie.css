@@ -152,3 +152,8 @@ form button:hover {
     min-width: unset;
     white-space: unset;
 }
+
+form input[type="radio"] {
+    width: auto;
+    display: inline-block;
+}

@@ -30,7 +30,7 @@
     <strong>Email:</strong> <%= user.getEmail() %> <br>
     <strong>Nickname:</strong> <%= user.getNickname() %> <br>
 
-    <h2>Peliculas favoritas:</h2>
+    <h2>Peliculas favoritas</h2>
     <ul>
         <% for (MovieDTO m : likedMovies) { %>
         <li>

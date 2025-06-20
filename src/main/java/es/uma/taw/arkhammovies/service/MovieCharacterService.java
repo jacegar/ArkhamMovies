@@ -6,6 +6,7 @@ import es.uma.taw.arkhammovies.dao.PersonRepository;
 import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
 import es.uma.taw.arkhammovies.entity.Movie;
 import es.uma.taw.arkhammovies.entity.MovieCharacter;
+import es.uma.taw.arkhammovies.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -55,5 +56,11 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
         Movie movie = movieRepository.findById(movieId).get();
 
         return this.entity2DTO(movie.getMovieCharacters());
+    }
+
+    public List<MovieCharacterDTO> getCharactersFromPerson(Integer personId) {
+        Person person = personRepository.findById(personId).get();
+
+        return this.entity2DTO(person.getMovieCharacters());
     }
 }
