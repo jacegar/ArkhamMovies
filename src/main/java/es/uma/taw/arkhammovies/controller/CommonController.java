@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //Autor: Juan Acevedo García (35%)
 
@@ -24,6 +26,7 @@ public class CommonController extends BaseController{
     @Autowired protected GenreService genreService;
     @Autowired protected MovieCharacterService characterService;
     @Autowired protected PersonService personService;
+    @Autowired protected MoviecrewService crewService;
 
     //Usado en las pestañas de ver más para ver todas las peliculas según cierto criterio
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes, 4 -> mejor valoración media
@@ -82,6 +85,15 @@ public class CommonController extends BaseController{
         MovieDTO movie = movieService.findMovie(id);
         UserDTO user = (UserDTO) session.getAttribute("user");
         List<MovieCharacterDTO> characters = characterService.getCharactersFromMovie(movie.getId());
+        List<ReviewDTO> reviews = this.reviewService.findByMovieId(id);
+        List<GenreDTO> genres = this.genreService.getGenresByMovie(movie.getId());
+
+        List<MoviecrewDTO> crew = crewService.getMoviecrewByMovie(movie.getId());
+        Map<Integer, PersonDTO> crewPeople = new HashMap<>();
+        for(PersonDTO person : personService.getPeopleByWorkedMovie(movie.getId())){
+            crewPeople.put(person.getId(), person);
+        }
+
         boolean isLiked = false;
         boolean isSaved = false;
 
@@ -91,12 +103,13 @@ public class CommonController extends BaseController{
         }
 
         model.addAttribute("movie", movie);
-        List<ReviewDTO> reviews = this.reviewService.findByMovieId(id);
         model.addAttribute("reviews", reviews);
         model.addAttribute("isLiked", isLiked);
         model.addAttribute("isSaved", isSaved);
-        model.addAttribute("genres", genreService.getAllGenres());
+        model.addAttribute("genres", genres);
         model.addAttribute("characters", characters);
+        model.addAttribute("crew", crew);
+        model.addAttribute("crewPeople", crewPeople);
 
         return "movie";
     }

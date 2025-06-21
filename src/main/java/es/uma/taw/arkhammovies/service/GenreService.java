@@ -17,8 +17,13 @@ public class GenreService extends DTOService<GenreDTO, Genre>{
     protected GenreRepository genreRepository;
 
     public List<GenreDTO> getAllGenres(){
-        List<GenreDTO> genres = new ArrayList<>();
-        genreRepository.findAll().forEach(genre -> genres.add(genre.toDTO()));
-        return genres;
+        List<Genre> genres = genreRepository.findAll();
+        return entity2DTO(genres);
+    }
+
+    public List<GenreDTO> getGenresByMovie(Integer id) {
+        List<Genre> genres = genreRepository.findGenresByMovie(id);
+
+        return entity2DTO(genres);
     }
 }

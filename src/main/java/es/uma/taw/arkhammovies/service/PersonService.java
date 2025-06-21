@@ -57,4 +57,10 @@ public class PersonService extends DTOService<PersonDTO, Person>{
     }
 
     public void deletePersonById(Integer id) { this.personRepository.deleteById(id); }
+
+    public List<PersonDTO> getPeopleByWorkedMovie(Integer movieId) {
+        List<Person> people = personRepository.findPeopleByWorkedMovie(movieId);
+
+        return this.entity2DTO(people);
+    }
 }

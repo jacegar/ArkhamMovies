@@ -12,5 +12,9 @@ import java.util.List;
 public interface MoviecrewRepository extends JpaRepository<Moviecrew, Integer> {
     //Devuelve los trabajos en produccion de una persona
     @Query("select m from Moviecrew m where m.person.id = :personId")
-    public List<Moviecrew> getCrewMembersByPerson(@Param("personId") Integer personId);
+    public List<Moviecrew> findCrewMembersByPerson(@Param("personId") Integer personId);
+
+    //Devuelve la moviecrew de una pelicula
+    @Query("select m from Moviecrew m where m.movie.id = :movieId")
+    public List<Moviecrew> findMoviecrewByMovie(@Param("movieId") Integer movieId);
 }

@@ -2,9 +2,11 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.*" %>
+<%@ page import="es.uma.taw.arkhammovies.entity.Moviecrew" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <!--Autor: Juan Acevedo García 60% -->
+    <!--Autor: Juan Acevedo García 65% -->
     <%
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -15,6 +17,8 @@
         List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
         List<GenreDTO> genres = (List<GenreDTO>) request.getAttribute("genres");
         List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
+        List<MoviecrewDTO> crew = (List<MoviecrewDTO>) request.getAttribute("crew");
+        Map<Integer, PersonDTO> crewPeople = (Map<Integer, PersonDTO>) request.getAttribute("crewPeople");
     %>
 
 <head>
@@ -71,13 +75,11 @@
                         <p>La pelicula no tiene géneros</p>
                     <%}else{ %>
                         <p>Géneros: </p>
-                        <%for(GenreDTO genre : genres) {
-                            if (movie.getGenres().contains(genre.getId())) {%>
+                        <%for(GenreDTO genre : genres) {%>
                                 <li>
                                     <%=genre.getName()%>
                                 </li>
-                            <%}
-                        }
+                        <%}
                     }%>
                 </ul>
             </div>
@@ -86,10 +88,25 @@
             <div class="movie-characters">
                 <h2>Personajes:</h2>
                 <ul>
-                <%for(MovieCharacterDTO character : characters){%>
+                    <%for(MovieCharacterDTO character : characters){%>
                     <li>
                         <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>"></a>
                         <a href="/characters/character?id=<%=character.getId()%>"><%=character.getName()%></a>
+                    </li>
+                    <%}%>
+                </ul>
+            </div>
+            <% } %>
+
+            <% if(crew != null && !crew.isEmpty()){ %>
+            <div class="movie-characters">
+                <h2>Personal de producción:</h2>
+                <ul>
+                <%for(MoviecrewDTO crewMember : crew){%>
+                    <li class="person-jobs">
+                        <a href="/people/person?id=<%=crewMember.getPersonId()%>"><img src="<%=crewPeople.get(crewMember.getPersonId()).getPhotoUrl()%>" alt="Foto de <%=crewPeople.get(crewMember.getPersonId()).getName()%>"></a>
+                        <a href="/people/person?id=<%=crewMember.getPersonId()%>"><%=crewPeople.get(crewMember.getPersonId()).getName()%></a>
+                        <p><%=crewMember.getJob()%></p>
                     </li>
                 <%}%>
                 </ul>
@@ -128,18 +145,18 @@
             <%
                 for(ReviewDTO review : reviews) {
             %>
-            <a href="/user/<%= review.getUser_id().getNickname() %>" class="button-link"><%= review.getUser_id().getNickname() %></a>
-            | <%=review.getScore()%> | <%=review.getText()%>
-            <%
-                if(user != null && (user.getRole() == 0 || review.getUser_id().getId() == user.getId())) {
-            %>
-                <a href="/movies/removeReview?movieId=<%=review.getMovie_id().getId()%>&userId=<%=review.getUser_id().getId()%>">
-                    <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
-                </a>
-            <%
-                }
-            %>
-            <br/>
+                <a href="/user/<%= review.getUser_id().getNickname() %>" class="button-link"><%= review.getUser_id().getNickname() %></a>
+                | <%=review.getScore()%> | <%=review.getText()%>
+                <%
+                    if(user != null && (user.getRole() == 0 || review.getUser_id().getId() == user.getId())) {
+                %>
+                    <a href="/movies/removeReview?movieId=<%=review.getMovie_id().getId()%>&userId=<%=review.getUser_id().getId()%>">
+                        <img src="https://img.icons8.com/m_two_tone/512/filled-trash.png" alt="Delete" width="24" height="24">
+                    </a>
+                <%
+                    }
+                %>
+                <br/>
             <%
                 }
             %>

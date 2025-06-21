@@ -16,8 +16,14 @@ public class MoviecrewService extends DTOService<MoviecrewDTO, Moviecrew> {
     protected MoviecrewRepository crewmemberRepository;
 
     public List<MoviecrewDTO> getMoviecrewsByPerson(Integer personId) {
-        List<Moviecrew> moviecrews = crewmemberRepository.getCrewMembersByPerson(personId);
+        List<Moviecrew> jobs = crewmemberRepository.findCrewMembersByPerson(personId);
 
-        return entity2DTO(moviecrews);
+        return entity2DTO(jobs);
+    }
+
+    public List<MoviecrewDTO> getMoviecrewByMovie(Integer movieId) {
+        List<Moviecrew> moviecrew = crewmemberRepository.findMoviecrewByMovie(movieId);
+
+        return entity2DTO(moviecrew);
     }
 }
