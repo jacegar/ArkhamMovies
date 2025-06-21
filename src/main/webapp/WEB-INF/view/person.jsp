@@ -58,7 +58,7 @@
             <% } %>
 
             <% if(jobs != null && !jobs.isEmpty()){%>
-            <div class="movie-characters">
+            <div class="movie-characters crew-list">
                 <h2>Ha trabajado en:</h2>
                 <ul>
                     <%for(MoviecrewDTO job : jobs){
@@ -74,6 +74,7 @@
                                 <input type="hidden" name="personId" value="<%= job.getPersonId() %>" />
                                 <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
                             </form>
+                            <a href="/moviecrew/edit?movieId=<%= job.getMovieId() %>&personId=<%= job.getPersonId() %>" class="edit-button movie-crew-button">Editar</a>
                         <% } %>
                     </li>
                     <%}%>

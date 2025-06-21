@@ -53,4 +53,14 @@ public class MoviecrewService extends DTOService<MoviecrewDTO, Moviecrew> {
 
         moviecrewRepository.deleteById(moviecrewId);
     }
+
+    public MoviecrewDTO getMovieCrewById(Integer movieId, Integer personId) {
+        MoviecrewId moviecrewId = new MoviecrewId();
+        moviecrewId.setPersonId(personId);
+        moviecrewId.setMovieId(movieId);
+
+        Moviecrew moviecrew = moviecrewRepository.findById(moviecrewId).get();
+
+        return moviecrew.toDTO();
+    }
 }

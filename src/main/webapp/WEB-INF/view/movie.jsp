@@ -100,7 +100,7 @@
             <% } %>
 
             <% if(crew != null && !crew.isEmpty()){ %>
-            <div class="movie-characters">
+            <div class="movie-characters crew-list">
                 <h2>Personal de producción:</h2>
                 <ul>
                 <%for(MoviecrewDTO crewMember : crew){%>
@@ -110,11 +110,12 @@
                         <p><%=crewMember.getJob()%></p>
 
                         <% if (user!=null && user.getRole()==0){ %>
-                        <form method="post" action="/moviecrew/delete">
-                            <input type="hidden" name="movieId" value="<%= crewMember.getMovieId() %>" />
-                            <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
-                            <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
-                        </form>
+                            <form method="post" action="/moviecrew/delete">
+                                <input type="hidden" name="movieId" value="<%= crewMember.getMovieId() %>" />
+                                <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
+                                <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
+                            </form>
+                            <a href="/moviecrew/edit?movieId=<%= crewMember.getMovieId() %>&personId=<%= crewMember.getPersonId() %>" class="edit-button">Editar</a>
                         <% } %>
                     </li>
                 <%}%>

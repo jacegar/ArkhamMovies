@@ -56,8 +56,31 @@ public class MoviecrewController extends BaseController{
         return "savemoviecrew";
     }
 
+    @GetMapping("/edit")
+    public String doEdit(@RequestParam("movieId") Integer movieId,
+                         @RequestParam("personId") Integer personId,
+                         Model model,
+                         HttpSession session) {
+
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() != 0) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        MoviecrewDTO moviecrew = moviecrewService.getMovieCrewById(movieId, personId);
+        boolean esEditar = true;
+
+        model.addAttribute("movies", movieService.getAllMovies());
+        model.addAttribute("people", personService.getPeopleByName(""));
+        model.addAttribute("moviecrew", moviecrew);
+        model.addAttribute("esEditar", esEditar);
+
+        return "savemoviecrew";
+    }
+
     @PostMapping("/save")
-    public String doSave(@ModelAttribute("character") MoviecrewDTO moviecrew,
+    public String doSave(@ModelAttribute("moviecrew") MoviecrewDTO moviecrew,
                          Model model,
                          @RequestParam("esEditar") boolean esEditar) {
 
@@ -73,7 +96,7 @@ public class MoviecrewController extends BaseController{
         }
 
         this.moviecrewService.saveMoviecrew(moviecrew);
-        return "redirect:/";
+        return "redirect:/movies/movie?id=" + moviecrew.getMovieId();
     }
 
     @PostMapping("/delete")
@@ -88,6 +111,6 @@ public class MoviecrewController extends BaseController{
             this.moviecrewService.deleteMovieCrewById(movieId, personId);
         }
 
-        return "redirect:/";
+        return "redirect:/movies/movie?id=" + movieId;
     }
 }
