@@ -34,6 +34,7 @@
         %>
         <div class="center-container">
             <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
+            <a href="/moviecrew/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar personal de producción</a>
         </div>
         <%
             }
@@ -107,6 +108,14 @@
                         <a href="/people/person?id=<%=crewMember.getPersonId()%>"><img src="<%=crewPeople.get(crewMember.getPersonId()).getPhotoUrl()%>" alt="Foto de <%=crewPeople.get(crewMember.getPersonId()).getName()%>"></a>
                         <a href="/people/person?id=<%=crewMember.getPersonId()%>"><%=crewPeople.get(crewMember.getPersonId()).getName()%></a>
                         <p><%=crewMember.getJob()%></p>
+
+                        <% if (user!=null && user.getRole()==0){ %>
+                        <form method="post" action="/moviecrew/delete">
+                            <input type="hidden" name="movieId" value="<%= crewMember.getMovieId() %>" />
+                            <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
+                            <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
+                        </form>
+                        <% } %>
                     </li>
                 <%}%>
                 </ul>

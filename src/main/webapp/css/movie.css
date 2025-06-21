@@ -78,6 +78,7 @@ form button:hover, .add-movie-button:hover {
     justify-content: center;
     align-items: center;
     margin-top: 1.75rem;
+    gap: 1rem;
 }
 
 .add-movie-button {

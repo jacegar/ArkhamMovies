@@ -3,7 +3,7 @@
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<!--Autor: Juan Acevedo García 25% -->
+<!--Autor: Juan Acevedo García 30% -->
 <%
     PersonDTO person = (PersonDTO) request.getAttribute("person");
     UserDTO user = (UserDTO) session.getAttribute("user");
@@ -24,6 +24,7 @@
         %>
         <div class="center-container">
             <a href="/characters/new?personId=<%=person.getId()%>" class="add-movie-button">Agregar un personaje</a>
+            <a href="/moviecrew/new?personId=<%=person.getId()%>" class="add-movie-button">Agregar personal de producción</a>
         </div>
         <%
             }
@@ -66,6 +67,14 @@
                         <a href="/movies/movie?id=<%=job.getMovieId()%>"><img src="<%=movieWorked.getPhotoUrl()%>" alt="Foto de <%=movieWorked.getTitle()%>"></a>
                         <a href="/movies/movie?id=<%=job.getMovieId()%>"><%=movieWorked.getTitle()%></a>
                         <p class="crewmember-job"><%=job.getJob()%></p>
+
+                        <% if (user!=null && user.getRole()==0){ %>
+                            <form method="post" action="/moviecrew/delete">
+                                <input type="hidden" name="movieId" value="<%= job.getMovieId() %>" />
+                                <input type="hidden" name="personId" value="<%= job.getPersonId() %>" />
+                                <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
+                            </form>
+                        <% } %>
                     </li>
                     <%}%>
                 </ul>
