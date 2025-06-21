@@ -12,7 +12,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.Collections;
 import java.util.List;
 
-//Autor: Juan Acevedo García (30%)
+//Autor: Juan Acevedo García (35%)
 
 //Controlador para tareas comunes que no encajan en ningun rol, ej ver datos de una pelicula o buscar una pelicula concreta en la pagina
 @Controller
@@ -33,29 +33,39 @@ public class CommonController extends BaseController{
         List<MovieCharacterDTO> characterDTOList = null;
         List<PersonDTO> personDTOList = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
-        
-        if (criteria == 0){
-            completeList = movieService.getMoviesSortedByPopularity("");
-        }
-        else if(criteria == 1){
-            if(user == null || user.getMoviesLiked() == null || user.getMoviesLiked().isEmpty()){
-                completeList = movieService.getAllMovies();
-                Collections.shuffle(completeList);
-            }else{
-                completeList = movieService.getRecommendedMovies(user, "");
-            }
-        }
-        else if(criteria == 2){
-            completeList = movieService.getMoviesSortedByReleaseDate("");
-        }
-        else if(criteria == 3){
-            characterDTOList = characterService.getCharactersByName("");
-        }
-        else if(criteria == 4) {
-            completeList = movieService.getMoviesSortedByAverageScore("");
-        }
-        else { // criteria >= 5
-            personDTOList = personService.getPeopleByName("");
+
+        switch (criteria){
+            case 0:
+                completeList = movieService.getMoviesSortedByPopularity("");
+                break;
+            case 1:
+                if(user == null || user.getMoviesLiked() == null || user.getMoviesLiked().isEmpty()){
+                    completeList = movieService.getAllMovies();
+                    Collections.shuffle(completeList);
+                }else{
+                    completeList = movieService.getRecommendedMovies(user, "");
+                }
+                break;
+                case 2:
+                    completeList = movieService.getMoviesSortedByReleaseDate("");
+                    break;
+                case 3:
+                    characterDTOList = characterService.getCharactersByName("");
+                    break;
+                case 4:
+                    completeList = movieService.getMoviesSortedByAverageScore("");
+                    break;
+                case 5:
+                    personDTOList = personService.getActorsByName("");
+                    break;
+                case 6:
+                    personDTOList = personService.getCrewmembersByName("");
+                    break;
+                default:
+                    completeList = movieService.getMoviesSortedByPopularity("");
+                    characterDTOList = characterService.getCharactersByName("");
+                    personDTOList = personService.getPeopleByName("");
+                    break;
         }
 
         model.addAttribute("movieList", completeList);
@@ -120,7 +130,10 @@ public class CommonController extends BaseController{
                 movies = movieService.getMoviesSortedByAverageScore(title);
                 break;
             case 5:
-                people = personService.getPeopleByName(title);
+                people = personService.getActorsByName(title);
+                break;
+            case 6:
+                people = personService.getCrewmembersByName(title);
                 break;
             default:
                 characters = characterService.getCharactersByName(title);

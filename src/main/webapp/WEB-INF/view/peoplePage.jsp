@@ -56,7 +56,7 @@
   <div class="people">
     <div class="list-header">
       <h1>Personal de producción</h1>
-      <a href="/movies/list?criteria=5">Ver más</a>
+      <a href="/movies/list?criteria=6">Ver más</a>
     </div>
     <ul>
       <%

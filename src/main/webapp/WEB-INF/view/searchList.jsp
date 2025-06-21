@@ -89,7 +89,13 @@
         <% if (people!=null){ %>
         <div class="list-container">
             <h1>
-                Personas
+                <%if(criteria == 5){%>
+                    <h1>Actores</h1>
+                <%}else if(criteria == 6){%>
+                    <h1>Personal de producción</h1>
+                <%}else{%>
+                    <h1>Personas</h1>
+                <%}%>
             </h1>
             <ul>
                 <%
