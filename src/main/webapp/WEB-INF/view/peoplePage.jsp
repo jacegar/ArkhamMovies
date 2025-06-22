@@ -21,7 +21,7 @@
     if (user!=null && user.getRole()==0){
   %>
   <div class="center-container">
-    <a href="/people/new" class="add-movie-button">Agregar un actor</a>
+    <a href="/people/new" class="add-movie-button">Agregar una persona</a>
   </div>
   <%
     }

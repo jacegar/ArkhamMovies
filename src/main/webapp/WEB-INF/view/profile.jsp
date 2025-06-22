@@ -38,6 +38,7 @@
 
     <h2>Peliculas favoritas</h2>
     <ul>
+        <%= likedMovies.isEmpty()?"No tienes películas favoritas":""%>
         <% for (MovieDTO m : likedMovies) { %>
         <li>
             <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>
@@ -55,6 +56,7 @@
 
     <h2>Películas guardadas</h2>
     <ul>
+        <%= savedMovies.isEmpty()?"No tienes películas guardadas.":""%>
         <% for (MovieDTO m : savedMovies) { %>
         <li>
             <a href="/movies/movie?id=<%=m.getId()%>"><img src="<%=m.getPhotoUrl()%>" alt="Foto de <%=m.getTitle()%>" width="200" height="300"></a>

@@ -93,6 +93,14 @@
                     <li>
                         <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>"></a>
                         <a href="/characters/character?id=<%=character.getId()%>"><%=character.getName()%></a>
+
+                        <% if (user!=null && user.getRole()==0){ %>
+                        <form method="post" action="/characters/delete">
+                            <input type="hidden" name="id" value="<%= character.getId() %>" />
+                            <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este personaje?')">Borrar</button>
+                        </form>
+                        <a href="/characters/edit?id=<%= character.getId() %>" class="edit-button movie-crew-button">Editar</a>
+                        <% } %>
                     </li>
                     <%}%>
                 </ul>

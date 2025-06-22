@@ -12,7 +12,7 @@
 <body>
 <jsp:include page="header.jsp" />
 <div class="content-wrapper">
-  <h1>${esEditar ? "Editar " : "Nuevo "}actor</h1>
+  <h1>${esEditar ? "Editar " : "Nueva "}persona</h1>
   <form:form action="/people/save" method="post" modelAttribute="person">
   <form:hidden path="id" />
   <input type="hidden" name="esEditar" value="${esEditar}" />

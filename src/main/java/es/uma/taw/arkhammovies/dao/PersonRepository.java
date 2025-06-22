@@ -16,7 +16,7 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     public List<Person> getPeopleByName(@Param("name") String name);
 
     //Devuelve los actores que contengan el parámetro name en su nombre
-    @Query("select p from Person p where p.movieCharacters is not empty and p.name ilike %:name%")
+    @Query("select p from Person p where (p.movieCharacters is not empty or p.movieCharacters is empty and p.movieCrew is empty) and p.name ilike %:name%")
     public List<Person> getActorsByName(@Param("name") String name);
 
     //Devuelve las personas que hayan trabajado alguna vez como crewmember y que contengan el parámetro name en su nombre
