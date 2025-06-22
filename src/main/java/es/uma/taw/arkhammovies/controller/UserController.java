@@ -2,6 +2,7 @@ package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
 import es.uma.taw.arkhammovies.service.MovieService;
+import es.uma.taw.arkhammovies.service.ReviewService;
 import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private MovieService movieService;
+
+    @Autowired
+    private ReviewService reviewService;
 
     protected String doUser(Model model, int option, UserDTO user) {
         model.addAttribute("option", option);
@@ -103,6 +107,7 @@ public class UserController extends BaseController {
         UserDTO userDTO = this.userService.findUserByNickname(nickname);
         List<MovieDTO> likedMovies;
         List<MovieDTO> savedMovies;
+        List<ReviewDTO> reviews;
 
         if (userDTO.getMoviesLiked() == null) {
             likedMovies = new ArrayList<>();
@@ -116,6 +121,29 @@ public class UserController extends BaseController {
             savedMovies = this.movieService.findMoviesById(userDTO.getMoviesSaved());
         }
 
+        if (userDTO.getReviews() == null) {
+            reviews = new ArrayList<>();
+        } else {
+            reviews = this.reviewService.findByUserId(userDTO.getId());
+        }
+
+        Double mediaReviews = null;
+        if (!reviews.isEmpty()){
+            mediaReviews = 0.0;
+            for (ReviewDTO r : reviews){
+                mediaReviews+= r.getScore()==null?0:r.getScore();
+            }
+            mediaReviews/=reviews.size();
+        }
+
+
+        Integer minutos = 0;
+        for (MovieDTO m : likedMovies){
+            minutos+= m.getRuntime()==null?0:m.getRuntime();
+        }
+
+        model.addAttribute("avgScore", mediaReviews);
+        model.addAttribute("minutes", minutos);
         model.addAttribute("likedMovies", likedMovies);
         model.addAttribute("savedMovies", savedMovies);
         model.addAttribute("user", userDTO);
@@ -139,32 +167,5 @@ public class UserController extends BaseController {
         }
 
         return "vetar";
-    }
-
-    @GetMapping("/estadisticas")
-    public String doEstadisticas(@RequestParam("nickname") String nickname,
-                                 Model model,
-                                 HttpSession session) {
-        UserDTO userDTO = this.userService.findUserByNickname(nickname);
-        List<MovieDTO> likedMovies;
-        List<MovieDTO> savedMovies;
-
-        if (userDTO.getMoviesLiked() == null) {
-            likedMovies = new ArrayList<>();
-        } else {
-            likedMovies = this.movieService.findMoviesById(userDTO.getMoviesLiked());
-        }
-
-        if (userDTO.getMoviesSaved() == null) {
-            savedMovies = new ArrayList<>();
-        } else {
-            savedMovies = this.movieService.findMoviesById(userDTO.getMoviesSaved());
-        }
-
-        model.addAttribute("likedMovies", likedMovies);
-        model.addAttribute("savedMovies", savedMovies);
-        model.addAttribute("user", userDTO);
-
-        return "estadisticas";
     }
 }

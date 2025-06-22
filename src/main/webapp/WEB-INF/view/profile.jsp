@@ -13,11 +13,10 @@
     UserDTO userSession = (UserDTO)session.getAttribute("user");
     List<MovieDTO> likedMovies = (List<MovieDTO>)request.getAttribute("likedMovies");
     List<MovieDTO> savedMovies = (List<MovieDTO>)request.getAttribute("savedMovies");
+    Integer minutos = (Integer) request.getAttribute("minutes");
+    Double avgScore = (Double) request.getAttribute("avgScore");
 
-    int minutos = 0;
-    for (MovieDTO m : likedMovies){
-        minutos+= m.getRuntime()==null?0:m.getRuntime();
-    }
+
 %>
 <body>
     <header>
@@ -31,10 +30,14 @@
         <% } %>
     </header>
 
-    <h2>Información del usuario</h2> <br/>
+    <h2>Información del usuario</h2>
     <p><strong>Email:</strong> <%= user.getEmail() %> </p>
     <p><strong>Nickname:</strong> <%= user.getNickname() %> </p>
-    <p><strong>Total de minutos vistos:</strong> <%= minutos %></p> <br/>
+    <p><strong>Número de películas favoritas:</strong> <%= user.getMoviesLiked().size() %></p>
+    <p><strong>Número de películas guardadas:</strong> <%= user.getMoviesSaved().size() %></p>
+    <p><strong>Total de minutos vistos:</strong> <%= minutos %></p>
+    <p><strong>Número de reseñas:</strong> <%= user.getReviews().size() %></p>
+    <p><strong>Media de nota de las reseñas:</strong> <%= avgScore==null?"NA":String.format("%.2f", avgScore) %></p> <br/>
 
     <h2>Peliculas favoritas</h2>
     <ul>
@@ -79,10 +82,6 @@
         <% } %>
         <form method="post" action="/user/atras">
             <button class="back-button">Volver</button>
-        </form>
-        <form method="get" action="/user/estadisticas">
-            <input type="hidden" name="nickname" value="<%= user.getNickname() %>" />
-            <button type="submit">Estadísticas</button>
         </form>
     </div>
 </body>

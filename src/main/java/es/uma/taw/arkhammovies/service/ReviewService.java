@@ -26,6 +26,11 @@ public class ReviewService extends DTOService<ReviewDTO, Review>{
         return this.entity2DTO(reviews);
     }
 
+    public List<ReviewDTO> findByUserId(Integer userId) {
+        List<Review> reviews = this.reviewRepository.getReviewsByUserId(userId);
+        return this.entity2DTO(reviews);
+    }
+
     public void addReview(Integer movieId, Integer userId, Integer score, String review) {
         Review reviewObj = new Review();
 
