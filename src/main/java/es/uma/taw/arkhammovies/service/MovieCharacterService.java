@@ -63,4 +63,10 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
 
         return this.entity2DTO(person.getMovieCharacters());
     }
+
+    public List<MovieCharacterDTO> getLikedCharactersFromUser(Integer userId, String name) {
+        List<MovieCharacter> characters = movieCharacterRepository.findLikedCharactersFromUser(userId, name);
+
+        return this.entity2DTO(characters);
+    }
 }

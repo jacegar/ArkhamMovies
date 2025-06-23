@@ -64,6 +64,9 @@ public class CommonController extends BaseController{
                 case 6:
                     personDTOList = personService.getCrewmembersByName("");
                     break;
+                case 7:
+                    characterDTOList = characterService.getLikedCharactersFromUser(user.getId(), "");
+                    break;
                 default:
                     completeList = movieService.getMoviesSortedByPopularity("");
                     characterDTOList = characterService.getCharactersByName("");
@@ -147,6 +150,11 @@ public class CommonController extends BaseController{
                 break;
             case 6:
                 people = personService.getCrewmembersByName(title);
+                break;
+            case 7:
+                if(user != null) {
+                    characters = characterService.getLikedCharactersFromUser(user.getId(), title);
+                }
                 break;
             default:
                 characters = characterService.getCharactersByName(title);

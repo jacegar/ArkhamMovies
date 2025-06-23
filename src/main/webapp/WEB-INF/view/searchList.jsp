@@ -65,7 +65,11 @@
         <% if (characters!=null){ %>
             <div class="list-container">
                 <h1>
-                    Personajes
+                    <% if(criteria == 7){ %>
+                        Podrían interesarte
+                    <% } else { %>
+                        Personajes
+                    <% } %>
                 </h1>
                 <ul>
                     <%

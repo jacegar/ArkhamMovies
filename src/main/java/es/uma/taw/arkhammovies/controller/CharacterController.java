@@ -30,13 +30,23 @@ public class CharacterController extends BaseController{
     @GetMapping("/inicio")
     public String getCharactersPage(HttpSession session, Model model) {
         List<MovieCharacterDTO> characters = null;
+        List<MovieCharacterDTO> likedCharacters = null;
+        UserDTO user = (UserDTO) session.getAttribute("user");
 
         characters = characterService.getCharactersByName("");
         if(characters.size() > 6){
             characters = characters.subList(0, 6);
         }
 
+        if(user != null) {
+            likedCharacters = characterService.getLikedCharactersFromUser(user.getId(), "");
+            if(likedCharacters.size() > 6){
+                characters = characters.subList(0, 6);
+            }
+        }
+
         model.addAttribute("characters", characters);
+        model.addAttribute("likedCharacters", likedCharacters);
 
         return "charactersPage";
     }

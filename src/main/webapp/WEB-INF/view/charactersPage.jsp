@@ -11,6 +11,7 @@
 <%
   UserDTO user = (UserDTO) session.getAttribute("user");
   List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
+  List<MovieCharacterDTO> likedCharacters = (List<MovieCharacterDTO>) request.getAttribute("likedCharacters");
 %>
 
 <body>
@@ -51,5 +52,22 @@
         <%}%>
       </ul>
     </div>
+
+    <%if(likedCharacters != null && !likedCharacters.isEmpty()){%>
+    <div class="characters">
+        <div class="list-header">
+            <h1>Podrían interesarte</h1>
+            <a href="/movies/list?criteria=7">Ver más</a>
+        </div>
+        <ul>
+            <% for(MovieCharacterDTO c : likedCharacters){ %>
+            <li>
+                <a href="/characters/character?id=<%=c.getId()%>"><img src="<%=c.getPhotoUrl()%>" alt="Foto de <%=c.getName()%>" width="200" height="300"></a>
+                <a href="/characters/character?id=<%=c.getId()%>"><%=c.getName()%> <%=c.getSurname1()==null?"":c.getSurname1()%> <%=c.getSurname2()==null?"":c.getSurname2()%></a>
+            </li>
+            <% } %>
+        </ul>
+    </div>
+    <%}%>
 </body>
 </html>
