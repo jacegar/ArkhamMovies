@@ -61,16 +61,47 @@
                     </a>
                 </div>
                 <% } %>
-                <p><%=movie.getTagline()%></p>
-                <h2>Descripción</h2>
-                <p><%=movie.getOverview().isEmpty() ? "Sin descripción" : movie.getOverview() %></p>
-                <h3>Presupuesto</h3>
-                <p><%=movie.getBudget() == null ? "Desconocido" : movie.getBudget() + " €" %></p>
-                <h3>Fecha de estreno</h3>
-                <p><%=date%></p>
-                <% if (!movie.getHomepage().equals("N/A") && !movie.getHomepage().isEmpty()) { %>
-                    <a href="<%=movie.getHomepage()%>">Página de la película</a>
-                <% } %>
+                <table>
+                    <tr>
+                        <td>
+                            <p><%=movie.getTagline()%></p>
+                            <h2>Descripción</h2>
+                            <p><%=movie.getOverview().isEmpty() ? "Sin descripción" : movie.getOverview() %></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>Presupuesto</h3>
+                            <p><%=movie.getBudget() == null ? "Desconocido" : movie.getBudget() + " €" %></p>
+                        </td>
+                        <td>
+                            <h3>Facturación</h3>
+                            <p><%=movie.getRevenue() == null ? "Desconocida" : movie.getRevenue() + " €" %></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>Estatus</h3>
+                            <p><%=movie.getStatus() == null || movie.getStatus().isEmpty() ? "Desconocido" : movie.getStatus() %></p>
+                        </td>
+                        <td>
+                            <h3>Duración</h3>
+                            <p><%=movie.getRuntime() == null ? "Desconocida" : movie.getRuntime() + " minutos" %></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>Fecha de estreno</h3>
+                            <p><%=date%></p>
+                        </td>
+                        <td>
+                            <% if (!movie.getHomepage().equals("N/A") && !movie.getHomepage().isEmpty()) { %>
+                            <a href="<%=movie.getHomepage()%>">Página de la película</a>
+                            <% } %>
+                        </td>
+                    </tr>
+                </table>
+
                 <ul>
                     <% if(movie.getGenres() == null || movie.getGenres().isEmpty()){%>
                         <p>La pelicula no tiene géneros</p>

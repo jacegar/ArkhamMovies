@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>Estatus:</td>
-                    <td><form:input path="status" size="50" /></td>
+                    <td><form:input path="status" size="20" maxlength="20"/></td>
                 </tr>
                 <tr>
                     <td><strong>Fecha de estreno*:</strong></td>
