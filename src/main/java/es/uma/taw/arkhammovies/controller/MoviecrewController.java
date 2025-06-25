@@ -32,7 +32,7 @@ public class MoviecrewController extends BaseController{
                            @RequestParam (required = false) Integer personId) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -64,7 +64,7 @@ public class MoviecrewController extends BaseController{
 
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -82,7 +82,12 @@ public class MoviecrewController extends BaseController{
     @PostMapping("/save")
     public String doSave(@ModelAttribute("moviecrew") MoviecrewDTO moviecrew,
                          Model model,
-                         @RequestParam("esEditar") boolean esEditar) {
+                         @RequestParam("esEditar") boolean esEditar,
+                         HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
 
         if (moviecrew.getJob().isEmpty()) {
             model.addAttribute("movies", movieService.getAllMovies());
@@ -105,7 +110,7 @@ public class MoviecrewController extends BaseController{
                            HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }else {
             this.moviecrewService.deleteMovieCrewById(movieId, personId);

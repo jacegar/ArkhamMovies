@@ -75,8 +75,7 @@ public class PeopleController extends BaseController{
     @GetMapping("/new")
     public String doCreate(Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
-
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -92,7 +91,12 @@ public class PeopleController extends BaseController{
     @PostMapping("/save")
     public String doSave(@ModelAttribute("person") PersonDTO person,
                          Model model,
-                         @RequestParam("esEditar") boolean esEditar) {
+                         @RequestParam("esEditar") boolean esEditar,
+                         HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
 
         if (person.getName().isEmpty() || person.getSurname1().isEmpty() || person.getGender()==null || person.getAge()==null) {
             model.addAttribute("error",
@@ -113,8 +117,7 @@ public class PeopleController extends BaseController{
     @GetMapping("/edit")
     public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
-
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -128,7 +131,12 @@ public class PeopleController extends BaseController{
     }
 
     @PostMapping("/delete")
-    public String doDelete(@RequestParam("id") Integer id) {
+    public String doDelete(@RequestParam("id") Integer id, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         this.personService.deletePersonById(id);
 
         return "redirect:/";
