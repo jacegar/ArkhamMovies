@@ -16,10 +16,6 @@
         <h1>${esEditar ? "Editar " : "Nueva "}película</h1>
         <form:form action="/movie/save" method="post" modelAttribute="movie">
             <form:hidden path="id" />
-            <form:hidden path="popularity" />
-            <form:hidden path="runtime" />
-            <form:hidden path="revenue" />
-            <form:hidden path="status" />
             <input type="hidden" name="esEditar" value="${esEditar}" />
             <table>
                 <tr>
@@ -35,8 +31,20 @@
                     <td><form:textarea path="overview" rows="5" cols="40" /></td>
                 </tr>
                 <tr>
+                    <td>Duración:</td>
+                    <td><form:input path="runtime" type="number" /></td>
+                </tr>
+                <tr>
                     <td>Presupuesto:</td>
                     <td><form:input path="budget" type="number" /></td>
+                </tr>
+                <tr>
+                    <td>Facturación:</td>
+                    <td><form:input path="revenue" type="number" /></td>
+                </tr>
+                <tr>
+                    <td>Estatus:</td>
+                    <td><form:input path="status" size="50" /></td>
                 </tr>
                 <tr>
                     <td><strong>Fecha de estreno*:</strong></td>
@@ -49,6 +57,10 @@
                 <tr>
                     <td>Portada (enlace):</td>
                     <td><form:input path="photoUrl" type="url" /></td>
+                </tr>
+                <tr>
+                    <td>Popularidad:</td>
+                    <td><form:input path="popularity" type="number" /></td>
                 </tr>
                 <tr>
                     <td>
