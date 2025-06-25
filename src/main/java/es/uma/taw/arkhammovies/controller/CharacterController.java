@@ -9,6 +9,7 @@ import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.PersonService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRange;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,7 +72,7 @@ public class CharacterController extends BaseController{
                            @RequestParam (required = false) Integer personId) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -100,7 +101,13 @@ public class CharacterController extends BaseController{
     @PostMapping("/save")
     public String doSave(@ModelAttribute("character") MovieCharacterDTO character,
                          Model model,
-                         @RequestParam("esEditar") boolean esEditar) {
+                         @RequestParam("esEditar") boolean esEditar,
+                         HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
 
         if (character.getName().isEmpty()) {
             model.addAttribute("movies", movieService.getAllMovies());
@@ -124,7 +131,7 @@ public class CharacterController extends BaseController{
     public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -140,7 +147,12 @@ public class CharacterController extends BaseController{
     }
 
     @PostMapping("/delete")
-    public String doDelete(@RequestParam("id") Integer id) {
+    public String doDelete(@RequestParam("id") Integer id, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         this.characterService.deleteCharacterById(id);
 
         return "redirect:/";

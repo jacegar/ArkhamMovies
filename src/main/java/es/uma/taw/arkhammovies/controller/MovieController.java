@@ -31,7 +31,7 @@ public class MovieController {
     public String doCreate(Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -48,7 +48,14 @@ public class MovieController {
     @PostMapping("/save")
     public String doSave(@ModelAttribute("movie") MovieDTO movie,
                          Model model,
-                         @RequestParam("esEditar") boolean esEditar) {
+                         @RequestParam("esEditar") boolean esEditar,
+                         HttpSession session) {
+
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
 
         if (movie.getTitle().isEmpty() || movie.getReleaseDate() == null) {
             model.addAttribute("generos", genreService.getAllGenres());
@@ -71,7 +78,7 @@ public class MovieController {
     public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() != 0) {
+        if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
@@ -86,7 +93,12 @@ public class MovieController {
     }
 
     @PostMapping("/delete")
-    public String doDelete(@RequestParam("id") Integer id) {
+    public String doDelete(@RequestParam("id") Integer id, HttpSession session) {
+        UserDTO user = (UserDTO) session.getAttribute("user");
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         this.movieService.deleteMovieById(id);
 
         return "redirect:/";
