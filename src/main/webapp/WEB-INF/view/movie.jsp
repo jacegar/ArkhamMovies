@@ -30,7 +30,7 @@
     <jsp:include page="header.jsp" />
     <main>
         <%
-            if (user!=null && user.getRole()==0){
+            if (user!=null && user.getRole()<2){
         %>
         <div class="center-container">
             <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
@@ -94,7 +94,7 @@
                         <a href="/characters/character?id=<%=character.getId()%>"><img src="<%=character.getPhotoUrl()%>" alt="Foto de <%=character.getName()%>"></a>
                         <a href="/characters/character?id=<%=character.getId()%>"><%=character.getName()%></a>
 
-                        <% if (user!=null && user.getRole()==0){ %>
+                        <% if (user!=null && user.getRole()<2){ %>
                         <form method="post" action="/characters/delete">
                             <input type="hidden" name="id" value="<%= character.getId() %>" />
                             <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este personaje?')">Borrar</button>
@@ -117,7 +117,7 @@
                         <a href="/people/person?id=<%=crewMember.getPersonId()%>"><%=crewPeople.get(crewMember.getPersonId()).getName()%></a>
                         <p><%=crewMember.getJob()%></p>
 
-                        <% if (user!=null && user.getRole()==0){ %>
+                        <% if (user!=null && user.getRole()<2){ %>
                             <form method="post" action="/moviecrew/delete">
                                 <input type="hidden" name="movieId" value="<%= crewMember.getMovieId() %>" />
                                 <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
@@ -181,7 +181,7 @@
         </div>
         <div class="action-buttons">
             <%
-                if (user!=null && user.getRole()==0){
+                if (user!=null && user.getRole()<2){
             %>
                 <a href="/movie/edit?id=<%= movie.getId() %>" class="edit-button">Editar</a>
                 <form method="post" action="/movie/delete">

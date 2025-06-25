@@ -17,7 +17,7 @@
 <body>
     <jsp:include page="header.jsp" />
     <%
-        if (user!=null && user.getRole()==0){
+        if (user!=null && user.getRole()<2){
     %>
     <div class="center-container">
         <a href="/characters/new" class="add-movie-button">Agregar un personaje</a>

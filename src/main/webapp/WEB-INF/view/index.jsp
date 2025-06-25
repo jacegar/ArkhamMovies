@@ -21,7 +21,7 @@
     <jsp:include page="header.jsp" />
     <main>
         <%
-            if (user!=null && user.getRole()==0){
+            if (user!=null && user.getRole()<2){
         %>
         <div class="center-container">
             <a href="/movie/new" class="add-movie-button">Agregar una película</a>
