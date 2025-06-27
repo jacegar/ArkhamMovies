@@ -30,6 +30,8 @@ public class MoviecrewController extends BaseController{
     public String doCreate(Model model, HttpSession session,
                            @RequestParam(required = false) Integer movieId,
                            @RequestParam (required = false) Integer personId) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -62,6 +64,8 @@ public class MoviecrewController extends BaseController{
                          Model model,
                          HttpSession session) {
 
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -84,6 +88,8 @@ public class MoviecrewController extends BaseController{
                          Model model,
                          @RequestParam("esEditar") boolean esEditar,
                          HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
         if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
@@ -108,6 +114,8 @@ public class MoviecrewController extends BaseController{
     public String doDelete(@RequestParam("movieId") Integer movieId,
                            @RequestParam("personId") Integer personId,
                            HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {

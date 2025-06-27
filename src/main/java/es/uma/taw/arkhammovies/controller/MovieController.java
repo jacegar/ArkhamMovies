@@ -19,7 +19,7 @@ import java.util.Date;
 
 @Controller
 @RequestMapping("/movie")
-public class MovieController {
+public class MovieController extends BaseController {
 
     @Autowired
     MovieService movieService;
@@ -29,6 +29,8 @@ public class MovieController {
 
     @GetMapping("/new")
     public String doCreate(Model model, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -50,6 +52,8 @@ public class MovieController {
                          Model model,
                          @RequestParam("esEditar") boolean esEditar,
                          HttpSession session) {
+
+        if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
 
@@ -76,6 +80,8 @@ public class MovieController {
 
     @GetMapping("/edit")
     public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -94,6 +100,8 @@ public class MovieController {
 
     @PostMapping("/delete")
     public String doDelete(@RequestParam("id") Integer id, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
         if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
