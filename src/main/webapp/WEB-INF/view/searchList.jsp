@@ -25,6 +25,7 @@
             <form method="post" action="/movies/searchbyTitle">
                 <input type="text" name="title" value="<%=title == null ? "" : title %>" maxlength="500">
                 <input type="hidden" name="criteria" value="<%=criteria%>">
+                <input type="hidden" name="keyword" value="${keyword}">
                 <button>Buscar</button>
             </form>
         </div>
@@ -39,6 +40,8 @@
                         Estrenos más recientes
                     <% } else if(criteria == 4) { %>
                         Películas con mejor media
+                    <% } else if (criteria == 8) { %>
+                        Películas de ${keyword}
                     <%}else { %>
                         Películas:
                     <% } %>

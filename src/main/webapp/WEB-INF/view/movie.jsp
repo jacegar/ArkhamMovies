@@ -124,7 +124,7 @@
                     <%}else{ %>
                     <%for(KeywordDTO keyword : keywords) {%>
                     <li>
-                        <%=keyword.getName()%>
+                        <a href="/movies/list?criteria=8&keyword=<%= keyword.getName() %>"><%=keyword.getName()%></a>
                     </li>
                     <%}
                     }%>

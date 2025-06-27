@@ -32,7 +32,8 @@ public class CommonController extends BaseController{
     //Usado en las pestañas de ver más para ver todas las peliculas según cierto criterio
     //0 -> peliculas mas populares, 1 -> recomendadas para usuario, 2 -> mas recientes, 4 -> mejor valoración media
    @GetMapping("/list")
-    public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria) {
+    public String getExtendedList(HttpSession session, Model model, @RequestParam(value = "criteria", defaultValue = "0") Integer criteria,
+                                  @RequestParam(value = "keyword", required = false) String keyword) {
         List<MovieDTO> completeList = null;
         List<MovieCharacterDTO> characterDTOList = null;
         List<PersonDTO> personDTOList = null;
@@ -68,6 +69,9 @@ public class CommonController extends BaseController{
                 case 7:
                     characterDTOList = characterService.getLikedCharactersFromUser(user.getId(), "");
                     break;
+                case 8:
+                    completeList = movieService.findMoviesByKeyword(keyword);
+                    break;
                 default:
                     completeList = movieService.getMoviesSortedByPopularity("");
                     characterDTOList = characterService.getCharactersByName("");
@@ -79,6 +83,7 @@ public class CommonController extends BaseController{
         model.addAttribute("characterList", characterDTOList);
         model.addAttribute("personList", personDTOList);
         model.addAttribute("criteria", criteria);
+        model.addAttribute("keyword", keyword);
 
         return "searchList";
     }
@@ -121,7 +126,8 @@ public class CommonController extends BaseController{
     }
 
     @PostMapping("/searchbyTitle")
-    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "999") Integer criteria) {
+    public String postMovie(HttpSession session, Model model, @RequestParam(value = "title") String title, @RequestParam(value = "criteria", defaultValue = "999") Integer criteria,
+                            @RequestParam(value = "keyword", required = false) String keyword) {
         List<MovieDTO> movies = null;
         List<MovieCharacterDTO> characters = null;
         List<PersonDTO> people = null;
@@ -159,6 +165,9 @@ public class CommonController extends BaseController{
                     characters = characterService.getLikedCharactersFromUser(user.getId(), title);
                 }
                 break;
+            case 8:
+                movies = movieService.findMoviesByKeywordAndTitle(keyword, title);
+                break;
             default:
                 characters = characterService.getCharactersByName(title);
                 movies = movieService.getMoviesByTitle(title);
@@ -171,6 +180,7 @@ public class CommonController extends BaseController{
         model.addAttribute("movieList", movies);
         model.addAttribute("criteria", criteria);
         model.addAttribute("title", title);
+        model.addAttribute("keyword", keyword);
 
         return "searchList";
     }

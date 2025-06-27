@@ -184,4 +184,16 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public void deleteMovieById(Integer id) {
         this.movieRepository.deleteById(id);
     }
+
+    public List<MovieDTO> findMoviesByKeyword(String keyword) {
+        List<Movie> movies = movieRepository.findMoviesByKeyword(keyword);
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> findMoviesByKeywordAndTitle(String keyword, String title) {
+        List<Movie> movies = movieRepository.findMoviesByKeywordAndTitle(keyword, title);
+
+        return this.entity2DTO(movies);
+    }
 }

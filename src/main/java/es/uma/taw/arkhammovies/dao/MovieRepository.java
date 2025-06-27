@@ -38,4 +38,12 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     //Devuelve las peliculas en las que una persona ha trabajado como crewmember
     @Query("SELECT m FROM Movie m join m.moviecrews mc where mc.person.id = :personId")
     List<Movie> getMoviesWherePersonIsCrew(@Param("personId")Integer personId);
+
+    // Devuelve las películas que contengan una palabra clave concreta
+    @Query("select m from Movie m join m.keywords mk where mk.name = :keyword")
+    List<Movie> findMoviesByKeyword(@Param("keyword") String keyword);
+
+    // Devuelve las películas que contengan una palabra clave concreta y por título
+    @Query("select m from Movie m join m.keywords mk where mk.name = :keyword and m.title ilike %:title%")
+    List<Movie> findMoviesByKeywordAndTitle(@Param("keyword") String keyword, @Param("title") String title);
 }
