@@ -70,6 +70,8 @@ public class CharacterController extends BaseController{
     public String doCreate(Model model, HttpSession session,
                            @RequestParam (required = false) Integer movieId,
                            @RequestParam (required = false) Integer personId) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -103,6 +105,8 @@ public class CharacterController extends BaseController{
                          Model model,
                          @RequestParam("esEditar") boolean esEditar,
                          HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -129,6 +133,8 @@ public class CharacterController extends BaseController{
 
     @GetMapping("/edit")
     public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
 
         if (user.getRole() >= 2) {
@@ -148,6 +154,8 @@ public class CharacterController extends BaseController{
 
     @PostMapping("/delete")
     public String doDelete(@RequestParam("id") Integer id, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
         UserDTO user = (UserDTO) session.getAttribute("user");
         if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
