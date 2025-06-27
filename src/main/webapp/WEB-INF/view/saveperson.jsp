@@ -50,7 +50,8 @@
         </form:form>
       </td>
       <td>
-        <form method="post" action="/user/atras">
+        <form method="post" action="/people/atras">
+          <input type="hidden" name="personId" value="${person != null ? person.getId() : null}" />
           <button class="back-button">Volver</button>
         </form>
       </td>

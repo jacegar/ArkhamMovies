@@ -50,7 +50,7 @@
       <%
         if (user!=null && user.getRole()<2){
       %>
-      <a href="/characters/edit?id=<%= character.getId() %>" class="edit-button">Editar</a>
+      <a href="/characters/edit?id=<%= character.getId() %>&ret=1" class="edit-button">Editar</a>
       <form method="post" action="/characters/delete">
         <input type="hidden" name="id" value="<%= character.getId() %>" />
         <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar el personaje' +

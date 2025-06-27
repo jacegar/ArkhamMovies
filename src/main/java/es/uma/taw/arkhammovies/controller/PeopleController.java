@@ -151,7 +151,11 @@ public class PeopleController extends BaseController{
     }
 
     @PostMapping("/atras")
-    public String doAtras() {
-        return "redirect:/people/inicio";
+    public String doAtras(@RequestParam(value = "personId", required = false) Integer personId) {
+        if (personId != null) {
+            return "redirect:/people/person?id=" + personId;
+        } else {
+            return "redirect:/people/inicio";
+        }
     }
 }

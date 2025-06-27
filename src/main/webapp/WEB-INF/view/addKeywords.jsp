@@ -30,7 +30,9 @@
                 </form:form>
             </td>
             <td>
-                <form method="post" action="/user/atras">
+                <form method="post" action="/moviecrew/atras">
+                    <input type="hidden" name="movieId" value="${movie.getId()}" />
+                    <input type="hidden" name="ret" value="1" />
                     <button class="back-button">Volver</button>
                 </form>
             </td>

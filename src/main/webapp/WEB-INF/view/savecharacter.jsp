@@ -59,7 +59,11 @@
                 </form:form>
             </td>
             <td>
-                <form method="post" action="/user/atras">
+                <form method="post" action="/characters/atras">
+                    <input type="hidden" name="characterId" value="${character != null ? character.getId() : null}" />
+                    <input type="hidden" name="personId" value="${personId != null ? personId : null}" />
+                    <input type="hidden" name="movieId" value="${movieId != null ? movieId : null}" />
+                    <input type="hidden" name="ret" value="${ret != null ? ret : null}" />
                     <button class="back-button">Volver</button>
                 </form>
             </td>

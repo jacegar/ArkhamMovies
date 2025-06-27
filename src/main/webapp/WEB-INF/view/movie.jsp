@@ -34,8 +34,8 @@
             if (user!=null && user.getRole()<2){
         %>
         <div class="center-container">
-            <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
-            <a href="/moviecrew/new?movieId=<%=movie.getId()%>&cameFromPerson=false" class="add-movie-button">Agregar personal de producción</a>
+            <a href="/characters/new?movieId=<%=movie.getId()%>&ret=2" class="add-movie-button">Agregar un personaje</a>
+            <a href="/moviecrew/new?movieId=<%=movie.getId()%>&ret=1" class="add-movie-button">Agregar personal de producción</a>
             <a href="/keywords/add_to_movie?movieId=<%= movie.getId() %>" class="add-movie-button">Agregar palabras clave</a>
         </div>
         <%
@@ -145,7 +145,7 @@
                             <input type="hidden" name="id" value="<%= character.getId() %>" />
                             <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este personaje?')">Borrar</button>
                         </form>
-                        <a href="/characters/edit?id=<%= character.getId() %>" class="edit-button movie-crew-button">Editar</a>
+                        <a href="/characters/edit?id=<%= character.getId() %>&ret=2&movieId=${movie.getId()}" class="edit-button movie-crew-button">Editar</a>
                         <% } %>
                     </li>
                     <%}%>
@@ -169,7 +169,7 @@
                                 <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
                                 <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
                             </form>
-                            <a href="/moviecrew/edit?movieId=<%= crewMember.getMovieId() %>&personId=<%= crewMember.getPersonId() %>&cameFromPerson=false" class="edit-button">Editar</a>
+                            <a href="/moviecrew/edit?movieId=<%= crewMember.getMovieId() %>&personId=<%= crewMember.getPersonId() %>&ret=1" class="edit-button">Editar</a>
                         <% } %>
                     </li>
                 <%}%>

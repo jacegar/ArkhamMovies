@@ -23,8 +23,8 @@
             if (user!=null && user.getRole()<2){
         %>
         <div class="center-container">
-            <a href="/characters/new?personId=<%=person.getId()%>" class="add-movie-button">Agregar un personaje</a>
-            <a href="/moviecrew/new?personId=<%=person.getId()%>&cameFromPerson=true" class="add-movie-button">Agregar personal de producción</a>
+            <a href="/characters/new?personId=<%=person.getId()%>&ret=0" class="add-movie-button">Agregar un personaje</a>
+            <a href="/moviecrew/new?personId=<%=person.getId()%>&ret=0" class="add-movie-button">Agregar personal de producción</a>
         </div>
         <%
             }
@@ -57,7 +57,7 @@
                             <input type="hidden" name="id" value="<%= character.getId() %>" />
                             <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este personaje?')">Borrar</button>
                         </form>
-                        <a href="/characters/edit?id=<%= character.getId() %>" class="edit-button movie-crew-button">Editar</a>
+                        <a href="/characters/edit?id=<%= character.getId() %>&ret=0&personId=${person.getId()}" class="edit-button movie-crew-button">Editar</a>
                         <% } %>
                     </li>
                     <%}%>
@@ -82,7 +82,7 @@
                                 <input type="hidden" name="personId" value="<%= job.getPersonId() %>" />
                                 <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
                             </form>
-                            <a href="/moviecrew/edit?movieId=<%= job.getMovieId() %>&personId=<%= job.getPersonId() %>&cameFromPerson=true" class="edit-button movie-crew-button">Editar</a>
+                            <a href="/moviecrew/edit?movieId=<%= job.getMovieId() %>&personId=<%= job.getPersonId() %>&ret=0" class="edit-button movie-crew-button">Editar</a>
                         <% } %>
                     </li>
                     <%}%>

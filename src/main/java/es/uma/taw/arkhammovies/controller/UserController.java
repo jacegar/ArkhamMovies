@@ -97,9 +97,23 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/atras")
-    public String doAtras(@RequestParam(value = "nickname", required = false) String nickname) {
+    public String doAtras(@RequestParam(value = "nickname", required = false) String nickname,
+                          @RequestParam(value = "criteria", required = false) Integer criteria) {
         if (nickname == null || nickname.isEmpty()) {
-            return "redirect:/";
+            if (criteria != null) {
+                switch (criteria) {
+                    case 5:
+                    case 6:
+                        return "redirect:/people/inicio";
+                    case 3:
+                    case 7:
+                        return "redirect:/characters/inicio";
+                    default:
+                        return "redirect:/";
+                }
+            } else {
+                return "redirect:/";
+            }
         } else {
             return "redirect:/user/" + nickname;
         }

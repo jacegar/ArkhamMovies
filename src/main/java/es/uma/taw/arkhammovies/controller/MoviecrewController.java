@@ -30,7 +30,7 @@ public class MoviecrewController extends BaseController{
     public String doCreate(Model model, HttpSession session,
                            @RequestParam(required = false) Integer movieId,
                            @RequestParam (required = false) Integer personId,
-                           @RequestParam(value = "cameFromPerson", required = false) boolean cameFromPerson) {
+                           @RequestParam(value = "ret", required = false) Integer ret) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -55,7 +55,7 @@ public class MoviecrewController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", false);
-        model.addAttribute("cameFromPerson", cameFromPerson);
+        model.addAttribute("ret", ret);
 
         return "savemoviecrew";
     }
@@ -65,7 +65,7 @@ public class MoviecrewController extends BaseController{
                          @RequestParam("personId") Integer personId,
                          Model model,
                          HttpSession session,
-                         @RequestParam(value = "cameFromPerson", required = false) boolean cameFromPerson) {
+                         @RequestParam(value = "ret", required = false) Integer ret) {
 
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
@@ -82,7 +82,7 @@ public class MoviecrewController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", esEditar);
-        model.addAttribute("cameFromPerson", cameFromPerson);
+        model.addAttribute("ret", ret);
 
         return "savemoviecrew";
     }
@@ -134,10 +134,10 @@ public class MoviecrewController extends BaseController{
     @PostMapping("/atras")
     public String doAtras(@RequestParam(value = "personId", required = false) Integer personId,
                           @RequestParam(value = "movieId", required = false) Integer movieId,
-                          @RequestParam(value = "cameFromPerson", required = false) boolean cameFromPerson) {
-        if (personId != null && cameFromPerson)
+                          @RequestParam(value = "ret", required = false) Integer ret) {
+        if (personId != null && ret != null && ret == 0)
             return "redirect:/people/person?id=" + personId;
-        else if (movieId != null)
+        else if (movieId != null && ret != null && ret == 1)
             return "redirect:/movies/movie?id=" + movieId;
         else
             return "redirect:/";

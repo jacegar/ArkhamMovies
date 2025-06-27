@@ -20,7 +20,7 @@
         if (user!=null && user.getRole()<2){
     %>
     <div class="center-container">
-        <a href="/characters/new" class="add-movie-button">Agregar un personaje</a>
+        <a href="/characters/new?ret=1" class="add-movie-button">Agregar un personaje</a>
     </div>
     <%
         }

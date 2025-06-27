@@ -69,7 +69,8 @@ public class CharacterController extends BaseController{
     @GetMapping("/new")
     public String doCreate(Model model, HttpSession session,
                            @RequestParam (required = false) Integer movieId,
-                           @RequestParam (required = false) Integer personId) {
+                           @RequestParam (required = false) Integer personId,
+                           @RequestParam(value = "ret", required = false) Integer ret) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -96,6 +97,9 @@ public class CharacterController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("character", movieCharacterDTO);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("personId", personId);
+        model.addAttribute("movieId", movieId);
+        model.addAttribute("ret", ret);
 
         return "savecharacter";
     }
@@ -132,7 +136,10 @@ public class CharacterController extends BaseController{
     }
 
     @GetMapping("/edit")
-    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session,
+                         @RequestParam(value = "ret", required = false) Integer ret,
+                         @RequestParam (required = false) Integer movieId,
+                         @RequestParam (required = false) Integer personId) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -148,6 +155,9 @@ public class CharacterController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("character", characterDTO);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("ret", ret);
+        model.addAttribute("movieId", movieId);
+        model.addAttribute("personId", personId);
 
         return "savecharacter";
     }
@@ -167,7 +177,18 @@ public class CharacterController extends BaseController{
     }
 
     @PostMapping("/atras")
-    public String doAtras() {
-        return "redirect:/characters/inicio";
+    public String doAtras(@RequestParam(value = "characterId", required = false) Integer characterId,
+                          @RequestParam(value = "personId", required = false) Integer personId,
+                          @RequestParam(value = "movieId", required = false) Integer movieId,
+                          @RequestParam(value = "ret", required = false) Integer ret) {
+        if (personId != null && ret != null && ret == 0) {
+            return "redirect:/people/person?id=" + personId;
+        } else if (characterId != null && ret != null && ret == 1) {
+            return "redirect:/characters/character?id=" + characterId;
+        } else if (movieId != null && ret != null && ret == 2) {
+            return "redirect:/movies/movie?id=" + movieId;
+        } else {
+            return "redirect:/characters/inicio";
+        }
     }
 }

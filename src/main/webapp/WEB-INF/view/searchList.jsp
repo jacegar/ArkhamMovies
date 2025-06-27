@@ -124,6 +124,7 @@
         </div>
         <% } %>
         <form method="post" action="/user/atras">
+            <input type="hidden" name="criteria" value="<%= criteria %>" />
             <button>Volver</button>
         </form>
     </main>
