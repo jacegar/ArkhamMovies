@@ -1,14 +1,17 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
+import es.uma.taw.arkhammovies.entity.User;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.ReviewService;
 import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,9 +97,12 @@ public class UserController extends BaseController {
     }
 
     @PostMapping("/atras")
-    public String doAtras(Model model) {
-
-        return "redirect:/";
+    public String doAtras(@RequestParam(value = "nickname", required = false) String nickname) {
+        if (nickname == null || nickname.isEmpty()) {
+            return "redirect:/";
+        } else {
+            return "redirect:/user/" + nickname;
+        }
     }
 
     @GetMapping("/{nickname}")
@@ -155,6 +161,14 @@ public class UserController extends BaseController {
     public String doVetar(Model model, HttpSession session,
                           @RequestParam (required = false) String email) {
 
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
+        UserDTO user = (UserDTO)session.getAttribute("user");
+
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
         if (email!=null) {
             if (!email.isEmpty()) {
                 boolean eliminado = userService.removeUserByEmail(email);
@@ -165,6 +179,8 @@ public class UserController extends BaseController {
                 model.addAttribute("mensaje", "Debes introducir un email");
             }
         }
+
+        model.addAttribute("nickname", user.getNickname());
 
         return "vetar";
     }

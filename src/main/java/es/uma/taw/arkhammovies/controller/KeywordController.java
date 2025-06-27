@@ -191,4 +191,9 @@ public class KeywordController extends BaseController {
 
         return "redirect:/";
     }
+
+    @PostMapping("/atras")
+    public String doAtras() {
+        return "redirect:/keywords/inicio";
+    }
 }

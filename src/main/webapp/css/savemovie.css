@@ -26,7 +26,7 @@ body {
     margin-top: 2rem;
 }
 
-form:not(.login-container form):not(.user-container form):not(td form[action="/user/atras"]):not(td form[action="/keywords/delete"]) {
+form:not(.login-container form):not(.user-container form):not(td form) {
     display: flex;
     flex-direction: column;
     align-items: center;

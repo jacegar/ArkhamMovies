@@ -33,6 +33,7 @@
     </form>
 
     <form method="post" action="/user/atras" class="back-button">
+        <input type="hidden" name="nickname" value="${nickname}"/>
         <button>Volver</button>
     </form>
 

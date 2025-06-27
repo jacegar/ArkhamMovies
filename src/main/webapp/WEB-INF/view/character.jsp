@@ -59,7 +59,7 @@
       <%
         }
       %>
-      <form method="post" action="/user/atras">
+      <form method="post" action="/characters/atras">
         <button class="back-button">Volver</button>
       </form>
     </div>

@@ -165,4 +165,9 @@ public class CharacterController extends BaseController{
 
         return "redirect:/";
     }
+
+    @PostMapping("/atras")
+    public String doAtras() {
+        return "redirect:/characters/inicio";
+    }
 }

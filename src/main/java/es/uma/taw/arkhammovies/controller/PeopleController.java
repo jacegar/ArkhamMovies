@@ -149,4 +149,9 @@ public class PeopleController extends BaseController{
 
         return "redirect:/";
     }
+
+    @PostMapping("/atras")
+    public String doAtras() {
+        return "redirect:/people/inicio";
+    }
 }

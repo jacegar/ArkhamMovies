@@ -47,7 +47,10 @@
                 </form:form>
             </td>
             <td>
-                <form method="post" action="/user/atras">
+                <form method="post" action="/moviecrew/atras">
+                    <input hidden name="cameFromPerson" value="${cameFromPerson}" />
+                    <input hidden name="personId" value="${moviecrew.getPersonId()}" />
+                    <input hidden name="movieId" value="${moviecrew.getMovieId()}" />
                     <button class="back-button">Volver</button>
                 </form>
             </td>

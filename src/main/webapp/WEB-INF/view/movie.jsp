@@ -35,7 +35,7 @@
         %>
         <div class="center-container">
             <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
-            <a href="/moviecrew/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar personal de producción</a>
+            <a href="/moviecrew/new?movieId=<%=movie.getId()%>&cameFromPerson=false" class="add-movie-button">Agregar personal de producción</a>
             <a href="/keywords/add_to_movie?movieId=<%= movie.getId() %>" class="add-movie-button">Agregar palabras clave</a>
         </div>
         <%
@@ -169,7 +169,7 @@
                                 <input type="hidden" name="personId" value="<%= crewMember.getPersonId() %>" />
                                 <button class="delete-button" onclick="return confirm('¿Está seguro de que quiere borrar este trabajo en producción?')">Borrar</button>
                             </form>
-                            <a href="/moviecrew/edit?movieId=<%= crewMember.getMovieId() %>&personId=<%= crewMember.getPersonId() %>" class="edit-button">Editar</a>
+                            <a href="/moviecrew/edit?movieId=<%= crewMember.getMovieId() %>&personId=<%= crewMember.getPersonId() %>&cameFromPerson=false" class="edit-button">Editar</a>
                         <% } %>
                     </li>
                 <%}%>
