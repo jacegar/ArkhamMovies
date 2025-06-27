@@ -149,10 +149,10 @@ public class CommonController extends BaseController{
                 movies = movieService.getMoviesSortedByAverageScore(title);
                 break;
             case 5:
-                people = personService.getActorsByName(title);
+                people = personService.getActorsByNameOrSurname(title);
                 break;
             case 6:
-                people = personService.getCrewmembersByName(title);
+                people = personService.getCrewmembersByNameByNameOrSurname(title);
                 break;
             case 7:
                 if(user != null) {
@@ -162,7 +162,7 @@ public class CommonController extends BaseController{
             default:
                 characters = characterService.getCharactersByName(title);
                 movies = movieService.getMoviesByTitle(title);
-                people = personService.getPeopleByName(title);
+                people = personService.getPeopleByNameOrSurname(title);
                 break;
         }
 

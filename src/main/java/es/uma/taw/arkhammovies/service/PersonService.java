@@ -63,4 +63,22 @@ public class PersonService extends DTOService<PersonDTO, Person>{
 
         return this.entity2DTO(people);
     }
+
+    public List<PersonDTO> getActorsByNameOrSurname(String name) {
+        List<Person> people = personRepository.getActorsByNameOrSurname(name);
+
+        return this.entity2DTO(people);
+    }
+
+    public List<PersonDTO> getPeopleByNameOrSurname(String name) {
+        List<Person> people = personRepository.getPeopleByNameOrSurname(name);
+
+        return this.entity2DTO(people);
+    }
+
+    public List<PersonDTO> getCrewmembersByNameByNameOrSurname(String name) {
+        List<Person> people = personRepository.getCrewMembersByNameOrSurname(name);
+
+        return this.entity2DTO(people);
+    }
 }

@@ -26,5 +26,18 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
     //Devuelve las personas que han trabajado en una pelicula como crewmember
     @Query("select p from Person p join p.movieCrew mc where mc.movie.id = :movieId")
     List<Person> findPeopleByWorkedMovie(@Param("movieId") Integer movieId);
+
+    //Devuelve los actores que contengan el parámetro name en su nombre o apellidos
+    @Query("select p from Person p where (p.movieCharacters is not empty or p.movieCharacters is empty and p.movieCrew is empty)" +
+            " and (p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%)")
+    List<Person> getActorsByNameOrSurname(@Param("name") String name);
+
+    //Devuelve las personas que contengan el parámetro name en su nombre o apellidos
+    @Query("select p from Person p where p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%")
+    List<Person> getPeopleByNameOrSurname(@Param("name") String name);
+
+    //Devuelve las personas que hayan trabajado alguna vez como crewmember y que contengan el parámetro name en su nombre o apellidos
+    @Query("select p from Person p where p.movieCrew is not empty and (p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%)")
+    List<Person> getCrewMembersByNameOrSurname(@Param("name") String name);
 }
 
