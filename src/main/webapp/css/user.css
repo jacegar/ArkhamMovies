@@ -87,3 +87,14 @@ form .back-button button {
 form .back-button button:hover {
     background-color: #5a6268;
 }
+
+.redirection-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.redirection-link a {
+    margin-left: 0.5rem;
+}

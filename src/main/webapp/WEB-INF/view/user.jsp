@@ -48,6 +48,20 @@
         <button>Volver</button>
     </form>
 
+    <div class="redirection-link">
+        <%
+            if (option == 0) {
+        %>
+                ¿Ya tienes cuenta? <a href="/user/login">Inicia sesión</a>
+        <%
+            } else {
+        %>
+                ¿No tienes cuenta? <a href="/user/register">Regístrate</a>
+        <%
+            }
+        %>
+    </div>
+
     <p class="error"><%= (error == null ? "" : error) %></p>
 </body>
 </html>
