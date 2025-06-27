@@ -42,4 +42,10 @@ public class KeywordService extends DTOService<KeywordDTO, Keyword> {
 
         return this.entity2DTO(keywords);
     }
+
+    public List<KeywordDTO> findKeywordsBySearch(String search) {
+        List<Keyword> keywords = this.keywordRepository.findKeywordsBySearch(search);
+
+        return this.entity2DTO(keywords);
+    }
 }

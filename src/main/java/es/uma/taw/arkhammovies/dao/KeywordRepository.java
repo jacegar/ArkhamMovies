@@ -13,4 +13,7 @@ public interface KeywordRepository extends JpaRepository<Keyword, Integer> {
 
     @Query("select k from Keyword k join k.movies km where km.id = :movieId")
     List<Keyword> findKeywordsByMovieId(@Param("movieId") Integer movieId);
+
+    @Query("select k from Keyword k where k.name ilike %:search%")
+    public List<Keyword> findKeywordsBySearch(@Param("search") String search);
 }

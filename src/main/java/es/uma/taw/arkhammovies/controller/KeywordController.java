@@ -35,13 +35,36 @@ public class KeywordController extends BaseController {
 
         UserDTO user = (UserDTO) session.getAttribute("user");
 
+        return doShowKeywords(user, model, null);
+    }
+
+    @PostMapping("/search")
+    public String doSearchKeyword(HttpSession session,
+                                  Model model,
+                                  @RequestParam("busqueda") String busqueda) {
+
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        return doShowKeywords(user, model, busqueda);
+    }
+
+    protected String doShowKeywords(UserDTO user, Model model, String busqueda) {
         if (user.getRole() >= 2) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
-        List<KeywordDTO> keywords = this.keywordService.findAllKeywords();
+        List<KeywordDTO> keywords;
+
+        if (busqueda == null || busqueda.isEmpty()) {
+            keywords = this.keywordService.findAllKeywords();
+        } else {
+            keywords = this.keywordService.findKeywordsBySearch(busqueda);
+        }
 
         model.addAttribute("keywords", keywords);
+        model.addAttribute("busqueda", busqueda);
 
         return "keywordsPage";
     }
