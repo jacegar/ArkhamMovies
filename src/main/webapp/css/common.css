@@ -71,3 +71,22 @@ header h1 {
 .crew-list{
     margin-bottom: 3rem;
 }
+
+.user-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    background-color: #f0ad4e;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    margin: 1rem 2rem;
+}
+
+.user-link:hover {
+    background-color: #d9902f;
+    color: #f1ecec;
+}

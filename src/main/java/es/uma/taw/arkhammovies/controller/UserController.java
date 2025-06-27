@@ -168,4 +168,19 @@ public class UserController extends BaseController {
 
         return "vetar";
     }
+
+    @GetMapping("/inicio")
+    public String doUsersPage() { return "usersPage"; }
+
+    @PostMapping("/search")
+    public String doSearchUser(Model model, @RequestParam("busqueda") String busqueda) {
+        if (busqueda.isEmpty()) return "redirect:/user/inicio";
+
+        List<UserDTO> usuarios = this.userService.findUsersBySearch(busqueda);
+
+        model.addAttribute("busqueda", busqueda);
+        model.addAttribute("usuarios", usuarios);
+
+        return "usersPage";
+    }
 }

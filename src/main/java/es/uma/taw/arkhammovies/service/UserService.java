@@ -7,6 +7,8 @@ import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService extends DTOService<UserDTO, User> {
 
@@ -60,5 +62,11 @@ public class UserService extends DTOService<UserDTO, User> {
         User user = this.userRepository.findUserByNickname(nickname);
 
         return user != null ? this.toDTO(user) : null;
+    }
+
+    public List<UserDTO> findUsersBySearch(String search) {
+        List<User> users = this.userRepository.findUsersBySearch(search);
+
+        return this.entity2DTO(users);
     }
 }

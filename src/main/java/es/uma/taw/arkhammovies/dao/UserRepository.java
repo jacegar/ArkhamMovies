@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.nickname = :nickname and u.password = :password")
@@ -18,4 +20,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     public User findUserByNickname(@Param("nickname")String nickname);
 
     void deleteByEmail(String email);
+
+    @Query("select u from User u where u.nickname ilike %:search%")
+    public List<User> findUsersBySearch(@Param("search") String search);
 }
