@@ -29,7 +29,7 @@ public class UserService extends DTOService<UserDTO, User> {
         user.setNickname(userDTO.getNickname());
         user.setEmail(userDTO.getEmail());
         user.setPassword(userDTO.getPassword());
-        user.setRole(this.roleRepository.findById(1).get()); // Suponiendo que el id 1 sea rol usuario
+        user.setRole(this.roleRepository.findById(2).get()); // Suponiendo que el id 2 sea rol usuario
 
         this.userRepository.save(user);
         userDTO.setId(user.getId());

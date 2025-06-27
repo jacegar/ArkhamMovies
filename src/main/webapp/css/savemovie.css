@@ -26,7 +26,7 @@ body {
     margin-top: 2rem;
 }
 
-form:not(.login-container form):not(.user-container form):not(td form[action="/user/atras"]) {
+form:not(.login-container form):not(.user-container form):not(td form[action="/user/atras"]):not(td form[action="/keywords/delete"]) {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -156,4 +156,10 @@ form button:hover {
 form input[type="radio"] {
     width: auto;
     display: inline-block;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }

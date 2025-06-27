@@ -68,7 +68,7 @@ public class UserController extends BaseController {
             return doUser(model, 0, user);
         } else {
             this.userService.registerUser(user);
-            user.setRole(1);
+            user.setRole(2);
             session.setAttribute("user", user);
             return "redirect:/";
         }
