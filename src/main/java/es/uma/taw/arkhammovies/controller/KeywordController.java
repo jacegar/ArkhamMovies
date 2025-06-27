@@ -1,8 +1,11 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.KeywordDTO;
+import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.service.KeywordService;
+import es.uma.taw.arkhammovies.service.MovieService;
+import es.uma.taw.arkhammovies.service.MoviekeywordService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,12 @@ public class KeywordController extends BaseController {
 
     @Autowired
     private KeywordService keywordService;
+
+    @Autowired
+    private MovieService movieService;
+
+    @Autowired
+    private MoviekeywordService moviekeywordService;
 
     @GetMapping("/inicio")
     public String doKeywordsPage(HttpSession session, Model model) {
@@ -120,5 +129,43 @@ public class KeywordController extends BaseController {
         this.keywordService.deleteKeywordById(id);
 
         return "redirect:/keywords/inicio";
+    }
+
+    @GetMapping("/add_to_movie")
+    public String doAddToMovie(@RequestParam("movieId") Integer id, Model model, HttpSession session) {
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        MovieDTO movie = this.movieService.findMovie(id);
+        List<KeywordDTO> keywords = this.keywordService.findAllKeywords();
+
+        model.addAttribute("movie", movie);
+        model.addAttribute("keywords", keywords);
+
+        return "addKeywords";
+    }
+
+    @PostMapping("/save_movie")
+    public String doSaveMovie(@ModelAttribute("movie") MovieDTO movie,
+                              Model model,
+                              HttpSession session) {
+
+        if (!isAuthenticated(session)) return "redirect:/user/login";
+
+        UserDTO user = (UserDTO) session.getAttribute("user");
+
+        if (user.getRole() >= 2) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        this.moviekeywordService.deleteMovieKeywordsByMovieId(movie.getId());
+        this.moviekeywordService.saveMovieKeywords(movie.getId(), movie.getKeywords());
+
+        return "redirect:/";
     }
 }

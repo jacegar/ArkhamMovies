@@ -24,6 +24,7 @@ public class CommonController extends BaseController{
     @Autowired protected MovieService movieService;
     @Autowired protected ReviewService reviewService;
     @Autowired protected GenreService genreService;
+    @Autowired protected KeywordService keywordService;
     @Autowired protected MovieCharacterService characterService;
     @Autowired protected PersonService personService;
     @Autowired protected MoviecrewService crewService;
@@ -90,6 +91,7 @@ public class CommonController extends BaseController{
         List<MovieCharacterDTO> characters = characterService.getCharactersFromMovie(movie.getId());
         List<ReviewDTO> reviews = this.reviewService.findByMovieId(id);
         List<GenreDTO> genres = this.genreService.getGenresByMovie(movie.getId());
+        List<KeywordDTO> keywords = this.keywordService.findKeywordsByMovieId(movie.getId());
 
         List<MoviecrewDTO> crew = crewService.getMoviecrewByMovie(movie.getId());
         Map<Integer, PersonDTO> crewPeople = new HashMap<>();
@@ -110,6 +112,7 @@ public class CommonController extends BaseController{
         model.addAttribute("isLiked", isLiked);
         model.addAttribute("isSaved", isSaved);
         model.addAttribute("genres", genres);
+        model.addAttribute("keywords", keywords);
         model.addAttribute("characters", characters);
         model.addAttribute("crew", crew);
         model.addAttribute("crewPeople", crewPeople);

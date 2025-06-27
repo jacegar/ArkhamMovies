@@ -16,6 +16,7 @@
         UserDTO user = (UserDTO) session.getAttribute("user");
         List<ReviewDTO> reviews = (List<ReviewDTO>) request.getAttribute("reviews");
         List<GenreDTO> genres = (List<GenreDTO>) request.getAttribute("genres");
+        List<KeywordDTO> keywords = (List<KeywordDTO>) request.getAttribute("keywords");
         List<MovieCharacterDTO> characters = (List<MovieCharacterDTO>) request.getAttribute("characters");
         List<MoviecrewDTO> crew = (List<MoviecrewDTO>) request.getAttribute("crew");
         Map<Integer, PersonDTO> crewPeople = (Map<Integer, PersonDTO>) request.getAttribute("crewPeople");
@@ -35,6 +36,7 @@
         <div class="center-container">
             <a href="/characters/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar un personaje</a>
             <a href="/moviecrew/new?movieId=<%=movie.getId()%>" class="add-movie-button">Agregar personal de producción</a>
+            <a href="/keywords/add_to_movie?movieId=<%= movie.getId() %>" class="add-movie-button">Agregar palabras clave</a>
         </div>
         <%
             }
@@ -103,15 +105,28 @@
                 </table>
 
                 <ul>
+                    <p>Géneros: </p>
                     <% if(movie.getGenres() == null || movie.getGenres().isEmpty()){%>
                         <p>La pelicula no tiene géneros</p>
                     <%}else{ %>
-                        <p>Géneros: </p>
                         <%for(GenreDTO genre : genres) {%>
                                 <li>
                                     <%=genre.getName()%>
                                 </li>
                         <%}
+                    }%>
+                </ul>
+
+                <ul>
+                    <p>Palabras clave: </p>
+                    <% if(movie.getKeywords() == null || movie.getKeywords().isEmpty()){%>
+                    <p>La pelicula no tiene palabras clave</p>
+                    <%}else{ %>
+                    <%for(KeywordDTO keyword : keywords) {%>
+                    <li>
+                        <%=keyword.getName()%>
+                    </li>
+                    <%}
                     }%>
                 </ul>
             </div>

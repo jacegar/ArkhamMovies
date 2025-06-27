@@ -36,4 +36,10 @@ public class KeywordService extends DTOService<KeywordDTO, Keyword> {
     }
 
     public void deleteKeywordById(Integer id) { this.keywordRepository.deleteById(id); }
+
+    public List<KeywordDTO> findKeywordsByMovieId(Integer movieId) {
+        List<Keyword> keywords = this.keywordRepository.findKeywordsByMovieId(movieId);
+
+        return this.entity2DTO(keywords);
+    }
 }
