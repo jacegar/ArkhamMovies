@@ -90,3 +90,16 @@ header h1 {
     background-color: #d9902f;
     color: #f1ecec;
 }
+
+.statistics-main{
+    display: flex;
+    flex-direction: row;
+    gap: 10rem;
+    justify-content: center;
+}
+
+.film-analisis-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
