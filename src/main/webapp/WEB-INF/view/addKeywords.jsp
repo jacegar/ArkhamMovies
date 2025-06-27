@@ -1,4 +1,3 @@
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -8,9 +7,6 @@
     <link rel="stylesheet" type="text/css" href="../../css/savemovie.css">
     <link rel="stylesheet" type="text/css" href="../../css/movie.css">
 </head>
-<%
-    String error = (String)request.getAttribute("error");
-%>
 <body>
 <jsp:include page="header.jsp" />
 <div class="content-wrapper">
@@ -40,7 +36,6 @@
             </td>
         </tr>
     </table>
-    <p class="error"><%= (error == null ? "" : error) %></p>
 </div>
 </body>
 </html>
