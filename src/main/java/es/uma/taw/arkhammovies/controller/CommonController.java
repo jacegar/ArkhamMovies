@@ -70,6 +70,8 @@ public class CommonController extends BaseController{
                     characterDTOList = characterService.getLikedCharactersFromUser(user.getId(), "");
                     break;
                 case 8:
+                    if (keyword == null || keyword.isEmpty())
+                        return "redirect:/";
                     completeList = movieService.findMoviesByKeyword(keyword);
                     break;
                 default:
@@ -166,6 +168,8 @@ public class CommonController extends BaseController{
                 }
                 break;
             case 8:
+                if (keyword == null || keyword.isEmpty())
+                    return "redirect:/";
                 movies = movieService.findMoviesByKeywordAndTitle(keyword, title);
                 break;
             default:
