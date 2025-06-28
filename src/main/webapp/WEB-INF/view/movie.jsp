@@ -102,6 +102,49 @@
                             <% } %>
                         </td>
                     </tr>
+<tr>
+    <td>
+        <h3>Idiomas</h3>
+        <ul>
+            <%
+                List<?> allLanguages = (List<?>) request.getAttribute("allLanguages");
+                if (allLanguages == null || allLanguages.isEmpty()) {
+            %>
+                <li>No hay idiomas</li>
+            <%
+                } else {
+                    for (Object langObj : allLanguages) {
+                        // Cambia getName() si tu DTO tiene otro método
+                        String langName = (String) langObj.getClass().getMethod("getName").invoke(langObj);
+            %>
+                <li><%= langName %></li>
+            <%
+                    }
+                }
+            %>
+        </ul>
+    </td>
+    <td>
+        <h3>Países</h3>
+        <ul>
+            <%
+                List<?> allCountries = (List<?>) request.getAttribute("allCountries");
+                if (allCountries == null || allCountries.isEmpty()) {
+            %>
+                <li>No hay países</li>
+            <%
+                } else {
+                    for (Object countryObj : allCountries) {
+                        String countryName = (String) countryObj.getClass().getMethod("getName").invoke(countryObj);
+            %>
+                <li><%= countryName %></li>
+            <%
+                    }
+                }
+            %>
+        </ul>
+    </td>
+</tr>
                 </table>
 
                 <ul>

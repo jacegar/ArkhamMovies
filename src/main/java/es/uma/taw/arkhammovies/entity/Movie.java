@@ -120,6 +120,10 @@ public class Movie implements DTO<MovieDTO>, Serializable {
         List<Integer> languagesIds = new ArrayList<>();
         this.languages.forEach((final Language language) -> languagesIds.add(language.getId()));
         movieDTO.setLanguages(languagesIds);
+        
+        List<Integer> countriesIds = new ArrayList<>();
+        this.productioncountries.forEach((final Productioncountry country) -> countriesIds.add(country.getId()));
+        movieDTO.setProductionCountries(countriesIds);
 
         List<ReviewId> reviewsIds = new ArrayList<>();
         this.reviews.forEach((final Review review) -> reviewsIds.add(review.getId()));

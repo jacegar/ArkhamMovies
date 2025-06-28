@@ -1,14 +1,14 @@
 package es.uma.taw.arkhammovies.service;
 
-import es.uma.taw.arkhammovies.dao.GenreRepository;
-import es.uma.taw.arkhammovies.dao.MovieRepository;
-import es.uma.taw.arkhammovies.dao.UserRepository;
+import es.uma.taw.arkhammovies.dao.*;
 
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.ReviewDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.entity.Genre;
+import es.uma.taw.arkhammovies.entity.Language;
 import es.uma.taw.arkhammovies.entity.Movie;
+import es.uma.taw.arkhammovies.entity.Productioncountry;
 import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,17 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;
     @Autowired protected UserRepository userRepository;
     @Autowired protected GenreRepository genreRepository;
+    @Autowired protected CountryRepository countryRepository;
+    @Autowired protected LanguageRepository languageRepository;
     protected ReviewService reviewService;
+
+    public List<Productioncountry> getAllCountries() {
+        return countryRepository.findAll();
+    }
+
+    public List<Language> getAllLanguages() {
+        return languageRepository.findAll();
+    }
 
     public List<MovieDTO> getAllMovies() {
         List<Movie> movies = movieRepository.findAll();
@@ -90,7 +100,17 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         return this.entity2DTO(movies);
     }
+    public List<Language> getLanguagesByMovieId(Integer movieId) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) return Collections.emptyList();
+        return movie.getLanguages();
+    }
 
+    public List<Productioncountry> getCountriesByMovieId(Integer movieId) {
+        Movie movie = movieRepository.findById(movieId).orElse(null);
+        if (movie == null) return Collections.emptyList();
+        return movie.getProductioncountries();
+    }
     public List<MovieDTO> getMoviesWherePersonIsCrew(Integer personId) {
         List<Movie> movies = movieRepository.getMoviesWherePersonIsCrew(personId);
 
@@ -177,6 +197,12 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         List<Genre> genres = genreRepository.findAllById(movieDTO.getGenres());
         movie.setGenres(genres);
+        
+        List<Productioncountry> countries = countryRepository.findAllById(movieDTO.getProductionCountries());
+        movie.setProductioncountries(countries);
+
+        List<Language> languages = languageRepository.findAllById(movieDTO.getLanguages());
+        movie.setLanguages(languages);
 
         this.movieRepository.save(movie);
     }
