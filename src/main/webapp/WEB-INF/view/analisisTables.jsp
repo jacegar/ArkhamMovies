@@ -24,15 +24,15 @@
                 case 4:
                 case 5:
                 case 6:
-                    tipo = "Películas";
+                    tipo = "Películas ordenadas";
                     columna = "Título";
                     break;
                 case 7:
-                    tipo = "Géneros";
+                    tipo = "Géneros ordenados";
                     columna = "Género";
                     break;
                 case 8:
-                    tipo = "Palabras clave";
+                    tipo = "Palabras clave ordenadas";
                     columna = "Palabra clave";
                     break;
                 default:
