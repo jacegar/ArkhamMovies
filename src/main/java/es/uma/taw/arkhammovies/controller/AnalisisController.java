@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,5 +45,22 @@ public class AnalisisController extends BaseController{
         model.addAttribute("likesMedios", likesMedios);
 
         return "analisis";
+    }
+
+    @GetMapping("/table")
+    public String getAnalisisTable(Model model, @RequestParam(required = false) Integer page) {
+        String statName = null;
+
+        switch (page){
+            case 0:
+                break;
+
+            default:
+                break;
+        }
+
+        model.addAttribute("statName", statName);
+
+        return "analisisTables";
     }
 }
