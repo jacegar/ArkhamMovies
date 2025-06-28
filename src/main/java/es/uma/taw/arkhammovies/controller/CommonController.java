@@ -127,7 +127,8 @@ public class CommonController extends BaseController{
         model.addAttribute("crew", crew);
         model.addAttribute("crewPeople", crewPeople);
         model.addAttribute("referer", referer);
-
+        model.addAttribute("allLanguages", movieService.getLanguagesByMovieId(movie.getId()));
+        model.addAttribute("allCountries", movieService.getCountriesByMovieId(movie.getId()));
         return "movie";
     }
 

@@ -45,7 +45,8 @@ public class MovieController extends BaseController {
         model.addAttribute("movie", movieDTO);
         model.addAttribute("esEditar", esEditar);
         model.addAttribute("referer", referer);
-
+        model.addAttribute("allCountries", movieService.getAllCountries());
+        model.addAttribute("allLanguages", movieService.getAllLanguages());
         return "savemovie";
     }
 
@@ -68,7 +69,8 @@ public class MovieController extends BaseController {
             model.addAttribute("error",
                     "Por favor, rellene todos los campos obligatorios");
             model.addAttribute("esEditar", esEditar);
-
+            model.addAttribute("allCountries", movieService.getAllCountries());
+            model.addAttribute("allLanguages", movieService.getAllLanguages());
             return "savemovie";
         }
 
@@ -98,7 +100,8 @@ public class MovieController extends BaseController {
         model.addAttribute("movie", movie);
         model.addAttribute("esEditar", esEditar);
         model.addAttribute("referer", referer);
-
+        model.addAttribute("allCountries", movieService.getAllCountries());
+        model.addAttribute("allLanguages", movieService.getAllLanguages()); 
         return "savemovie";
     }
 
