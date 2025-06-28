@@ -17,7 +17,7 @@
             <h2><a href="/characters/inicio">Personajes</a></h2>
             <h2><a href="/people/inicio">Personas</a></h2>
             <h2><a href="/user/inicio">Usuarios</a></h2>
-            <h2><a href="/analisis/inicio">Análisis</a></h2>
+            <h2><a href="/analisis/inicio">Estadísticas</a></h2>
             <%
                 if (user != null && user.getRole() < 2) {
             %>

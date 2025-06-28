@@ -12,6 +12,7 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/analisis.css">
     <title>Arkham Movies</title>
 </head>
 <body>

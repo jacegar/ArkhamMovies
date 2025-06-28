@@ -1,0 +1,188 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: calc(100vh - 120px);
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 50%, #f1f3f4 100%);
+}
+
+main h1 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.5rem;
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 2.5rem;
+    position: relative;
+    font-weight: 700;
+    text-shadow: 0 2px 4px rgba(0, 123, 255, 0.1);
+}
+
+main h1::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #007BFF, #0056b3);
+    border-radius: 2px;
+}
+
+.moviesTable {
+    width: 100%;
+    max-width: 1000px;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.1);
+    position: relative;
+}
+
+.moviesTable th {
+    background: linear-gradient(135deg, #007BFF 0%, #0056b3 100%);
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: none;
+    position: relative;
+}
+
+.moviesTable th:first-child {
+    border-top-left-radius: 12px;
+}
+
+.moviesTable th:last-child {
+    border-top-right-radius: 12px;
+}
+
+.moviesTable th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0.7), rgba(255,255,255,0.3));
+}
+
+.moviesTable tr {
+    transition: all 0.3s ease;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.moviesTable tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.moviesTable tr:nth-child(odd) {
+    background-color: #fff;
+}
+
+.moviesTable tr:hover {
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.05) 0%, rgba(0, 123, 255, 0.02) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.1);
+}
+
+.moviesTable td {
+    font-family: 'Arial', sans-serif;
+    padding: 1.2rem 1rem;
+    text-align: center;
+    border: none;
+    font-size: 1rem;
+    color: #495057;
+    position: relative;
+}
+
+.moviesTable td:first-child {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #007BFF;
+    background: linear-gradient(135deg, rgba(0, 123, 255, 0.1) 0%, rgba(0, 123, 255, 0.05) 100%);
+    border-right: 2px solid rgba(0, 123, 255, 0.1);
+    width: 100px;
+}
+
+.moviesTable td:nth-child(2) {
+    font-weight: 600;
+    color: #2c3e50;
+    text-align: left;
+    padding-left: 1.5rem;
+    max-width: 300px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.moviesTable td:last-child {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #28a745;
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(40, 167, 69, 0.02) 100%);
+    border-left: 2px solid rgba(40, 167, 69, 0.1);
+    width: 150px;
+}
+
+.moviesTable tr:nth-child(2) td:first-child {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #856404;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.moviesTable tr:nth-child(2) td:first-child::before {
+    content: '🥇';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+}
+
+.moviesTable tr:nth-child(3) td:first-child {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e5e5e5 100%);
+    color: #6c757d;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.moviesTable tr:nth-child(3) td:first-child::before {
+    content: '🥈';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+
+.moviesTable tr:nth-child(4) td:first-child {
+    background: linear-gradient(135deg, #cd7f32 0%, #deb887 100%);
+    color: #5d4e37;
+    font-size: 1.1rem;
+    position: relative;
+}
+
+.moviesTable tr:nth-child(4) td:first-child::before {
+    content: '🥉';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+}
+
+.moviesTable tr:last-child td:first-child {
+    border-bottom-left-radius: 12px;
+}
+
+.moviesTable tr:last-child td:last-child {
+    border-bottom-right-radius: 12px;
+}

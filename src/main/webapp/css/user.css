@@ -98,3 +98,17 @@ form .back-button button:hover {
 .redirection-link a {
     margin-left: 0.5rem;
 }
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #007BFF;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
