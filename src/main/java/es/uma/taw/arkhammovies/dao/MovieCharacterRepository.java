@@ -14,6 +14,10 @@ public interface MovieCharacterRepository extends JpaRepository<MovieCharacter, 
     public List<MovieCharacter> getCharactersByNameOrSurname(String name);
 
     //Devuelve los personajes que aparecen en una pelicula que le gusta al usuario
+    @Query("select c from MovieCharacter c join c.movie m join m.usersLiked u where u.id = :userId")
+    List<MovieCharacter> findAllLikedCharactersFromUser(Integer userId);
+
+    //Devuelve los personajes con un nombre concreto que aparecen en una pelicula que le gusta al usuario
     @Query("select c from MovieCharacter c join c.movie m join m.usersLiked u where u.id = :userId and " +
             "(concat(c.name, ' ', coalesce(c.surname1, ''), ' ', coalesce(c.surname2, '')) ilike %:name%)")
     List<MovieCharacter> findLikedCharactersFromUser(Integer userId, String name);

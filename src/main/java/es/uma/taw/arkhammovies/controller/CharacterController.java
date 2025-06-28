@@ -33,7 +33,7 @@ public class CharacterController extends BaseController{
         List<MovieCharacterDTO> likedCharacters = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        characters = characterService.getCharactersByNameOrSurname("");
+        characters = characterService.getAllCharacters();
         if(characters.size() > 6){
             characters = characters.subList(0, 6);
         }
@@ -96,7 +96,7 @@ public class CharacterController extends BaseController{
         boolean esEditar = false;
 
         model.addAttribute("movies", movieService.getAllMovies());
-        model.addAttribute("people", personService.getPeopleByName(""));
+        model.addAttribute("people", personService.getAllPeople());
         model.addAttribute("character", movieCharacterDTO);
         model.addAttribute("esEditar", esEditar);
         model.addAttribute("referer", referer);
@@ -119,7 +119,7 @@ public class CharacterController extends BaseController{
 
         if (character.getName().isEmpty()) {
             model.addAttribute("movies", movieService.getAllMovies());
-            model.addAttribute("people", personService.getPeopleByName(""));
+            model.addAttribute("people", personService.getAllPeople());
             model.addAttribute("error",
                     "Por favor, rellene todos los campos obligatorios");
             model.addAttribute("esEditar", esEditar);
@@ -151,7 +151,7 @@ public class CharacterController extends BaseController{
         boolean esEditar = true;
 
         model.addAttribute("movies", movieService.getAllMovies());
-        model.addAttribute("people", personService.getPeopleByName(""));
+        model.addAttribute("people", personService.getAllPeople());
         model.addAttribute("character", characterDTO);
         model.addAttribute("esEditar", esEditar);
         model.addAttribute("referer", referer);

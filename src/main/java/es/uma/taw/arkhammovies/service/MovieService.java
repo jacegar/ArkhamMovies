@@ -37,19 +37,38 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         return this.entity2DTO(movies);
      }
 
-     public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByAverageScore(title);
+    public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByAverageScore();
+        } else {
+            movies = movieRepository.getMoviesSortedByAverageScore(title);
+        }
+
         return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getMoviesSortedByPopularity(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByPopularity();
+        } else {
+            movies = movieRepository.getMoviesSortedByPopularity(title);
+        }
 
         return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getMoviesSortedByReleaseDate(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByReleaseDate(title);
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByReleaseDate();
+        } else {
+            movies = movieRepository.getMoviesSortedByReleaseDate(title);
+        }
 
         return this.entity2DTO(movies);
     }
@@ -66,6 +85,29 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
             sum += review.getScore();
         }
         return sum / reviews.size();
+    }
+
+    public List<MovieDTO> getAllRecommendedMovies(UserDTO user) {
+        List<Movie> movies;
+
+        List<Genre> likedGenres = genreRepository.getLikedGenresOrderedByFrequency(user.getId());
+        if(likedGenres.size() > 3){
+            likedGenres = likedGenres.subList(0, 3);
+        }
+
+        if(likedGenres.isEmpty()){
+            movies = movieRepository.findAll();
+            movies.removeAll(movieRepository.getLikedMoviesByUser(user.getId()));
+            Collections.shuffle(movies);
+        }else {
+            List<Integer> likedGenresIds = new ArrayList<>();
+
+            likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
+
+            movies = movieRepository.getAllRecommendedMoviesByUserAndGenres(user.getId(), likedGenresIds);
+        }
+
+        return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {

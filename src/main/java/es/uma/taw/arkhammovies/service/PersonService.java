@@ -17,20 +17,20 @@ public class PersonService extends DTOService<PersonDTO, Person>{
     @Autowired
     private PersonRepository personRepository;
 
-    public List<PersonDTO> getPeopleByName(String name) {
-        List<Person> people = personRepository.getPeopleByName(name);
+    public List<PersonDTO> getAllPeople() {
+        List<Person> people = personRepository.findAll();
 
         return this.entity2DTO(people);
     }
 
-    public List<PersonDTO> getActorsByName(String name) {
-        List<Person> people = personRepository.getActorsByName(name);
+    public List<PersonDTO> getAllActors() {
+        List<Person> people = personRepository.getAllActors();
 
         return this.entity2DTO(people);
     }
 
-    public List<PersonDTO> getCrewmembersByName(String name) {
-        List<Person> people = personRepository.getCrewMembersByName(name);
+    public List<PersonDTO> getAllCrewMembers() {
+        List<Person> people = personRepository.getAllCrewMembers();
 
         return this.entity2DTO(people);
     }

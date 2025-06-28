@@ -36,12 +36,12 @@ public class PeopleController extends BaseController{
         List<PersonDTO> actors = null;
         List<PersonDTO> crewmembers = null;
 
-        actors = personService.getActorsByName("");
+        actors = personService.getAllActors();
         if(actors.size() > 6){
             actors = actors.subList(0, 6);
         }
 
-        crewmembers = personService.getCrewmembersByName("");
+        crewmembers = personService.getAllCrewMembers();
         if(crewmembers.size() > 6){
             crewmembers = crewmembers.subList(0, 6);
         }

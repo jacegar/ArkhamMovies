@@ -14,10 +14,17 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query("select m from Movie m where m.title ilike %:title% order by m.popularity desc")
     public List<Movie> getMoviesSortedByPopularity(String title);
 
+    //Devuelve las películas más populares, usado en la pantalla de inicio
+    @Query("select m from Movie m order by m.popularity desc")
+    List<Movie> getAllMoviesSortedByPopularity();
 
     //Devuelve las películas más recientes, usado en la pantalla de inicio
     @Query("select m from Movie m where m.title ilike %:title% order by m.releaseDate desc")
     public List<Movie> getMoviesSortedByReleaseDate(String title);
+
+    //Devuelve las películas más recientes, usado en la pantalla de inicio
+    @Query("select m from Movie m order by m.releaseDate desc")
+    public List<Movie> getAllMoviesSortedByReleaseDate();
 
     //Devuelve las películas que contengan el parámetro title en su título
     @Query("select m from Movie m where m.title ilike %:title%")
@@ -28,12 +35,20 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
             "(select m from Movie m join m.usersLiked u on u.id = :userId) and m.title ilike %:title%")
     public List<Movie> getRecommendedMoviesByUserAndGenres(@Param("userId") Integer userId, @Param("genresIds") List<Integer> genresIds, String title);
 
+    //Devuelve peliculas que pertenezcan a alguno de los generos de la lista, y que no esten en la lista de gustados por el usuario sin título
+    @Query("select distinct m from Movie m join m.genres g where g.id in :genresIds and m not in " +
+            "(select m from Movie m join m.usersLiked u on u.id = :userId)")
+    List<Movie> getAllRecommendedMoviesByUserAndGenres(@Param("userId") Integer userId, @Param("genresIds") List<Integer> genresIds);
+
     //Devuelve las peliculas que le gustan a un usuario
     @Query("select m from Movie m join m.usersLiked u where u.id = :userId and m member of u.moviesLiked")
     public List<Movie> getLikedMoviesByUser(@Param("userId") Integer userId);
     
     @Query("SELECT m FROM Movie m LEFT JOIN m.reviews r where m.title ilike %:title% GROUP BY m.id ORDER BY AVG(r.score) DESC")
     List<Movie> getMoviesSortedByAverageScore(String title);
+
+    @Query("SELECT m FROM Movie m LEFT JOIN m.reviews r GROUP BY m.id ORDER BY AVG(r.score) DESC")
+    List<Movie> getAllMoviesSortedByAverageScore();
 
     //Devuelve las peliculas en las que una persona ha trabajado como crewmember
     @Query("SELECT m FROM Movie m join m.moviecrews mc where mc.person.id = :personId")
