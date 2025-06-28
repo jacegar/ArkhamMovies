@@ -13,9 +13,7 @@ import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 //Autor: Juan Acevedo García 75%
 
@@ -47,19 +45,38 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
         return this.entity2DTO(movies);
      }
 
-     public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByAverageScore(title);
+    public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByAverageScore();
+        } else {
+            movies = movieRepository.getMoviesSortedByAverageScore(title);
+        }
+
         return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getMoviesSortedByPopularity(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByPopularity(title);
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByPopularity();
+        } else {
+            movies = movieRepository.getMoviesSortedByPopularity(title);
+        }
 
         return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getMoviesSortedByReleaseDate(String title) {
-        List<Movie> movies = movieRepository.getMoviesSortedByReleaseDate(title);
+        List<Movie> movies;
+
+        if (title.isEmpty()) {
+            movies = movieRepository.getAllMoviesSortedByReleaseDate();
+        } else {
+            movies = movieRepository.getMoviesSortedByReleaseDate(title);
+        }
 
         return this.entity2DTO(movies);
     }
@@ -76,6 +93,29 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
             sum += review.getScore();
         }
         return sum / reviews.size();
+    }
+
+    public List<MovieDTO> getAllRecommendedMovies(UserDTO user) {
+        List<Movie> movies;
+
+        List<Genre> likedGenres = genreRepository.getLikedGenresOrderedByFrequency(user.getId());
+        if(likedGenres.size() > 3){
+            likedGenres = likedGenres.subList(0, 3);
+        }
+
+        if(likedGenres.isEmpty()){
+            movies = movieRepository.findAll();
+            movies.removeAll(movieRepository.getLikedMoviesByUser(user.getId()));
+            Collections.shuffle(movies);
+        }else {
+            List<Integer> likedGenresIds = new ArrayList<>();
+
+            likedGenres.forEach((final Genre genre) -> likedGenresIds.add(genre.getId()));
+
+            movies = movieRepository.getAllRecommendedMoviesByUserAndGenres(user.getId(), likedGenresIds);
+        }
+
+        return this.entity2DTO(movies);
     }
 
     public List<MovieDTO> getRecommendedMovies(UserDTO user, String title) {
@@ -242,4 +282,59 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public Double findLikesMean() {
         return movieRepository.getLikesMean();
     }
+
+    public List<MovieDTO> getAllMoviesSortedByBudget() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByBudget();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByRevenue() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByRevenue();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByProfit() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByProfit();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByDuration() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByDuration();
+
+        return this.entity2DTO(movies);
+    }
+
+    public Map<String, Double> getSortedMovieScores() {
+        List<Object[]> results = movieRepository.getSortedMovieScores();
+        Map<String, Double> movieScoreMap = new LinkedHashMap<>();
+
+        for (Object[] row : results) {
+            String title = (String) row[0];
+            Double avgScore = (Double) row[1];
+            movieScoreMap.put(title, avgScore);
+        }
+
+        return movieScoreMap;
+    }
+
+    public Map<String, Integer> getSortedFavouritedMovies() {
+        List<Object[]> results = movieRepository.getSortedFavouritedMovies();
+        return getCountMap(results);
+    }
+
+    static Map<String, Integer> getCountMap(List<Object[]> results) {
+        Map<String, Integer> countMap = new LinkedHashMap<>();
+
+        for (Object[] row : results) {
+            String name = (String) row[0];
+            Integer count = (Integer) row[1];
+            countMap.put(name, count);
+        }
+
+        return countMap;
+    }
+
 }

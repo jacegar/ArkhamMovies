@@ -36,12 +36,12 @@ public class PeopleController extends BaseController{
         List<PersonDTO> actors = null;
         List<PersonDTO> crewmembers = null;
 
-        actors = personService.getActorsByName("");
+        actors = personService.getAllActors();
         if(actors.size() > 6){
             actors = actors.subList(0, 6);
         }
 
-        crewmembers = personService.getCrewmembersByName("");
+        crewmembers = personService.getAllCrewMembers();
         if(crewmembers.size() > 6){
             crewmembers = crewmembers.subList(0, 6);
         }
@@ -158,7 +158,7 @@ public class PeopleController extends BaseController{
 
     @PostMapping("/atras")
     public String doAtras(@RequestParam(value = "prevUrl", required = false) String prevUrl) {
-        if (prevUrl != null && !prevUrl.isEmpty() && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
+        if (prevUrl != null && prevUrl.contains("?") && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
             return "redirect:" + prevUrl;
         } else {
             return "redirect:/people/inicio";

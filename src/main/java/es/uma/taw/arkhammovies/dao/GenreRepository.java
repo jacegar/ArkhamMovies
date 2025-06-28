@@ -19,4 +19,9 @@ public interface GenreRepository extends JpaRepository<Genre, Integer> {
 
     @Query("select g from Genre g join g.moviesgenre mg where mg.id = :movieId")
     List<Genre> findGenresByMovie(@Param("movieId") Integer movieId);
+
+    @Query("select g.name, count(m) from Genre g join g.moviesgenre m " +
+            "group by g.id " +
+            "order by count(m) desc")
+    List<Object[]> getGenresOrderedByFrequency();
 }

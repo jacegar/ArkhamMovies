@@ -1,28 +1,96 @@
-<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
-<%@ page import="java.util.List" %>
-<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
-<%
-    String statName = (String) request.getAttribute("statName");
-%>
-
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/analisisTables.css">
     <title>Arkham Movies</title>
 </head>
+<%
+    Integer statNumber = (Integer)request.getAttribute("statNumber");
+    String statName = (String) request.getAttribute("statName");
+    Map<String, Integer> integerMap = (Map<String, Integer>)request.getAttribute("integerMap");
+    Map<String, Double> doubleMap = (Map<String, Double>)request.getAttribute("doubleMap");
+%>
 <body>
     <jsp:include page="header.jsp" />
     <main>
-        <% if(true){ %>
-        <table class="moviesTable">
-            <tr>
-                <th>ID</th>
-                <th>Titulo</th>
-                <th><%= statName %></th>
-            </tr>
-        </table>
+        <%
+            String tipo, columna;
+            switch (statNumber) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    tipo = "Películas ordenadas";
+                    columna = "Título";
+                    break;
+                case 7:
+                    tipo = "Géneros ordenados";
+                    columna = "Género";
+                    break;
+                case 8:
+                    tipo = "Palabras clave ordenadas";
+                    columna = "Palabra clave";
+                    break;
+                case 9:
+                case 10:
+                    tipo = "Usuarios ordenados";
+                    columna = "Usuario";
+                    break;
+                default:
+                    tipo = "";
+                    columna = "";
+                    break;
+            }
+            if (!integerMap.isEmpty()) {
+        %>
+            <h1><%= tipo %> por <%= statName %></h1>
+            <table class="moviesTable">
+                <tr>
+                    <th>Posición</th>
+                    <th><%= columna %></th>
+                    <th><%= statName %></th>
+                </tr>
+                <%
+                    int pos = 1;
+                    for (Map.Entry<String, Integer> entry : integerMap.entrySet()) {
+                %>
+                        <tr>
+                            <td><%= pos %></td>
+                            <td><%= entry.getKey() %></td>
+                            <td><%= entry.getValue() %></td>
+                        </tr>
+                <%
+                        pos++;
+                    }
+                %>
+            </table>
+        <% } else if (!doubleMap.isEmpty()) { %>
+            <h1><%= tipo %> por <%= statName %></h1>
+            <table class="moviesTable">
+                <tr>
+                    <th>Posición</th>
+                    <th><%= columna %></th>
+                    <th><%= statName %></th>
+                </tr>
+                <%
+                    int pos = 1;
+                    for (Map.Entry<String, Double> entry : doubleMap.entrySet()) {
+                %>
+                        <tr>
+                            <td><%= pos %></td>
+                            <td><%= entry.getKey() %></td>
+                            <td><%= entry.getValue() == null ? "N/A" : entry.getValue() %></td>
+                        </tr>
+                <%
+                        pos++;
+                    }
+                %>
+            </table>
         <% } %>
     </main>
 </body>

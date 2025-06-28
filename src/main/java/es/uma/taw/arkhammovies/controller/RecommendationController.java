@@ -37,7 +37,7 @@ public class RecommendationController extends BaseController{
             recommendedMovies = movieService.getAllMovies();
             Collections.shuffle(recommendedMovies);
         }else{
-            recommendedMovies = movieService.getRecommendedMovies(user, "");
+            recommendedMovies = movieService.getAllRecommendedMovies(user);
         }
         if(recommendedMovies.size() > 6){
             recommendedMovies = recommendedMovies.subList(0, 6);

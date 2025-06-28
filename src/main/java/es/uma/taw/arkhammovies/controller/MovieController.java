@@ -121,7 +121,7 @@ public class MovieController extends BaseController {
 
     @PostMapping("/atras")
     public String doAtras(@RequestParam(value = "prevUrl", required = false) String prevUrl) {
-        if (prevUrl != null && !prevUrl.isEmpty() && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
+        if (prevUrl != null && prevUrl.contains("?") && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
             return "redirect:" + prevUrl;
         } else {
             return "redirect:/";

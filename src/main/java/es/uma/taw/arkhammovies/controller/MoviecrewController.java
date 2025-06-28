@@ -49,7 +49,7 @@ public class MoviecrewController extends BaseController{
         }
 
         model.addAttribute("movies", movieService.getAllMovies());
-        model.addAttribute("people", personService.getPeopleByName(""));
+        model.addAttribute("people", personService.getAllPeople());
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", false);
         model.addAttribute("referer", referer);
@@ -75,7 +75,7 @@ public class MoviecrewController extends BaseController{
         boolean esEditar = true;
 
         model.addAttribute("movies", movieService.getAllMovies());
-        model.addAttribute("people", personService.getPeopleByName(""));
+        model.addAttribute("people", personService.getAllPeople());
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", esEditar);
         model.addAttribute("referer", referer);
@@ -97,7 +97,7 @@ public class MoviecrewController extends BaseController{
 
         if (moviecrew.getJob().isEmpty()) {
             model.addAttribute("movies", movieService.getAllMovies());
-            model.addAttribute("people", personService.getPeopleByName(""));
+            model.addAttribute("people", personService.getAllPeople());
             model.addAttribute("error",
                     "Por favor, rellene todos los campos obligatorios");
             model.addAttribute("esEditar", esEditar);

@@ -1,4 +1,5 @@
 <%@ page import="java.util.Map" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -6,10 +7,12 @@
     Map<String, Integer> estadisticas = (Map<String, Integer>) request.getAttribute("estadisticas");
     Double notaMedia = (Double) request.getAttribute("notaMedia");
     Double likesMedios = (Double) request.getAttribute("likesMedios");
+    UserDTO userSession = (UserDTO)session.getAttribute("user");
 %>
 
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
+    <link rel="stylesheet" type="text/css" href="../../css/analisis.css">
     <title>Arkham Movies</title>
 </head>
 <body>
@@ -61,14 +64,18 @@
                 <h3>Número de usuarios:</h3>
                 <p><%= estadisticas.get("numUsuarios") %></p>
             </div>
-            <div>
-                <h3>Número de editores:</h3>
-                <p><%= estadisticas.get("numEditores") %></p>
-            </div>
-            <div>
-                <h3>Número de administradores:</h3>
-                <p><%= estadisticas.get("numAdministradores") %></p>
-            </div>
+            <% if (userSession!=null && userSession.getRole()<2){ %>
+                <div>
+                    <h3>Número de editores:</h3>
+                    <p><%= estadisticas.get("numEditores") %></p>
+                </div>
+            <% } %>
+            <% if (userSession != null && userSession.getRole() == 0) { %>
+                <div>
+                    <h3>Número de administradores:</h3>
+                    <p><%= estadisticas.get("numAdministradores") %></p>
+                </div>
+            <% } %>
         </div>
 
         <div class="film-analisis-container">

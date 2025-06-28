@@ -22,8 +22,14 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
     @Autowired
     private PersonRepository personRepository;
 
-    public List<MovieCharacterDTO> getCharactersByName(String name) {
-        List<MovieCharacter> characters = movieCharacterRepository.getCharactersByName(name);
+    public List<MovieCharacterDTO> getAllCharacters() {
+        List<MovieCharacter> characters = movieCharacterRepository.findAll();
+
+        return this.entity2DTO(characters);
+    }
+
+    public List<MovieCharacterDTO> getCharactersByNameOrSurname(String name) {
+        List<MovieCharacter> characters = movieCharacterRepository.getCharactersByNameOrSurname(name);
 
         return this.entity2DTO(characters);
     }
@@ -65,7 +71,13 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
     }
 
     public List<MovieCharacterDTO> getLikedCharactersFromUser(Integer userId, String name) {
-        List<MovieCharacter> characters = movieCharacterRepository.findLikedCharactersFromUser(userId, name);
+        List<MovieCharacter> characters;
+
+        if (name.isEmpty()) {
+            characters = movieCharacterRepository.findAllLikedCharactersFromUser(userId);
+        } else {
+            characters = movieCharacterRepository.findLikedCharactersFromUser(userId, name);
+        }
 
         return this.entity2DTO(characters);
     }
