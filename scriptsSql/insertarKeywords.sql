@@ -49,60 +49,117 @@ INSERT INTO keyword (name) VALUES
 -- 9 = The Dark Knight
 -- 10 = Parasite
 
--- 2. Asociar keywords con películas
+-- 2. Limpiar la tabla moviekeyword antes de insertar nuevos datos
+DELETE FROM moviekeyword WHERE movie_id >= 1;
+
+-- 3. Asociar keywords con películas
 
 INSERT INTO moviekeyword (keyword_id, movie_id) VALUES
--- Minecraft: the movie (keywords 1 a 4, y la 35)
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(35, 1),
+-- Minecraft: the movie
+(1, 1),  -- exploración
+(2, 1),  -- construcción
+(3, 1),  -- supervivencia
+(4, 1),  -- herramientas
+(7, 1),  -- viaje
+(8, 1),  -- naturaleza
+(9, 1),  -- energía
+(18, 1), -- transformación
+(35, 1), -- videojuego
 
--- La comunidad del anillo (keywords 5 a 8)
-(5, 2),
-(6, 2),
-(7, 2),
-(8, 2),
+-- La comunidad del anillo
+(1, 2),  -- exploración
+(5, 2),  -- corrupción
+(6, 2),  -- alianza
+(7, 2),  -- viaje
+(8, 2),  -- naturaleza
+(11, 2), -- profecía
+(18, 2), -- transformación
+(20, 2), -- ritual
+(21, 2), -- percepción
+(25, 2), -- tiempo dilatado
+(31, 2), -- aspiración
 
--- Dragon Ball Evolution (keywords 9 a 11)
-(9, 3),
-(10, 3),
-(11, 3),
+-- Dragon Ball Evolution
+(9, 3),  -- energía
+(10, 3), -- entrenamiento
+(11, 3), -- profecía
+(18, 3), -- transformación
+(20, 3), -- ritual
+(21, 3), -- percepción
+(30, 3), -- moralidad
+(35, 3), -- videojuego
 
--- Ceuta, prison by the sea (keywords 12 a 14)
-(12, 4),
-(13, 4),
-(14, 4),
+-- Ceuta, prison by the sea
+(12, 4), -- frontera
+(13, 4), -- encierro
+(14, 4), -- vigilancia
+(15, 4), -- manipulación
+(16, 4), -- control
+(19, 4), -- liminalidad
+(28, 4), -- miedo
+(30, 4), -- moralidad
+(31, 4), -- desigualdad
+(33, 4), -- engaño
 
--- Thunderbolts* (keywords 15 a 17)
-(15, 5),
-(16, 5),
-(17, 5),
+-- Thunderbolts*
+(6, 5),  -- alianza
+(15, 5), -- manipulación
+(16, 5), -- control
+(17, 5), -- operación encubierta
+(18, 5), -- transformación
+(27, 5), -- anarquía
+(28, 5), -- miedo
+(29, 5), -- moralidad
+(30, 5), -- desigualdad
 
--- El viaje de Chihiro (keywords 18 a 21)
-(18, 6),
-(19, 6),
-(20, 6),
-(21, 6),
+-- El viaje de Chihiro
+(7, 6),  -- viaje
+(8, 6),  -- naturaleza
+(18, 6), -- transformación
+(19, 6), -- liminalidad
+(20, 6), -- ritual
+(21, 6), -- percepción
+(22, 6), -- ilusión
+(30, 6), -- moralidad
 
--- Inception (keywords 22 a 24)
-(22, 7),
-(23, 7),
-(24, 7),
+-- Inception
+(21, 7), -- percepción
+(22, 7), -- ilusión
+(23, 7), -- niveles
+(24, 7), -- relatividad
+(25, 7), -- tiempo dilatado
+(26, 7), -- vacío
+(33, 7), -- engaño
+(30, 7), -- moralidad
 
--- Interstellar (keywords 25 a 27)
-(25, 8),
-(26, 8),
-(27, 8),
+-- Interstellar
+(1, 8),  -- exploración
+(7, 8),  -- viaje
+(8, 8),  -- naturaleza
+(24, 8), -- relatividad
+(25, 8), -- tiempo dilatado
+(26, 8), -- vacío
+(27, 8), -- anarquía
+(28, 8), -- miedo
+(31, 8), -- aspiración
 
--- The Dark Knight (keywords 28 a 30)
-(28, 9),
-(29, 9),
-(30, 9),
+-- The Dark Knight
+(15, 9), -- manipulación
+(16, 9), -- control
+(17, 9), -- operación encubierta
+(27, 9), -- anarquía
+(28, 9), -- miedo
+(29, 9), -- moralidad
+(30, 9), -- desigualdad
+(33, 9), -- engaño
 
--- Parasite (keywords 31 a 34)
-(31, 10),
-(32, 10),
-(33, 10),
-(34, 10);
+-- Parasite
+(14, 10), -- vigilancia
+(15, 10), -- manipulación
+(16, 10), -- control
+(28, 10), -- miedo
+(29, 10), -- moralidad
+(30, 10), -- desigualdad
+(32, 10), -- invasión
+(33, 10), -- engaño
+(34, 10); -- aspiración
