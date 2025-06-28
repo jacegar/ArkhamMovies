@@ -53,7 +53,8 @@ public class PeopleController extends BaseController{
     }
 
     @GetMapping("/person")
-    public String getPerson(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
+    public String getPerson(HttpSession session, Model model, @RequestParam(value = "id") Integer id,
+                            @RequestHeader(value = "referer", required = false) String referer) {
         PersonDTO person = personService.findPerson(id);
         List<MovieCharacterDTO> characters = movieCharacterService.getCharactersFromPerson(person.getId());
         List<MoviecrewDTO> jobs = moviecrewService.getMoviecrewsByPerson(person.getId());
@@ -68,12 +69,14 @@ public class PeopleController extends BaseController{
         model.addAttribute("characters", characters);
         model.addAttribute("jobs", jobs);
         model.addAttribute("moviesWorked", movieMap);
+        model.addAttribute("referer", referer);
 
         return "person";
     }
 
     @GetMapping("/new")
-    public String doCreate(Model model, HttpSession session) {
+    public String doCreate(Model model, HttpSession session,
+                           @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -86,6 +89,7 @@ public class PeopleController extends BaseController{
 
         model.addAttribute("person", personDTO);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("referer", referer);
 
         return "saveperson";
     }
@@ -119,7 +123,8 @@ public class PeopleController extends BaseController{
     }
 
     @GetMapping("/edit")
-    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session,
+                         @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -132,6 +137,7 @@ public class PeopleController extends BaseController{
 
         model.addAttribute("person", personDTO);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("referer", referer);
 
         return "saveperson";
     }
@@ -151,9 +157,9 @@ public class PeopleController extends BaseController{
     }
 
     @PostMapping("/atras")
-    public String doAtras(@RequestParam(value = "personId", required = false) Integer personId) {
-        if (personId != null) {
-            return "redirect:/people/person?id=" + personId;
+    public String doAtras(@RequestParam(value = "prevUrl", required = false) String prevUrl) {
+        if (prevUrl != null && !prevUrl.isEmpty() && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
+            return "redirect:" + prevUrl;
         } else {
             return "redirect:/people/inicio";
         }

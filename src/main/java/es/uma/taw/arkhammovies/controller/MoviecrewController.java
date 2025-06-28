@@ -1,13 +1,10 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
 import es.uma.taw.arkhammovies.dto.MoviecrewDTO;
-import es.uma.taw.arkhammovies.dto.PersonDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.MoviecrewService;
 import es.uma.taw.arkhammovies.service.PersonService;
-import es.uma.taw.arkhammovies.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +27,7 @@ public class MoviecrewController extends BaseController{
     public String doCreate(Model model, HttpSession session,
                            @RequestParam(required = false) Integer movieId,
                            @RequestParam (required = false) Integer personId,
-                           @RequestParam(value = "ret", required = false) Integer ret) {
+                           @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -55,7 +52,7 @@ public class MoviecrewController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", false);
-        model.addAttribute("ret", ret);
+        model.addAttribute("referer", referer);
 
         return "savemoviecrew";
     }
@@ -63,9 +60,8 @@ public class MoviecrewController extends BaseController{
     @GetMapping("/edit")
     public String doEdit(@RequestParam("movieId") Integer movieId,
                          @RequestParam("personId") Integer personId,
-                         Model model,
-                         HttpSession session,
-                         @RequestParam(value = "ret", required = false) Integer ret) {
+                         Model model, HttpSession session,
+                         @RequestHeader(value = "referer", required = false) String referer) {
 
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
@@ -82,7 +78,7 @@ public class MoviecrewController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("moviecrew", moviecrew);
         model.addAttribute("esEditar", esEditar);
-        model.addAttribute("ret", ret);
+        model.addAttribute("referer", referer);
 
         return "savemoviecrew";
     }
@@ -131,15 +127,4 @@ public class MoviecrewController extends BaseController{
         return "redirect:/movies/movie?id=" + movieId;
     }
 
-    @PostMapping("/atras")
-    public String doAtras(@RequestParam(value = "personId", required = false) Integer personId,
-                          @RequestParam(value = "movieId", required = false) Integer movieId,
-                          @RequestParam(value = "ret", required = false) Integer ret) {
-        if (personId != null && ret != null && ret == 0)
-            return "redirect:/people/person?id=" + personId;
-        else if (movieId != null && ret != null && ret == 1)
-            return "redirect:/movies/movie?id=" + movieId;
-        else
-            return "redirect:/";
-    }
 }

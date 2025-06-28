@@ -78,8 +78,8 @@
                         </form:form>
                     </td>
                     <td>
-                        <form method="post" action="/moviecrew/atras">
-                            <input type="hidden" name="movieId" value="${movie != null ? movie.getId() : null}" />
+                        <form method="post" action="/movie/atras">
+                            <input type="hidden" name="prevUrl" value="${referer}" />
                             <button class="back-button">Volver</button>
                         </form>
                     </td>

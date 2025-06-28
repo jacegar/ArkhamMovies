@@ -94,7 +94,8 @@ public class CommonController extends BaseController{
 
 
     @GetMapping("/movie")
-    public String getMovie(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
+    public String getMovie(HttpSession session, Model model, @RequestParam(value = "id") Integer id,
+                           @RequestHeader(value = "referer", required = false) String referer) {
         MovieDTO movie = movieService.findMovie(id);
         UserDTO user = (UserDTO) session.getAttribute("user");
         List<MovieCharacterDTO> characters = characterService.getCharactersFromMovie(movie.getId());
@@ -125,6 +126,7 @@ public class CommonController extends BaseController{
         model.addAttribute("characters", characters);
         model.addAttribute("crew", crew);
         model.addAttribute("crewPeople", crewPeople);
+        model.addAttribute("referer", referer);
 
         return "movie";
     }

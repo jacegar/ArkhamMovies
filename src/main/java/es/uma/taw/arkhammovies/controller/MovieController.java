@@ -28,7 +28,8 @@ public class MovieController extends BaseController {
     GenreService genreService;
 
     @GetMapping("/new")
-    public String doCreate(Model model, HttpSession session) {
+    public String doCreate(Model model, HttpSession session,
+                           @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -43,6 +44,7 @@ public class MovieController extends BaseController {
         model.addAttribute("generos", genreService.getAllGenres());
         model.addAttribute("movie", movieDTO);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("referer", referer);
 
         return "savemovie";
     }
@@ -79,7 +81,8 @@ public class MovieController extends BaseController {
     }
 
     @GetMapping("/edit")
-    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session) {
+    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session,
+                         @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -94,6 +97,7 @@ public class MovieController extends BaseController {
         model.addAttribute("generos", genreService.getAllGenres());
         model.addAttribute("movie", movie);
         model.addAttribute("esEditar", esEditar);
+        model.addAttribute("referer", referer);
 
         return "savemovie";
     }
@@ -110,6 +114,15 @@ public class MovieController extends BaseController {
         this.movieService.deleteMovieById(id);
 
         return "redirect:/";
+    }
+
+    @PostMapping("/atras")
+    public String doAtras(@RequestParam(value = "prevUrl", required = false) String prevUrl) {
+        if (prevUrl != null && !prevUrl.isEmpty() && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
+            return "redirect:" + prevUrl;
+        } else {
+            return "redirect:/";
+        }
     }
 
     @InitBinder

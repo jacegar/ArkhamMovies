@@ -47,10 +47,8 @@
                 </form:form>
             </td>
             <td>
-                <form method="post" action="/moviecrew/atras">
-                    <input hidden name="ret" value="${ret}" />
-                    <input hidden name="personId" value="${moviecrew.getPersonId()}" />
-                    <input hidden name="movieId" value="${moviecrew.getMovieId()}" />
+                <form method="post" action="/movie/atras">
+                    <input type="hidden" name="prevUrl" value="${referer}" />
                     <button class="back-button">Volver</button>
                 </form>
             </td>

@@ -51,7 +51,7 @@
       </td>
       <td>
         <form method="post" action="/people/atras">
-          <input type="hidden" name="personId" value="${person != null ? person.getId() : null}" />
+          <input type="hidden" name="prevUrl" value="${referer}" />
           <button class="back-button">Volver</button>
         </form>
       </td>

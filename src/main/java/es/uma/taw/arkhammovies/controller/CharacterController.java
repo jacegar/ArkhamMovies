@@ -9,7 +9,6 @@ import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.PersonService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRange;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +52,9 @@ public class CharacterController extends BaseController{
     }
 
     @GetMapping("/character")
-    public String getCharacter(HttpSession session, Model model, @RequestParam(value = "id") Integer id) {
+    public String getCharacter(HttpSession session, Model model,
+                               @RequestHeader(value = "referer", required = false) String referer,
+                               @RequestParam(value = "id") Integer id) {
         MovieCharacterDTO character = characterService.findCharacter(id);
         MovieDTO movie = movieService.findMovie(character.getMovie());
         //character.getPerson() puede devolver nulo, faltaria tener en cuenta este caso
@@ -62,6 +63,7 @@ public class CharacterController extends BaseController{
         model.addAttribute("character", character);
         model.addAttribute("movie", movie);
         model.addAttribute("person", person);
+        model.addAttribute("referer", referer);
 
         return "character";
     }
@@ -70,7 +72,7 @@ public class CharacterController extends BaseController{
     public String doCreate(Model model, HttpSession session,
                            @RequestParam (required = false) Integer movieId,
                            @RequestParam (required = false) Integer personId,
-                           @RequestParam(value = "ret", required = false) Integer ret) {
+                           @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -97,9 +99,7 @@ public class CharacterController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("character", movieCharacterDTO);
         model.addAttribute("esEditar", esEditar);
-        model.addAttribute("personId", personId);
-        model.addAttribute("movieId", movieId);
-        model.addAttribute("ret", ret);
+        model.addAttribute("referer", referer);
 
         return "savecharacter";
     }
@@ -136,10 +136,9 @@ public class CharacterController extends BaseController{
     }
 
     @GetMapping("/edit")
-    public String doEdit(@RequestParam("id") Integer id, Model model, HttpSession session,
-                         @RequestParam(value = "ret", required = false) Integer ret,
-                         @RequestParam (required = false) Integer movieId,
-                         @RequestParam (required = false) Integer personId) {
+    public String doEdit(@RequestParam("id") Integer id, Model model,
+                         HttpSession session,
+                         @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -155,9 +154,7 @@ public class CharacterController extends BaseController{
         model.addAttribute("people", personService.getPeopleByName(""));
         model.addAttribute("character", characterDTO);
         model.addAttribute("esEditar", esEditar);
-        model.addAttribute("ret", ret);
-        model.addAttribute("movieId", movieId);
-        model.addAttribute("personId", personId);
+        model.addAttribute("referer", referer);
 
         return "savecharacter";
     }
@@ -177,16 +174,9 @@ public class CharacterController extends BaseController{
     }
 
     @PostMapping("/atras")
-    public String doAtras(@RequestParam(value = "characterId", required = false) Integer characterId,
-                          @RequestParam(value = "personId", required = false) Integer personId,
-                          @RequestParam(value = "movieId", required = false) Integer movieId,
-                          @RequestParam(value = "ret", required = false) Integer ret) {
-        if (personId != null && ret != null && ret == 0) {
-            return "redirect:/people/person?id=" + personId;
-        } else if (characterId != null && ret != null && ret == 1) {
-            return "redirect:/characters/character?id=" + characterId;
-        } else if (movieId != null && ret != null && ret == 2) {
-            return "redirect:/movies/movie?id=" + movieId;
+    public String doAtras(@RequestParam(value = "prevUrl", required = false) String prevUrl) {
+        if (prevUrl != null && !prevUrl.isEmpty() && !prevUrl.contains("new") && !prevUrl.contains("edit")) {
+            return "redirect:" + prevUrl;
         } else {
             return "redirect:/characters/inicio";
         }

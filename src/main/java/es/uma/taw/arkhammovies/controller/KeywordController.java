@@ -154,8 +154,9 @@ public class KeywordController extends BaseController {
         return "redirect:/keywords/inicio";
     }
 
-    @GetMapping("/add_to_movie")
-    public String doAddToMovie(@RequestParam("movieId") Integer id, Model model, HttpSession session) {
+    @GetMapping("/new_movie_keywords")
+    public String doAddToMovie(@RequestParam("movieId") Integer id, Model model, HttpSession session,
+                               @RequestHeader(value = "referer", required = false) String referer) {
         if (!isAuthenticated(session)) return "redirect:/user/login";
 
         UserDTO user = (UserDTO) session.getAttribute("user");
@@ -169,6 +170,7 @@ public class KeywordController extends BaseController {
 
         model.addAttribute("movie", movie);
         model.addAttribute("keywords", keywords);
+        model.addAttribute("referer", referer);
 
         return "addKeywords";
     }
