@@ -1,3 +1,6 @@
+<%@ page import="es.uma.taw.arkhammovies.entity.Movie" %>
+<%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -12,6 +15,7 @@
 <body>
     <jsp:include page="header.jsp" />
     <main>
+        <% if(true){ %>
         <table class="moviesTable">
             <tr>
                 <th>ID</th>
@@ -19,6 +23,7 @@
                 <th><%= statName %></th>
             </tr>
         </table>
+        <% } %>
     </main>
 </body>
 </html>

@@ -73,18 +73,17 @@
 
         <div class="film-analisis-container">
             <h2>Análisis de peliculas</h2>
-            <a>Películas por facturación</a>
-            <a>Películas por recaudación</a>
-            <a>Películas por beneficio</a>
-            <a>Películas por duración</a>
-            <a>Películas por nota</a>
-            <a>Películas por número de likes</a>
-            <a>Películas por popularidad</a>
-            <a>Géneros más frecuentes</a>
-            <a>Keywords más frecuentes</a>
-            <a>Usuarios con más reseñas</a>
-            <a>Usuarios con más likes</a>
-            <a>Usuarios con más nota media</a>
+            <a href="/analisis/table?page=0">Películas por facturación</a>
+            <a href="/analisis/table?page=1">Películas por recaudación</a>
+            <a href="/analisis/table?page=2">Películas por beneficio</a>
+            <a href="/analisis/table?page=3">Películas por duración</a>
+            <a href="/analisis/table?page=4">Películas por nota</a>
+            <a href="/analisis/table?page=5">Películas por número de likes</a>
+            <a href="/analisis/table?page=6">Películas por popularidad</a>
+            <a href="/analisis/table?page=7">Géneros más frecuentes</a>
+            <a href="/analisis/table?page=8">Keywords más frecuentes</a>
+            <a href="/analisis/table?page=9">Usuarios con más reseñas</a>
+            <a href="/analisis/table?page=10">Usuarios con más likes</a>
         </div>
     </main>
 </body>
