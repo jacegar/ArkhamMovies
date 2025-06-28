@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface MovieCharacterRepository extends JpaRepository<MovieCharacter, Integer> {
 
-    //Devuelve los personajes que contengan el parámetro name en su nombre
-    @Query("select c FROM MovieCharacter c where " +
+    //Devuelve los personajes que contengan el parámetro name en su nombre completo
+    @Query("select c from MovieCharacter c where " +
             "concat(c.name, ' ', coalesce(c.surname1, ''), ' ', coalesce(c.surname2, '')) ilike %:name%")
     public List<MovieCharacter> getCharactersByNameOrSurname(String name);
 
