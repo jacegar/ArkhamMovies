@@ -296,15 +296,19 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
     public Map<String, Integer> getSortedFavouritedMovies() {
         List<Object[]> results = movieRepository.getSortedFavouritedMovies();
-        Map<String, Integer> favouritedMovieMap = new LinkedHashMap<>();
+        return getCountMap(results);
+    }
+
+    static Map<String, Integer> getCountMap(List<Object[]> results) {
+        Map<String, Integer> countMap = new LinkedHashMap<>();
 
         for (Object[] row : results) {
-            String title = (String) row[0];
-            Integer favourited = (Integer) row[1];
-            favouritedMovieMap.put(title, favourited);
+            String name = (String) row[0];
+            Integer count = (Integer) row[1];
+            countMap.put(name, count);
         }
 
-        return favouritedMovieMap;
+        return countMap;
     }
 
 }

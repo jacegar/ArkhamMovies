@@ -32,4 +32,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select count(u) from User u where u.role.id = 0")
     Integer getAdminCount();
+
+    @Query("select u.nickname, size(u.reviews) from User u order by size(u.reviews) desc")
+    List<Object[]> getSortedUserReviews();
+
+    @Query("select u.nickname, size(u.moviesLiked) from User u order by size(u.moviesLiked) desc")
+    List<Object[]> getSortedUserLikes();
 }

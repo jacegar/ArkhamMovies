@@ -112,11 +112,14 @@ public class AnalisisController extends BaseController{
                 break;
             case 9:
                 statName = "Reseñas";
+                integerMap = userService.getSortedUserReviews();
                 break;
             case 10:
                 statName = "Likes";
+                integerMap = userService.getSortedUserLikes();
                 break;
             default:
+                // No sé
                 break;
         }
 

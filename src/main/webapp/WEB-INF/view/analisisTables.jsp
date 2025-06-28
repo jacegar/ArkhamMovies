@@ -35,6 +35,11 @@
                     tipo = "Palabras clave ordenadas";
                     columna = "Palabra clave";
                     break;
+                case 9:
+                case 10:
+                    tipo = "Usuarios ordenados";
+                    columna = "Usuario";
+                    break;
                 default:
                     tipo = "";
                     columna = "";
