@@ -69,4 +69,8 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
 
         return this.entity2DTO(characters);
     }
+
+    public Integer findCharacterCount() {
+        return (int) movieCharacterRepository.count();
+    }
 }

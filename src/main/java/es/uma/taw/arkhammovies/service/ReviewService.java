@@ -31,6 +31,10 @@ public class ReviewService extends DTOService<ReviewDTO, Review>{
         return this.entity2DTO(reviews);
     }
 
+    public Double findScoreMean() {
+        return reviewRepository.getScoreMean();
+    }
+
     public void addReview(Integer movieId, Integer userId, Integer score, String review) {
         Review reviewObj = new Review();
 

@@ -17,4 +17,6 @@ public interface ReviewRepository extends JpaRepository<Review, Integer> {
     @Query("select r from Review r where r.user.id = :userId")
     public List<Review> getReviewsByUserId(Integer userId);
 
+    @Query("select avg(r.score) from Review r")
+    Double getScoreMean();
 }

@@ -196,4 +196,24 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
         return this.entity2DTO(movies);
     }
+
+    public Integer findMovieCount(){
+        return (int) movieRepository.count();
+    }
+
+    public Integer findBudgetMean() {
+        return movieRepository.getBudgetMean();
+    }
+
+    public Integer findRevenueMean() {
+        return movieRepository.getRevenueMean();
+    }
+
+    public Integer findRuntimeMean() {
+        return movieRepository.getRuntimeMean();
+    }
+
+    public Double findLikesMean() {
+        return movieRepository.getLikesMean();
+    }
 }

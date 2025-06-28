@@ -63,4 +63,8 @@ public class MoviecrewService extends DTOService<MoviecrewDTO, Moviecrew> {
 
         return moviecrew.toDTO();
     }
+
+    public Integer findCrewCount() {
+        return (int) moviecrewRepository.count();
+    }
 }

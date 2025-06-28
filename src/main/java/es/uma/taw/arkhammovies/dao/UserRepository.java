@@ -23,4 +23,13 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.nickname ilike %:search%")
     public List<User> findUsersBySearch(@Param("search") String search);
+
+    @Query("select count(u) from User u where u.role.id = 2")
+    Integer getUserCount();
+
+    @Query("select count(u) from User u where u.role.id = 1")
+    Integer getEditorCount();
+
+    @Query("select count(u) from User u where u.role.id = 0")
+    Integer getAdminCount();
 }

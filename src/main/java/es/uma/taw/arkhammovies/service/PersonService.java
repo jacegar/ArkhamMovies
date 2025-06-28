@@ -81,4 +81,12 @@ public class PersonService extends DTOService<PersonDTO, Person>{
 
         return this.entity2DTO(people);
     }
+
+    public Integer findPeopleCount() {
+        return (int) personRepository.count();
+    }
+
+    public Integer findActorCount() {
+        return (int) personRepository.getActorsCount();
+    }
 }

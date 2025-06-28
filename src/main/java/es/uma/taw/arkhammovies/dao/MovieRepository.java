@@ -46,4 +46,16 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     // Devuelve las películas que contengan una palabra clave concreta y por título
     @Query("select m from Movie m join m.keywords mk where mk.name = :keyword and m.title ilike %:title%")
     List<Movie> findMoviesByKeywordAndTitle(@Param("keyword") String keyword, @Param("title") String title);
+
+    @Query("select avg(m.budget) from Movie m")
+    Integer getBudgetMean();
+
+    @Query("select avg(m.revenue) from Movie m")
+    Integer getRevenueMean();
+
+    @Query("select avg(m.runtime) from Movie m")
+    Integer getRuntimeMean();
+
+    @Query("select avg(size(m.usersLiked)) from Movie m")
+    Double getLikesMean();
 }

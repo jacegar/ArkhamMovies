@@ -1,5 +1,13 @@
+<%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
+<%
+    Map<String, Integer> estadisticas = (Map<String, Integer>) request.getAttribute("estadisticas");
+    Double notaMedia = (Double) request.getAttribute("notaMedia");
+    Double likesMedios = (Double) request.getAttribute("likesMedios");
+%>
+
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
     <title>Arkham Movies</title>
@@ -11,55 +19,55 @@
             <h2>Estadísticas generales</h2>
             <div>
                 <h3>Número de películas:</h3>
-                <p></p>
+                <p><%=estadisticas.get("numPeliculas")%></p>
             </div>
             <div>
                 <h3>Número de personajes:</h3>
-                <p></p>
+                <p><%=estadisticas.get("numPersonajes")%></p>
             </div>
             <div>
                 <h3>Número de personas:</h3>
-                <p></p>
+                <p><%=estadisticas.get("numPersonas")%></p>
             </div>
             <div>
                 <h3>Número de actores:</h3>
-                <p></p>
+                <p><%=estadisticas.get("numActores")%></p>
             </div>
             <div>
-                <h3>Número de miembros de producción:</h3>
-                <p></p>
+                <h3>Número de trabajos en producción:</h3>
+                <p><%=estadisticas.get("numTrabajosProd")%></p>
             </div>
             <div>
-                <h3>Nota media de películas:</h3>
-                <p></p>
+                <h3>Nota media de reseñas:</h3>
+                <p><%= notaMedia != null ? String.format("%.2f", notaMedia) : "N/A" %></p>
             </div>
             <div>
                 <h3>Presupuesto medio de películas:</h3>
-                <p></p>
+                <p><%= estadisticas.get("mediaPresupuesto") %> €</p>
             </div>
             <div>
                 <h3>Facturación media de películas:</h3>
-                <p></p>
+                <p><%= estadisticas.get("mediaFacturacion") %> €</p>
             </div>
             <div>
                 <h3>Duración media de películas:</h3>
-                <p></p>
+                <p><%= estadisticas.get("mediaDuracion") %> minutos</p>
             </div>
             <div>
                 <h3>Media de likes de películas:</h3>
-                <p></p>
+                <p><%= likesMedios != null ? String.format("%.2f", likesMedios) : "N/A" %></p>
             </div>
             <div>
                 <h3>Número de usuarios:</h3>
-                <p></p>
+                <p><%= estadisticas.get("numUsuarios") %></p>
             </div>
             <div>
                 <h3>Número de editores:</h3>
-                <p></p>
+                <p><%= estadisticas.get("numEditores") %></p>
             </div>
             <div>
                 <h3>Número de administradores:</h3>
-                <p></p>
+                <p><%= estadisticas.get("numAdministradores") %></p>
             </div>
         </div>
 

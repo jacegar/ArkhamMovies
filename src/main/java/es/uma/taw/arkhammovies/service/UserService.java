@@ -69,4 +69,16 @@ public class UserService extends DTOService<UserDTO, User> {
 
         return this.entity2DTO(users);
     }
+
+    public Integer findUserCount() {
+        return userRepository.getUserCount();
+    }
+
+    public Integer findEditorCount() {
+        return userRepository.getEditorCount();
+    }
+
+    public Integer findAdminCount() {
+        return userRepository.getAdminCount();
+    }
 }
