@@ -6,7 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Map;
 
 //Autor: Juan Acevedo García 50%
 
@@ -75,22 +74,24 @@ public interface MovieRepository extends JpaRepository<Movie, Integer> {
     @Query("select avg(size(m.usersLiked)) from Movie m")
     Double getLikesMean();
 
-    @Query("select m from Movie m order by m.budget desc")
-    List<Movie> getAllMoviesSortedByBudget();
+    @Query("select m.id, m.title, m.budget from Movie m order by m.budget desc")
+    List<Object[]> getSortedMovieBudgets();
 
-    @Query("select m from Movie m order by m.revenue desc")
-    List<Movie> getAllMoviesSortedByRevenue();
+    @Query("select m.id, m.title, m.revenue from Movie m order by m.revenue desc")
+    List<Object[]> getSortedMovieRevenues();
 
-    @Query("select m from Movie m order by (m.revenue - m.budget) desc")
-    List<Movie> getAllMoviesSortedByProfit();
+    @Query("select m.id, m.title, (m.revenue - m.budget) from Movie m order by (m.revenue - m.budget) desc")
+    List<Object[]> getSortedMovieProfits();
 
-    @Query("select m from Movie m order by m.runtime desc")
-    List<Movie> getAllMoviesSortedByDuration();
+    @Query("select m.id, m.title, m.runtime from Movie m order by m.runtime desc")
+    List<Object[]> getSortedMovieDurations();
 
-    @Query("SELECT m.title, AVG(r.score) FROM Movie m LEFT JOIN m.reviews r GROUP BY m.id ORDER BY AVG(r.score) DESC")
+    @Query("SELECT m.id, m.title, AVG(r.score) FROM Movie m LEFT JOIN m.reviews r GROUP BY m.id ORDER BY AVG(r.score) DESC")
     List<Object[]> getSortedMovieScores();
 
-    @Query("select m.title, size(m.usersLiked) from Movie m order by size(m.usersLiked) desc")
+    @Query("select m.id, m.title, size(m.usersLiked) from Movie m order by size(m.usersLiked) desc")
     List<Object[]> getSortedFavouritedMovies();
 
+    @Query("select m.id, m.title, m.popularity from Movie m order by m.popularity desc")
+    List<Object[]> getSortedMoviePopularities();
 }

@@ -1,9 +1,6 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dto.GenreDTO;
-import es.uma.taw.arkhammovies.dto.KeywordDTO;
-import es.uma.taw.arkhammovies.dto.MovieDTO;
-import es.uma.taw.arkhammovies.dto.UserDTO;
+import es.uma.taw.arkhammovies.dto.*;
 import es.uma.taw.arkhammovies.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,8 +23,7 @@ public class AnalisisController extends BaseController{
     @Autowired MoviecrewService moviecrewService;
     @Autowired ReviewService reviewService;
     @Autowired UserService userService;
-    @Autowired GenreService genreService;
-    @Autowired KeywordService keywordService;
+    @Autowired StatService statService;
 
     @GetMapping("/inicio")
     public String inicio(Model model) {
@@ -58,65 +53,54 @@ public class AnalisisController extends BaseController{
     @GetMapping("/table")
     public String getAnalisisTable(Model model, @RequestParam(required = false) Integer page) {
         String statName = null;
-        Map<String, Integer> integerMap = new LinkedHashMap<>();
-        Map<String, Double> doubleMap = new LinkedHashMap<>();
+        List<StatDTO> stats = null;
 
         switch (page){
             case 0:
                 // Budget
                 statName = "Facturación";
-                for (MovieDTO movie : movieService.getAllMoviesSortedByBudget()) {
-                    integerMap.put(movie.getTitle(), movie.getBudget());
-                }
+                stats = statService.getSortedMovieBudgets();
                 break;
             case 1:
                 // Revenue
                 statName = "Recaudación";
-                for (MovieDTO movie : movieService.getAllMoviesSortedByRevenue()) {
-                    integerMap.put(movie.getTitle(), movie.getRevenue());
-                }
+                stats = statService.getSortedMovieRevenues();
                 break;
             case 2:
                 statName = "Beneficio";
-                for (MovieDTO movie : movieService.getAllMoviesSortedByProfit()) {
-                    integerMap.put(movie.getTitle(), movie.getRevenue() - movie.getBudget());
-                }
+                stats = statService.getSortedMovieProfits();
                 break;
             case 3:
                 statName = "Duración";
-                for (MovieDTO movie : movieService.getAllMoviesSortedByDuration()) {
-                    integerMap.put(movie.getTitle(), movie.getRuntime());
-                }
+                stats = statService.getSortedMovieDurations();
                 break;
             case 4:
                 statName = "Nota";
-                doubleMap = movieService.getSortedMovieScores();
+                stats = statService.getSortedMovieScores();
                 break;
             case 5:
                 statName = "Likes";
-                integerMap = movieService.getSortedFavouritedMovies();
+                stats = statService.getSortedFavouritedMovies();
                 break;
             case 6:
                 statName = "Popularidad";
-                for (MovieDTO movie : movieService.getMoviesSortedByPopularity("")) {
-                    integerMap.put(movie.getTitle(), movie.getPopularity());
-                }
+                stats = statService.getSortedMoviePopularities();
                 break;
             case 7:
                 statName = "Frecuencia por película";
-                doubleMap = genreService.getGenresOrderedByFrequency();
+                stats = statService.getGenresOrderedByFrequency();
                 break;
             case 8:
                 statName = "Frecuencia por película";
-                doubleMap = keywordService.getKeywordsOrderedByFrequency();
+                stats = statService.getKeywordsOrderedByFrequency();
                 break;
             case 9:
                 statName = "Reseñas";
-                integerMap = userService.getSortedUserReviews();
+                stats = statService.getSortedUserReviews();
                 break;
             case 10:
                 statName = "Likes";
-                integerMap = userService.getSortedUserLikes();
+                stats = statService.getSortedUserLikes();
                 break;
             default:
                 // No sé
@@ -125,8 +109,7 @@ public class AnalisisController extends BaseController{
 
         model.addAttribute("statNumber", page);
         model.addAttribute("statName", statName);
-        model.addAttribute("integerMap", integerMap);
-        model.addAttribute("doubleMap", doubleMap);
+        model.addAttribute("stats", stats);
 
         return "analisisTables";
     }

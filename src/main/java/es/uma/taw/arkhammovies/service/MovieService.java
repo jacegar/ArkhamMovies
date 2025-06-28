@@ -33,7 +33,7 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public List<MovieDTO> getMoviesById(List<Integer> movieIds) {
         List<Movie> movies = movieRepository.findAllById(movieIds);
         return this.entity2DTO(movies);
-     }
+    }
 
     public List<MovieDTO> getMoviesSortedByAverageScore(String title) {
         List<Movie> movies;
@@ -255,60 +255,6 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
 
     public Double findLikesMean() {
         return movieRepository.getLikesMean();
-    }
-
-    public List<MovieDTO> getAllMoviesSortedByBudget() {
-        List<Movie> movies = movieRepository.getAllMoviesSortedByBudget();
-
-        return this.entity2DTO(movies);
-    }
-
-    public List<MovieDTO> getAllMoviesSortedByRevenue() {
-        List<Movie> movies = movieRepository.getAllMoviesSortedByRevenue();
-
-        return this.entity2DTO(movies);
-    }
-
-    public List<MovieDTO> getAllMoviesSortedByProfit() {
-        List<Movie> movies = movieRepository.getAllMoviesSortedByProfit();
-
-        return this.entity2DTO(movies);
-    }
-
-    public List<MovieDTO> getAllMoviesSortedByDuration() {
-        List<Movie> movies = movieRepository.getAllMoviesSortedByDuration();
-
-        return this.entity2DTO(movies);
-    }
-
-    public Map<String, Double> getSortedMovieScores() {
-        List<Object[]> results = movieRepository.getSortedMovieScores();
-        Map<String, Double> movieScoreMap = new LinkedHashMap<>();
-
-        for (Object[] row : results) {
-            String title = (String) row[0];
-            Double avgScore = (Double) row[1];
-            movieScoreMap.put(title, avgScore);
-        }
-
-        return movieScoreMap;
-    }
-
-    public Map<String, Integer> getSortedFavouritedMovies() {
-        List<Object[]> results = movieRepository.getSortedFavouritedMovies();
-        return getCountMap(results);
-    }
-
-    static Map<String, Integer> getCountMap(List<Object[]> results) {
-        Map<String, Integer> countMap = new LinkedHashMap<>();
-
-        for (Object[] row : results) {
-            String name = (String) row[0];
-            Integer count = (Integer) row[1];
-            countMap.put(name, count);
-        }
-
-        return countMap;
     }
 
 }

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class UserService extends DTOService<UserDTO, User> {
@@ -81,16 +80,6 @@ public class UserService extends DTOService<UserDTO, User> {
 
     public Integer findAdminCount() {
         return userRepository.getAdminCount();
-    }
-
-    public Map<String, Integer> getSortedUserReviews() {
-        List<Object[]> results = userRepository.getSortedUserReviews();
-        return MovieService.getCountMap(results);
-    }
-
-    public Map<String, Integer> getSortedUserLikes() {
-        List<Object[]> results = userRepository.getSortedUserLikes();
-        return MovieService.getCountMap(results);
     }
 
 }

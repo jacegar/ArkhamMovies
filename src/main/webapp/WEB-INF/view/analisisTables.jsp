@@ -1,4 +1,5 @@
-<%@ page import="java.util.Map" %>
+<%@ page import="java.util.List" %>
+<%@ page import="es.uma.taw.arkhammovies.dto.StatDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,8 +10,7 @@
 <%
     Integer statNumber = (Integer)request.getAttribute("statNumber");
     String statName = (String) request.getAttribute("statName");
-    Map<String, Integer> integerMap = (Map<String, Integer>)request.getAttribute("integerMap");
-    Map<String, Double> doubleMap = (Map<String, Double>)request.getAttribute("doubleMap");
+    List<StatDTO> stats = (List<StatDTO>)request.getAttribute("stats");
 %>
 <body>
     <jsp:include page="header.jsp" />
@@ -46,7 +46,7 @@
                     columna = "";
                     break;
             }
-            if (!integerMap.isEmpty()) {
+            if (!stats.isEmpty()) {
         %>
             <h1><%= tipo %> por <%= statName %></h1>
             <table class="moviesTable">
@@ -56,35 +56,29 @@
                     <th><%= statName %></th>
                 </tr>
                 <%
+                    String enlace;
                     int pos = 1;
-                    for (Map.Entry<String, Integer> entry : integerMap.entrySet()) {
+                    for (StatDTO stat : stats) {
+                        if (statNumber >= 0 && statNumber <= 6)
+                            enlace = "/movies/movie?id=" + stat.getId();
+                        else if (statNumber == 8)
+                            enlace = "/movies/list?criteria=8&keyword=" + stat.getKey();
+                        else if (statNumber == 9 || statNumber == 10)
+                            enlace = "/user/" + stat.getKey();
+                        else
+                            enlace = "";
                 %>
                         <tr>
                             <td><%= pos %></td>
-                            <td><%= entry.getKey() %></td>
-                            <td><%= entry.getValue() %></td>
-                        </tr>
-                <%
-                        pos++;
-                    }
-                %>
-            </table>
-        <% } else if (!doubleMap.isEmpty()) { %>
-            <h1><%= tipo %> por <%= statName %></h1>
-            <table class="moviesTable">
-                <tr>
-                    <th>Posición</th>
-                    <th><%= columna %></th>
-                    <th><%= statName %></th>
-                </tr>
-                <%
-                    int pos = 1;
-                    for (Map.Entry<String, Double> entry : doubleMap.entrySet()) {
-                %>
-                        <tr>
-                            <td><%= pos %></td>
-                            <td><%= entry.getKey() %></td>
-                            <td><%= entry.getValue() == null ? "N/A" : entry.getValue() %></td>
+                            <%  if (enlace.isEmpty()) { %>
+                                    <td><%= stat.getKey() %></td>
+                            <%  } else { %>
+                                    <td><a href="<%= enlace %>"><%= stat.getKey() %></a></td>
+                            <%
+                                }
+                            %>
+                            <td><%= (stat.getIValue() != null) ? stat.getIValue() :
+                                    ((stat.getDValue() != null) ? stat.getDValue() : "N/A") %></td>
                         </tr>
                 <%
                         pos++;

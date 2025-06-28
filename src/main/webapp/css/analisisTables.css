@@ -186,3 +186,17 @@ main h1::after {
 .moviesTable tr:last-child td:last-child {
     border-bottom-right-radius: 12px;
 }
+
+a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #007BFF;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}

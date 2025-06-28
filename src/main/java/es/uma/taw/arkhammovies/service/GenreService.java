@@ -1,7 +1,6 @@
 package es.uma.taw.arkhammovies.service;
 
 import es.uma.taw.arkhammovies.dao.GenreRepository;
-import es.uma.taw.arkhammovies.dao.MovieRepository;
 import es.uma.taw.arkhammovies.dto.GenreDTO;
 import es.uma.taw.arkhammovies.entity.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +14,6 @@ import java.util.*;
 public class GenreService extends DTOService<GenreDTO, Genre>{
     @Autowired
     protected GenreRepository genreRepository;
-    @Autowired
-    protected MovieRepository movieRepository;
 
     public List<GenreDTO> getAllGenres(){
         List<Genre> genres = genreRepository.findAll();
@@ -27,25 +24,6 @@ public class GenreService extends DTOService<GenreDTO, Genre>{
         List<Genre> genres = genreRepository.findGenresByMovie(id);
 
         return entity2DTO(genres);
-    }
-
-    public Map<String, Double> getGenresOrderedByFrequency() {
-        List<Object[]> results = genreRepository.getGenresOrderedByFrequency();
-        return getFrequencyMap(results, movieRepository);
-    }
-
-    static Map<String, Double> getFrequencyMap(List<Object[]> results, MovieRepository movieRepository) {
-        long movieCount = movieRepository.count();
-        Map<String, Double> frequencyMap = new LinkedHashMap<>();
-
-        for (Object[] row : results) {
-            String name = (String) row[0];
-            Long count = (Long) row[1];
-            Double frequency = count.doubleValue() / movieCount;
-            frequencyMap.put(name, frequency);
-        }
-
-        return frequencyMap;
     }
 
 }
