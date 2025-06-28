@@ -57,7 +57,7 @@ public class CommonController extends BaseController{
                     completeList = movieService.getMoviesSortedByReleaseDate("");
                     break;
                 case 3:
-                    characterDTOList = characterService.getCharactersByName("");
+                    characterDTOList = characterService.getCharactersByNameOrSurname("");
                     break;
                 case 4:
                     completeList = movieService.getMoviesSortedByAverageScore("");
@@ -78,7 +78,7 @@ public class CommonController extends BaseController{
                     break;
                 default:
                     completeList = movieService.getMoviesSortedByPopularity("");
-                    characterDTOList = characterService.getCharactersByName("");
+                    characterDTOList = characterService.getCharactersByNameOrSurname("");
                     personDTOList = personService.getPeopleByName("");
                     break;
         }
@@ -155,7 +155,7 @@ public class CommonController extends BaseController{
                 movies = movieService.getMoviesSortedByReleaseDate(title);
                 break;
             case 3:
-                characters = characterService.getCharactersByName(title);
+                characters = characterService.getCharactersByNameOrSurname(title);
                 break;
             case 4:
                 movies = movieService.getMoviesSortedByAverageScore(title);
@@ -177,7 +177,7 @@ public class CommonController extends BaseController{
                 movies = movieService.findMoviesByKeywordAndTitle(keyword, title);
                 break;
             default:
-                characters = characterService.getCharactersByName(title);
+                characters = characterService.getCharactersByNameOrSurname(title);
                 movies = movieService.getMoviesByTitle(title);
                 people = personService.getPeopleByNameOrSurname(title);
                 break;

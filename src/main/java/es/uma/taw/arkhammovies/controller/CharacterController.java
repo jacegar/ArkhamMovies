@@ -33,7 +33,7 @@ public class CharacterController extends BaseController{
         List<MovieCharacterDTO> likedCharacters = null;
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        characters = characterService.getCharactersByName("");
+        characters = characterService.getCharactersByNameOrSurname("");
         if(characters.size() > 6){
             characters = characters.subList(0, 6);
         }

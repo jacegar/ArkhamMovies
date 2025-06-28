@@ -22,8 +22,8 @@ public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCh
     @Autowired
     private PersonRepository personRepository;
 
-    public List<MovieCharacterDTO> getCharactersByName(String name) {
-        List<MovieCharacter> characters = movieCharacterRepository.getCharactersByName(name);
+    public List<MovieCharacterDTO> getCharactersByNameOrSurname(String name) {
+        List<MovieCharacter> characters = movieCharacterRepository.getCharactersByNameOrSurname(name);
 
         return this.entity2DTO(characters);
     }
