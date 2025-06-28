@@ -29,19 +29,19 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     //Devuelve los actores que contengan el parámetro name en su nombre o apellidos
     @Query("select p from Person p where (p.movieCharacters is not empty or p.movieCharacters is empty and p.movieCrew is empty)" +
-            " and (p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%)")
+            " and (concat(p.name, ' ', p.surname1, ' ', coalesce(p.surname2, '')) ilike %:name%)")
     List<Person> getActorsByNameOrSurname(@Param("name") String name);
 
     //Devuelve las personas que contengan el parámetro name en su nombre o apellidos
-    @Query("select p from Person p where p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%")
+    @Query("select p from Person p where concat(p.name, ' ', p.surname1, ' ', coalesce(p.surname2, '')) ilike %:name%")
     List<Person> getPeopleByNameOrSurname(@Param("name") String name);
 
     //Devuelve las personas que hayan trabajado alguna vez como crewmember y que contengan el parámetro name en su nombre o apellidos
-    @Query("select p from Person p where p.movieCrew is not empty and (p.name ilike %:name% or p.surname1 ilike %:name% or p.surname2 ilike %:name%)")
+    @Query("select p from Person p where p.movieCrew is not empty and " +
+            "(concat(p.name, ' ', p.surname1, ' ', coalesce(p.surname2, '')) ilike %:name%)")
     List<Person> getCrewMembersByNameOrSurname(@Param("name") String name);
 
     //Devuelve el numero de actores
     @Query("select count(p) from Person p where (p.movieCharacters is not empty or p.movieCharacters is empty and p.movieCrew is empty)")
     Integer getActorsCount();
 }
-
