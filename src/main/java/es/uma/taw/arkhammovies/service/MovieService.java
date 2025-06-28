@@ -13,9 +13,7 @@ import es.uma.taw.arkhammovies.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 //Autor: Juan Acevedo García 75%
 
@@ -258,4 +256,55 @@ public class MovieService extends DTOService<MovieDTO, Movie> {
     public Double findLikesMean() {
         return movieRepository.getLikesMean();
     }
+
+    public List<MovieDTO> getAllMoviesSortedByBudget() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByBudget();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByRevenue() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByRevenue();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByProfit() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByProfit();
+
+        return this.entity2DTO(movies);
+    }
+
+    public List<MovieDTO> getAllMoviesSortedByDuration() {
+        List<Movie> movies = movieRepository.getAllMoviesSortedByDuration();
+
+        return this.entity2DTO(movies);
+    }
+
+    public Map<String, Double> getSortedMovieScores() {
+        List<Object[]> results = movieRepository.getSortedMovieScores();
+        Map<String, Double> movieScoreMap = new LinkedHashMap<>();
+
+        for (Object[] row : results) {
+            String title = (String) row[0];
+            Double avgScore = (Double) row[1];
+            movieScoreMap.put(title, avgScore);
+        }
+
+        return movieScoreMap;
+    }
+
+    public Map<String, Integer> getSortedFavouritedMovies() {
+        List<Object[]> results = movieRepository.getSortedFavouritedMovies();
+        Map<String, Integer> favouritedMovieMap = new LinkedHashMap<>();
+
+        for (Object[] row : results) {
+            String title = (String) row[0];
+            Integer favourited = (Integer) row[1];
+            favouritedMovieMap.put(title, favourited);
+        }
+
+        return favouritedMovieMap;
+    }
+
 }
