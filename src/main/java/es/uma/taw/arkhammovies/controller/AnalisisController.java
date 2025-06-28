@@ -28,6 +28,7 @@ public class AnalisisController extends BaseController{
     @Autowired ReviewService reviewService;
     @Autowired UserService userService;
     @Autowired GenreService genreService;
+    @Autowired KeywordService keywordService;
 
     @GetMapping("/inicio")
     public String inicio(Model model) {
@@ -106,7 +107,8 @@ public class AnalisisController extends BaseController{
                 doubleMap = genreService.getGenresOrderedByFrequency();
                 break;
             case 8:
-                statName = "Frecuencia";
+                statName = "Frecuencia por película";
+                doubleMap = keywordService.getKeywordsOrderedByFrequency();
                 break;
             case 9:
                 statName = "Reseñas";

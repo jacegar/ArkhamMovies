@@ -31,13 +31,17 @@ public class GenreService extends DTOService<GenreDTO, Genre>{
 
     public Map<String, Double> getGenresOrderedByFrequency() {
         List<Object[]> results = genreRepository.getGenresOrderedByFrequency();
-        long moviesCount = movieRepository.count();
+        return getFrequencyMap(results, movieRepository);
+    }
+
+    static Map<String, Double> getFrequencyMap(List<Object[]> results, MovieRepository movieRepository) {
+        long movieCount = movieRepository.count();
         Map<String, Double> frequencyMap = new LinkedHashMap<>();
 
         for (Object[] row : results) {
             String name = (String) row[0];
-            Long genresCount = (Long) row[1];
-            Double frequency = genresCount.doubleValue() / moviesCount;
+            Long count = (Long) row[1];
+            Double frequency = count.doubleValue() / movieCount;
             frequencyMap.put(name, frequency);
         }
 

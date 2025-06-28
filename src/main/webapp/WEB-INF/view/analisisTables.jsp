@@ -15,28 +15,32 @@
     <jsp:include page="header.jsp" />
     <main>
         <%
+            String tipo, columna;
+            switch (statNumber) {
+                case 0:
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                case 6:
+                    tipo = "Películas";
+                    columna = "Título";
+                    break;
+                case 7:
+                    tipo = "Géneros";
+                    columna = "Género";
+                    break;
+                case 8:
+                    tipo = "Palabras clave";
+                    columna = "Palabra clave";
+                    break;
+                default:
+                    tipo = "";
+                    columna = "";
+                    break;
+            }
             if (!integerMap.isEmpty()) {
-                String tipo, columna;
-                switch (statNumber) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        tipo = "Películas";
-                        columna = "Título";
-                        break;
-                    case 7:
-                        tipo = "Géneros";
-                        columna = "Género";
-                        break;
-                    default:
-                        tipo = "";
-                        columna = "";
-                        break;
-                }
         %>
             <h1><%= tipo %> por <%= statName %></h1>
             <table class="moviesTable">
@@ -59,30 +63,7 @@
                     }
                 %>
             </table>
-        <%
-            } else if (!doubleMap.isEmpty()) {
-                String tipo, columna;
-                switch (statNumber) {
-                    case 0:
-                    case 1:
-                    case 2:
-                    case 3:
-                    case 4:
-                    case 5:
-                    case 6:
-                        tipo = "Películas";
-                        columna = "Título";
-                        break;
-                    case 7:
-                        tipo = "Géneros";
-                        columna = "Género";
-                        break;
-                    default:
-                        tipo = "";
-                        columna = "";
-                        break;
-                }
-        %>
+        <% } else if (!doubleMap.isEmpty()) { %>
             <h1><%= tipo %> por <%= statName %></h1>
             <table class="moviesTable">
                 <tr>
