@@ -27,6 +27,7 @@ public class AnalisisController extends BaseController{
     @Autowired MoviecrewService moviecrewService;
     @Autowired ReviewService reviewService;
     @Autowired UserService userService;
+    @Autowired GenreService genreService;
 
     @GetMapping("/inicio")
     public String inicio(Model model) {
@@ -56,55 +57,53 @@ public class AnalisisController extends BaseController{
     @GetMapping("/table")
     public String getAnalisisTable(Model model, @RequestParam(required = false) Integer page) {
         String statName = null;
-        List<GenreDTO> genres = null;
-        List<KeywordDTO> keywords = null;
-        List<UserDTO> users = null;
-        Map<String, Integer> movieMapInteger = new LinkedHashMap<>();
-        Map<String, Double> movieMapDouble = new LinkedHashMap<>();
+        Map<String, Integer> integerMap = new LinkedHashMap<>();
+        Map<String, Double> doubleMap = new LinkedHashMap<>();
 
         switch (page){
             case 0:
                 // Budget
                 statName = "Facturación";
                 for (MovieDTO movie : movieService.getAllMoviesSortedByBudget()) {
-                    movieMapInteger.put(movie.getTitle(), movie.getBudget());
+                    integerMap.put(movie.getTitle(), movie.getBudget());
                 }
                 break;
             case 1:
                 // Revenue
                 statName = "Recaudación";
                 for (MovieDTO movie : movieService.getAllMoviesSortedByRevenue()) {
-                    movieMapInteger.put(movie.getTitle(), movie.getRevenue());
+                    integerMap.put(movie.getTitle(), movie.getRevenue());
                 }
                 break;
             case 2:
                 statName = "Beneficio";
                 for (MovieDTO movie : movieService.getAllMoviesSortedByProfit()) {
-                    movieMapInteger.put(movie.getTitle(), movie.getRevenue() - movie.getBudget());
+                    integerMap.put(movie.getTitle(), movie.getRevenue() - movie.getBudget());
                 }
                 break;
             case 3:
                 statName = "Duración";
                 for (MovieDTO movie : movieService.getAllMoviesSortedByDuration()) {
-                    movieMapInteger.put(movie.getTitle(), movie.getRuntime());
+                    integerMap.put(movie.getTitle(), movie.getRuntime());
                 }
                 break;
             case 4:
                 statName = "Nota";
-                movieMapDouble = movieService.getSortedMovieScores();
+                doubleMap = movieService.getSortedMovieScores();
                 break;
             case 5:
                 statName = "Likes";
-                movieMapInteger = movieService.getSortedFavouritedMovies();
+                integerMap = movieService.getSortedFavouritedMovies();
                 break;
             case 6:
                 statName = "Popularidad";
                 for (MovieDTO movie : movieService.getMoviesSortedByPopularity("")) {
-                    movieMapInteger.put(movie.getTitle(), movie.getPopularity());
+                    integerMap.put(movie.getTitle(), movie.getPopularity());
                 }
                 break;
             case 7:
-                statName = "Frecuencia";
+                statName = "Frecuencia por película";
+                doubleMap = genreService.getGenresOrderedByFrequency();
                 break;
             case 8:
                 statName = "Frecuencia";
@@ -121,11 +120,8 @@ public class AnalisisController extends BaseController{
 
         model.addAttribute("statNumber", page);
         model.addAttribute("statName", statName);
-        model.addAttribute("movieMapInteger", movieMapInteger);
-        model.addAttribute("movieMapDouble", movieMapDouble);
-        model.addAttribute("genres", genres);
-        model.addAttribute("keywords", keywords);
-        model.addAttribute("users", users);
+        model.addAttribute("integerMap", integerMap);
+        model.addAttribute("doubleMap", doubleMap);
 
         return "analisisTables";
     }
