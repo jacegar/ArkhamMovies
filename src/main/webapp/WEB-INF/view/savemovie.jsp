@@ -63,18 +63,6 @@
                     <td><form:input path="popularity" type="number" /></td>
                 </tr>
                 <tr>
-                    <td>Países:</td>
-                    <td>
-                        <form:select path="productionCountries" items="${allCountries}" itemLabel="name" itemValue="id" multiple="true" cssClass="multi-select"/>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Idiomas:</td>
-                    <td>
-                        <form:select path="languages" items="${allLanguages}" itemLabel="name" itemValue="id" multiple="true" cssClass="multi-select"/>
-                    </td>
-                </tr>
-                <tr>
                     <td>
                         Géneros:
                     </td>
