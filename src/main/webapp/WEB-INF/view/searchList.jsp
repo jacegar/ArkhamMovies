@@ -4,7 +4,6 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<!--Autor: Juan Acevedo García 20% -->
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/searchList.css">
     <link rel="stylesheet" type="text/css" href="../../css/common.css">

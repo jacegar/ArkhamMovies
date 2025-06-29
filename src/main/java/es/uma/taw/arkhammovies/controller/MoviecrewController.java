@@ -13,8 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
-//Autor: Juan Acevedo García (100%)
-
 //Controlador para crear, editar y eliminar moviecrews
 @Controller
 @RequestMapping("/moviecrew")

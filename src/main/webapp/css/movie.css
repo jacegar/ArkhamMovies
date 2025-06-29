@@ -242,7 +242,6 @@ form button:hover, .edit-button:hover {
     transform: scale(1.1);
 }
 
-/* Estilos para la lista de géneros */
 .movie-details ul {
     display: flex;
     flex-wrap: wrap;
@@ -263,7 +262,6 @@ form button:hover, .edit-button:hover {
     display: inline-block;
 }
 
-/* Opcional: mejora el texto "Géneros:" */
 .movie-details ul p {
     width: 100%;
     font-weight: bold;
@@ -272,10 +270,9 @@ form button:hover, .edit-button:hover {
     padding: 0;
 }
 
-/* Lista de personajes horizontal y estilizada */
 .movie-characters {
     width: 100%;
-    margin-top: 1.2rem; /* Menor margen superior */
+    margin-top: 1.2rem;
     grid-column: 1 / -1;
 }
 
@@ -283,10 +280,10 @@ form button:hover, .edit-button:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 1rem; /* Menor separación entre tarjetas */
+    gap: 1rem;
     list-style: none;
     padding: 0;
-    margin: 0.5rem 0 0 0; /* Menor margen */
+    margin: 0.5rem 0 0 0;
     justify-content: flex-start;
 }
 
@@ -341,7 +338,7 @@ form button:hover, .edit-button:hover {
     border: 1px solid #d0e2f2;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 0.5rem 0.7rem 1.2rem 0.7rem; /* más espacio abajo para el trabajo */
+    padding: 0.5rem 0.7rem 1.2rem 0.7rem;
     display: flex;
     flex-direction: column;
     align-items: center;

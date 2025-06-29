@@ -1,7 +1,6 @@
 package es.uma.taw.arkhammovies.controller;
 
 import es.uma.taw.arkhammovies.dto.*;
-import es.uma.taw.arkhammovies.entity.User;
 import es.uma.taw.arkhammovies.service.MovieService;
 import es.uma.taw.arkhammovies.service.ReviewService;
 import es.uma.taw.arkhammovies.service.UserService;

@@ -1,0 +1,6 @@
+1 - script.sql
+2 - script alter tables.sql
+3 - insertarRoles.sql
+4 - insertarPeliculas.sql
+5 - insertarPersonasPersonajesCrewMembers.sql
+6 - insertarKeywords.sql

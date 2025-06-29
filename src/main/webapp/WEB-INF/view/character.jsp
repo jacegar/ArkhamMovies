@@ -4,7 +4,6 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <!--Autor: Juan Acevedo García 40% -->
   <%
     MovieCharacterDTO character = (MovieCharacterDTO) request.getAttribute("character");
     UserDTO user = (UserDTO) session.getAttribute("user");

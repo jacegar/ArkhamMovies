@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
-//Autor: Juan Acevedo García 75%
-
 @Service
 public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;

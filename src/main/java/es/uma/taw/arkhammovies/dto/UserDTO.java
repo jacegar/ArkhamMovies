@@ -5,8 +5,6 @@ import lombok.Data;
 
 import java.util.List;
 
-//Autor: Juan Acevedo García 90%
-
 @Data
 public class UserDTO {
     private Integer id;

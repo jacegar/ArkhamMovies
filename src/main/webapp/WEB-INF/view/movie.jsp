@@ -6,7 +6,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-    <!--Autor: Juan Acevedo García 65% -->
     <%
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");

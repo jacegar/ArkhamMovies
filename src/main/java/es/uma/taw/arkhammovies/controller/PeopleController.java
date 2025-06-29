@@ -17,8 +17,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-//Autor: Juan Acevedo García (10%)
-
 @Controller
 @RequestMapping("/people")
 public class PeopleController extends BaseController{

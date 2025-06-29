@@ -3,7 +3,6 @@
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<!--Autor: Juan Acevedo García 30% -->
 <%
     PersonDTO person = (PersonDTO) request.getAttribute("person");
     UserDTO user = (UserDTO) session.getAttribute("user");

@@ -9,8 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-//Autor: Juan Acevedo García 20%
-
 @Service
 public class PersonService extends DTOService<PersonDTO, Person>{
 

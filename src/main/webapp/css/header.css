@@ -35,9 +35,9 @@ header h1 a:hover, header h1 a:focus {
 .wrapperEnlaces {
     display: flex;
     flex-direction: row;
-    gap: 2rem; /* Más separación entre h2 */
-    margin-left: 2.5rem; /* Separación respecto a h1 */
-    align-items: flex-end; /* Alinea abajo respecto al h1 */
+    gap: 2rem;
+    margin-left: 2.5rem;
+    align-items: flex-end;
     flex: 1 1 auto;
     justify-content: flex-start;
 }

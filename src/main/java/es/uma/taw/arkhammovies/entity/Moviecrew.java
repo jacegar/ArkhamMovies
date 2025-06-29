@@ -2,14 +2,11 @@ package es.uma.taw.arkhammovies.entity;
 
 import es.uma.taw.arkhammovies.dto.DTO;
 import es.uma.taw.arkhammovies.dto.MoviecrewDTO;
-import es.uma.taw.arkhammovies.dto.PersonDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Setter

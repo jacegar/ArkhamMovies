@@ -1,6 +1,5 @@
 package es.uma.taw.arkhammovies.controller;
 
-import es.uma.taw.arkhammovies.dto.MovieCharacterDTO;
 import es.uma.taw.arkhammovies.dto.MovieDTO;
 import es.uma.taw.arkhammovies.dto.UserDTO;
 import es.uma.taw.arkhammovies.service.MovieCharacterService;
@@ -13,8 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collections;
 import java.util.List;
-
-//Autor: Juan Acevedo Garcia 90%
 
 //Controlador de recomendación
 @Controller

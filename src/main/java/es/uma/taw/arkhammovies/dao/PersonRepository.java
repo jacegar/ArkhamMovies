@@ -7,8 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-//Autor: Juan Acevedo García (75%)
-
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     //Devuelve todos los actores
