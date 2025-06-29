@@ -261,7 +261,7 @@ public class CommonController extends BaseController{
 
         UserDTO user = (UserDTO) session.getAttribute("user");
 
-        if (user.getRole() >= 2 && !user.getId().equals(userId)) {
+        if (user.getRole() != 0 && !user.getId().equals(userId)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
 
