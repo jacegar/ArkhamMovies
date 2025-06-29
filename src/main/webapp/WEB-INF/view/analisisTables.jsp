@@ -46,7 +46,7 @@
                     columna = "";
                     break;
             }
-            if (!stats.isEmpty()) {
+            if (stats != null && !stats.isEmpty()) {
         %>
             <h1><%= tipo %> por <%= statName %></h1>
             <table class="moviesTable">
