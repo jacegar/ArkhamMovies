@@ -2,6 +2,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Juan Acevedo: 85%
+Eduardo Ariza: 15%
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/index.css">

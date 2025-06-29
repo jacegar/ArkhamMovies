@@ -6,6 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 33%
+// Eduardo Ariza: 33%
+// Enrique Ibáñez: 33%
+// ================================================================================
+
 public interface MovieCharacterRepository extends JpaRepository<MovieCharacter, Integer> {
 
     //Devuelve los personajes que contengan el parámetro name en su nombre completo

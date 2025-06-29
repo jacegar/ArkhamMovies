@@ -3,6 +3,10 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Eduardo Ariza: 90%
+Juan Acevedo: 10%
+-->
 <html>
   <%
     MovieCharacterDTO character = (MovieCharacterDTO) request.getAttribute("character");

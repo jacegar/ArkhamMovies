@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+// ================================================================================
+// José Manuel Fernández: 90%
+// Juan Acevedo: 5%
+// Eduardo Ariza: 5%
+// ================================================================================
+
 @Service
 public class ReviewService extends DTOService<ReviewDTO, Review>{
 

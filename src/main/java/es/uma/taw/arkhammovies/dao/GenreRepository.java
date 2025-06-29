@@ -7,6 +7,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 80%
+// Enrique Ibáñez: 20%
+// ================================================================================
+
 public interface GenreRepository extends JpaRepository<Genre, Integer> {
     @Query("select g from Genre g join g.moviesgenre m join m.usersLiked u " +
             "where u.id = :userId " +

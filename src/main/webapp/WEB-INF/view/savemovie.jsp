@@ -1,5 +1,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Enrique Ibáñez: 55%
+Eduardo Ariza: 25%
+Juan Acevedo: 20%
+-->
 <html>
 <head>
     <title>Save Movie</title>

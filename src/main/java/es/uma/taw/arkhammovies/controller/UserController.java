@@ -15,6 +15,11 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.ArrayList;
 import java.util.List;
 
+// ================================================================================
+// Enrique Ibáñez: 75%
+// Eduardo Ariza: 25%
+// ================================================================================
+
 @Controller
 @RequestMapping("/user")
 public class UserController extends BaseController {

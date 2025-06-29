@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 100%
+// ================================================================================
+
 @Service
 public class MoviecrewService extends DTOService<MoviecrewDTO, Moviecrew> {
     @Autowired protected MoviecrewRepository moviecrewRepository;

@@ -1,6 +1,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Enrique Ibáñez: 100%
+-->
 <html>
 <head>
     <title>Header</title>

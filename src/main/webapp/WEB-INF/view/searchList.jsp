@@ -3,6 +3,12 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieCharacterDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.PersonDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Eduardo Ariza: 60%
+Juan Acevedo: 35%
+Enrique Ibáñez: 3%
+José Manuel Fernández: 2%
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/searchList.css">

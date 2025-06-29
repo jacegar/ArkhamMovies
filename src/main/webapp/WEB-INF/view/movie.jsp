@@ -5,6 +5,12 @@
 <%@ page import="es.uma.taw.arkhammovies.entity.Moviecrew" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Juan Acevedo: 65%
+Eduardo Ariza: 15%
+Enrique Ibáñez: 10%
+José Manuel Fernández: 10%
+-->
 <html>
     <%
         MovieDTO movie = (MovieDTO) request.getAttribute("movie");

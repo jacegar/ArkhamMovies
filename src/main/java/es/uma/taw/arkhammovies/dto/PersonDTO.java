@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
+// ================================================================================
+// Eduardo Ariza: 100%
+// ================================================================================
+
 @Data
 public class PersonDTO {
     private Integer id;

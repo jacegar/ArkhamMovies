@@ -16,6 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// ================================================================================
+// Juan Acevedo: 45%
+// Eduardo Ariza: 25%
+// Enrique Ibáñez: 20%
+// José Manuel Fernández: 10%
+// ================================================================================
+
 //Controlador para tareas comunes que no encajan en ningun rol, ej ver datos de una pelicula o buscar una pelicula concreta en la pagina
 @Controller
 @RequestMapping("/movies")

@@ -7,6 +7,12 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 60%
+// Eduardo Ariza: 20%
+// Enrique Ibáñez: 20%
+// ================================================================================
+
 public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     //Devuelve todos los actores

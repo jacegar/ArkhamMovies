@@ -1,6 +1,9 @@
 <%@ page import="java.util.Map" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Juan Acevedo: 100%
+-->
 <html>
 
 <%

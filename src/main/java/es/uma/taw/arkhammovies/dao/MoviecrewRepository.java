@@ -8,6 +8,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 100%
+// ================================================================================
+
 public interface MoviecrewRepository extends JpaRepository<Moviecrew, MoviecrewId> {
     //Devuelve los trabajos en produccion de una persona
     @Query("select m from Moviecrew m where m.person.id = :personId")

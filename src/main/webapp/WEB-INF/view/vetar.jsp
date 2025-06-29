@@ -1,4 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Eduardo Ariza: 100%
+-->
 <html>
 <head>
     <title>Vetar</title>

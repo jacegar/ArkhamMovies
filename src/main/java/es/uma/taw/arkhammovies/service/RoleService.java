@@ -6,6 +6,10 @@ import es.uma.taw.arkhammovies.entity.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+// ================================================================================
+// Enrique Ibáñez: 100%
+// ================================================================================
+
 @Service
 public class RoleService extends DTOService<RoleDTO, Role> {
 

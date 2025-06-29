@@ -2,6 +2,11 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Eduardo Ariza: 45%
+Enrique Ibáñez: 40%
+Juan Acevedo: 15%
+-->
 <html>
 <head>
     <title>Profile</title>

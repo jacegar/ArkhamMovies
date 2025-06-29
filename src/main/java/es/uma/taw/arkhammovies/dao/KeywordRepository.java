@@ -7,6 +7,10 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+// ================================================================================
+// Enrique Ibáñez: 100%
+// ================================================================================
+
 public interface KeywordRepository extends JpaRepository<Keyword, Integer> {
 
     Keyword findKeywordByName(String name);

@@ -4,6 +4,10 @@ import lombok.Data;
 
 import java.util.List;
 
+// ================================================================================
+// Enrique Ibáñez: 100%
+// ================================================================================
+
 @Data
 public class KeywordDTO {
     private Integer id;

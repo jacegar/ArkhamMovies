@@ -13,6 +13,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// ================================================================================
+// Juan Acevedo: 75%
+// Enrique Ibáñez: 25%
+// ================================================================================
+
 @Controller
 @RequestMapping("/analisis")
 public class AnalisisController extends BaseController{

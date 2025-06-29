@@ -1,6 +1,10 @@
 <%@ page import="java.util.List" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.StatDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Enrique Ibáñez: 85%
+Juan Acevedo: 15%
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/common.css">
