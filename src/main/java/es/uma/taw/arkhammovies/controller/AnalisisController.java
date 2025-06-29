@@ -58,20 +58,20 @@ public class AnalisisController extends BaseController{
         switch (page){
             case 0:
                 // Budget
-                statName = "Facturación";
+                statName = "Facturación (€)";
                 stats = statService.getSortedMovieBudgets();
                 break;
             case 1:
                 // Revenue
-                statName = "Recaudación";
+                statName = "Recaudación (€)";
                 stats = statService.getSortedMovieRevenues();
                 break;
             case 2:
-                statName = "Beneficio";
+                statName = "Beneficio (€)";
                 stats = statService.getSortedMovieProfits();
                 break;
             case 3:
-                statName = "Duración";
+                statName = "Duración (min)";
                 stats = statService.getSortedMovieDurations();
                 break;
             case 4:
