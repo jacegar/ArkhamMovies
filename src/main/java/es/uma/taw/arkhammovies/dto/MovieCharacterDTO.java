@@ -2,6 +2,10 @@ package es.uma.taw.arkhammovies.dto;
 
 import lombok.Data;
 
+// ================================================================================
+// Eduardo Ariza: 100%
+// ================================================================================
+
 @Data
 public class MovieCharacterDTO {
     private Integer id;

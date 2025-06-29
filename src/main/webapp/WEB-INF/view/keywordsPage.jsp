@@ -1,6 +1,9 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.KeywordDTO" %>
 <%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Enrique Ibáñez: 100%
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/index.css">

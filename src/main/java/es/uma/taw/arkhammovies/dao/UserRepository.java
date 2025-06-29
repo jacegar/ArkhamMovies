@@ -7,6 +7,11 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
+// ================================================================================
+// Enrique Ibáñez: 75%
+// Juan Acevedo: 25%
+// ================================================================================
+
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.nickname = :nickname and u.password = :password")
@@ -18,8 +23,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from User u where u.nickname = :nickname")
     public User findUserByNickname(@Param("nickname")String nickname);
-
-    void deleteByEmail(String email);
 
     @Query("select u from User u where u.nickname ilike %:search%")
     public List<User> findUsersBySearch(@Param("search") String search);

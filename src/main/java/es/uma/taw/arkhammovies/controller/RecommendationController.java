@@ -13,6 +13,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Collections;
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 80%
+// Eduardo Ariza: 15%
+// José Manuel Fernández: 5%
+// ================================================================================
+
 //Controlador de recomendación
 @Controller
 public class RecommendationController extends BaseController{

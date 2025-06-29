@@ -16,6 +16,10 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+// ================================================================================
+// Enrique Ibáñez: 100%
+// ================================================================================
+
 @Controller
 @RequestMapping("/keywords")
 public class KeywordController extends BaseController {

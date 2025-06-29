@@ -5,6 +5,10 @@ import es.uma.taw.arkhammovies.entity.ReviewId;
 import es.uma.taw.arkhammovies.entity.User;
 import lombok.Data;
 
+// ================================================================================
+// José Manuel Fernández: 100%
+// ================================================================================
+
 @Data
 public class ReviewDTO {
     private ReviewId id;

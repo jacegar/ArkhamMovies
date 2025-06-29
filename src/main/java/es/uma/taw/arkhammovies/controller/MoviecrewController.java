@@ -13,6 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
+// ================================================================================
+// Juan Acevedo: 85%
+// Enrique Ibáñez: 15%
+// ================================================================================
+
 //Controlador para crear, editar y eliminar moviecrews
 @Controller
 @RequestMapping("/moviecrew")

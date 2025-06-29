@@ -6,6 +6,10 @@ import lombok.Data;
 import java.util.Date;
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 100%
+// ================================================================================
+
 @Data
 public class MovieDTO {
     private Integer id;

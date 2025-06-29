@@ -17,6 +17,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+// ================================================================================
+// Enrique Ibáñez: 75%
+// Juan Acevedo: 20%
+// Eduardo Ariza: 5%
+// ================================================================================
+
 @Controller
 @RequestMapping("/movie")
 public class MovieController extends BaseController {

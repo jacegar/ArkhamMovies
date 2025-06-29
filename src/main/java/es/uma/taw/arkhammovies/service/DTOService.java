@@ -5,6 +5,10 @@ import es.uma.taw.arkhammovies.dto.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
+// ================================================================================
+// Juan Acevedo: 100%
+// ================================================================================
+
 public abstract class DTOService <DTOClass,EntityClass>{
 
     protected List<DTOClass> entity2DTO (List<EntityClass> entidades) {

@@ -15,6 +15,13 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+// ================================================================================
+// Juan Acevedo: 70%
+// Enrique Ibáñez: 12%
+// Eduardo Ariza: 10%
+// José Manuel Fernández: 8%
+// ================================================================================
+
 @Service
 public class MovieService extends DTOService<MovieDTO, Movie> {
     @Autowired protected MovieRepository movieRepository;

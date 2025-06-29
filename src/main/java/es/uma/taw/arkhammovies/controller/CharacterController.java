@@ -17,6 +17,12 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
+// ================================================================================
+// Eduardo Ariza: 50%
+// Juan Acevedo: 35%
+// Enrique Ibáñez: 15%
+// ================================================================================
+
 @Controller
 @RequestMapping("/characters")
 public class CharacterController extends BaseController{

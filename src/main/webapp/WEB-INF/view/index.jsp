@@ -2,6 +2,11 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.MovieDTO" %>
 <%@ page import="es.uma.taw.arkhammovies.dto.UserDTO" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Juan Acevedo: 70%
+José Manuel Fernández: 20%
+Eduardo Ariza: 10%
+-->
 <html>
 <head>
     <link rel="stylesheet" type="text/css" href="../../css/index.css">

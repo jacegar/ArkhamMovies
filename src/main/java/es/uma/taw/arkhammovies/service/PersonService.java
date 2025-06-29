@@ -9,6 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+// ================================================================================
+// Eduardo Ariza: 50%
+// Juan Acevedo: 45%
+// Enrique Ibáñez: 5%
+// ================================================================================
+
 @Service
 public class PersonService extends DTOService<PersonDTO, Person>{
 

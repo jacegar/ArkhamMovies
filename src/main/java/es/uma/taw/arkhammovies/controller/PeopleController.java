@@ -17,6 +17,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// ================================================================================
+// Eduardo Ariza: 60%
+// Juan Acevedo: 25%
+// Enrique Ibáñez: 15%
+// ================================================================================
+
 @Controller
 @RequestMapping("/people")
 public class PeopleController extends BaseController{

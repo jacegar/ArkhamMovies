@@ -2,6 +2,11 @@
 <%@ page import="es.uma.taw.arkhammovies.dto.*" %>
 <%@ page import="java.util.Map" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!--
+Eduardo Ariza: 70%
+Juan Acevedo: 25%
+Enrique Ibáñez: 5%
+-->
 <html>
 <%
     PersonDTO person = (PersonDTO) request.getAttribute("person");

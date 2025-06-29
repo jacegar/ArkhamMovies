@@ -6,6 +6,12 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
+// ================================================================================
+// José Manuel Fernández: 80%
+// Juan Acevedo: 10%
+// Eduardo Ariza: 10%
+// ================================================================================
+
 public interface ReviewRepository extends JpaRepository<Review, Integer> {
 
     @Query("select r from Review r where r.movie.id = :movieId")

@@ -12,6 +12,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// ================================================================================
+// Eduardo Ariza: 70%
+// Juan Acevedo: 15%
+// Enrique Ibáñez: 15%
+// ================================================================================
+
 @Service
 public class MovieCharacterService extends DTOService<MovieCharacterDTO, MovieCharacter>{
 
